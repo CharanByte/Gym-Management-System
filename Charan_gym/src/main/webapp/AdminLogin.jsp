@@ -30,7 +30,7 @@ body::before {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"), #000;
+  background: url("https://img.freepik.com/premium-photo/close-up-black-gym-dumbbells-isolated_312869-59.jpg?w=1060"), #000;
   background-position: center;
   background-size: cover;
 }

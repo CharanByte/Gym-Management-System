@@ -183,66 +183,64 @@ body {
 <body>
 <section class="container">
     <header>Enquiry Form</header>
-    <form action="#" class="form">
+    <form action="enquiry" class="form" method="post">
         <div class="input-box">
             <label>Full Name</label>
-            <input type="text" placeholder="Enter full name" required />
+            <input type="text" placeholder="Enter full name" name="name" required />
         </div>
 
         <div class="input-box">
             <label>Email Address</label>
-            <input type="text" placeholder="Enter email address" required />
+            <input type="text" placeholder="Enter email address" name="email" required />
         </div>
 
         <div class="column">
             <div class="input-box">
                 <label>Phone Number</label>
-                <input type="number" placeholder="Enter phone number" required />
+                <input type="number" placeholder="Enter phone number" name="phoneNumber" required />
             </div>
             <div class="input-box">
                 <label>Age</label>
-                <input type="number" placeholder="Enter your age" required />
+                <input type="number" placeholder="Enter your age" name="age" required />
             </div>
         </div>
         <div class="gender-box">
             <h3 style="color: #fff;">Gender</h3>
             <div class="gender-option">
                 <div class="gender">
-                    <input type="radio" id="check-male" name="gender" checked />
-                    <label for="check-male">male</label>
+                    <input type="radio" id="check-male" name="gender" value="male" checked />
+                    <label for="check-male">Male</label>
                 </div>
                 <div class="gender">
-                    <input type="radio" id="check-female" name="gender" />
+                    <input type="radio" id="check-female" name="gender" value="female" />
                     <label for="check-female">Female</label>
                 </div>
                 <div class="gender">
-                    <input type="radio" id="check-other" name="gender" />
-                    <label for="check-other">prefer not to say</label>
-                </div>
-            </div>
-        </div>
-        <div class="input-box address">
-            <label>Address</label>
-            <input type="text" placeholder="Enter street address" required />
-            <div class="column">
-                <div class="input-box">
-                    <select name="cars" id="cars">
-                        <option hidden>Select country</option>
-                        <option value="volvo">India</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Enter your city" required />
+                    <input type="radio" id="check-other" name="gender" value="prefer_not_to_say" />
+                    <label for="check-other">Prefer not to say</label>
                 </div>
             </div>
 
+        </div>
+        <div class="input-box address">
+            <label>Address</label>
+            <input type="text" placeholder="Enter street address" name="address" required />
             <div class="column">
-                <input type="text" placeholder="Enter your region" required />
-                <input type="number" placeholder="Enter postal code" required />
+                <div class="input-box">
+                    <select name="country" id="country">
+                        <option hidden>Select country</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Australia">Australia</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Enter your city" name="cityName" required />
+                </div>
             </div>
+
+
         </div>
         <button>Submit</button>
     </form>

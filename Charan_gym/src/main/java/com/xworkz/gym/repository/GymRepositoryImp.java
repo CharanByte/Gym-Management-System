@@ -2,6 +2,7 @@ package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.entity.AdminEntity;
+import com.xworkz.gym.entity.EnquiryEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,5 +39,24 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
         return adminEntity;
+    }
+
+    @Override
+    public void saveCustomerDetails(EnquiryEntity enquiryEntity) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.persist(enquiryEntity);
+            System.out.println("from repo  "+enquiryEntity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
     }
 }

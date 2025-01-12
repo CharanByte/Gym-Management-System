@@ -89,7 +89,7 @@
   <header class="header">
     <div class="logo">Logo</div>
     <nav class="nav">
-      <a href="Enquiry.jsp">Enquiry</a>
+      <a href="enquiry">Enquiry</a>
       <a href="#">Follow</a>
       <a href="#">Registration</a>
       <a href="#">Update</a>

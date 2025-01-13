@@ -25,7 +25,42 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public void validateCustomerDetails(EnquiryDTO enquiryDTO) {
+    public boolean validateCustomerDetails(EnquiryDTO enquiryDTO) {
+        boolean valid=true;
+        String name=enquiryDTO.getName();
+        if(name!=null && name.length()>1 && name.length()<30){
+            System.out.println("name is valid");
+        }
+        else {
+            valid=false;
+            System.out.println("name is in valid");
+        }
+        String email=enquiryDTO.getEmail();
+        if(email!=null && (email.contains("@gmail.com")||email.contains(".in"))){
+            System.out.println("email valid");
+        }
+        else {
+            valid=false;
+            System.out.println("email Invalid");
+        }
+        String phoneNo= String.valueOf(enquiryDTO.getPhoneNumber());
+        if(phoneNo!=null && phoneNo.length()==10){
+            System.out.println("phoneNo valid");
+        }
+        else {
+            valid=false;
+            System.out.println("phoneNo Invalid");
+        }
+        int age=enquiryDTO.getAge();
+        if(age>=12){
+            System.out.println("age valid");
+        }
+        else {
+            valid=false;
+            System.out.println("age Invalid");
+        }
+
+        if(valid){
         EnquiryEntity enquiryEntity=new EnquiryEntity();
         enquiryEntity.setName(enquiryDTO.getName());
         enquiryEntity.setEmail(enquiryDTO.getEmail());
@@ -33,8 +68,11 @@ public class GymServiceImp implements GymService{
         enquiryEntity.setAge(enquiryDTO.getAge());
         enquiryEntity.setGender(enquiryDTO.getGender());
         enquiryEntity.setAddress(enquiryDTO.getAddress());
-        enquiryEntity.setCountry(enquiryDTO.getCountry());
-        enquiryEntity.setCityName(enquiryDTO.getCityName());
+        enquiryEntity.setStatus(enquiryDTO.getStatus());
+        enquiryEntity.setAreaName(enquiryDTO.getAreaName());
         gymRepository.saveCustomerDetails(enquiryEntity);
+        }
+        return valid;
     }
+
 }

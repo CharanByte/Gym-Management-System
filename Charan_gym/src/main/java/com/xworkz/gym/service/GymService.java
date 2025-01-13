@@ -9,5 +9,5 @@ public interface GymService {
 
      boolean validateUser(AdminLoginDTO adminLoginDTO);
 
-     void validateCustomerDetails(EnquiryDTO enquiryDTO);
+     boolean validateCustomerDetails(EnquiryDTO enquiryDTO);
 }

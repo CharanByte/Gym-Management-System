@@ -28,9 +28,9 @@ public class EnquiryEntity {
     private String gender;
     @Column(name = "customer_address")
     private String address;
-    @Column(name = "customer_country")
-    private String country;
-    @Column(name = "customer_city")
-    private String cityName;
+    @Column(name = "customer_status")
+    private String status;
+    @Column(name = "customer_area")
+    private String areaName;
 
 }

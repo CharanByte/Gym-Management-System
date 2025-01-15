@@ -229,9 +229,8 @@ body {
             <div class="column">
                 <div class="input-box">
                     <select name="status" id="status">
-                        <option hidden>Select status</option>
+                        <option>Select status</option>
                         <option value="Enquiry">Enquiry</option>
-                        <option value="joining">Joining</option>
 
                     </select>
                 </div>

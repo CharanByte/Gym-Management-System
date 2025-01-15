@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "enquiry_table")
 @Data
 @RequiredArgsConstructor
-//@NamedQuery(name = "getAllByEmail", query = "select a from AdminEntity a where a.email=:getEmail")
+@NamedQuery(name = "getUserDetailsByName", query = "select a from EnquiryEntity a WHERE a.name LIKE:namePattern")
 
 public class EnquiryEntity {
     @Id

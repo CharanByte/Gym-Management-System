@@ -90,7 +90,7 @@
     <div class="logo">Logo</div>
     <nav class="nav">
       <a href="enquiry">Enquiry</a>
-      <a href="#">Follow</a>
+      <a href="">Follow</a>
       <a href="#">Registration</a>
       <a href="#">Update</a>
     </nav>
@@ -98,7 +98,7 @@
 
   <!-- Welcome Message Section -->
   <div class="message-container">
-    <h1>Welcome back, Admin! You have successfully logged in.</h1>
+    <h1>Welcome back, ${success}! You have successfully logged in.</h1>
   </div>
 </body>
 </html>

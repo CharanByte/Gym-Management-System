@@ -144,16 +144,29 @@ button:hover {
   margin-top: 30px;
   color: #fff;
 }
+.failure{
+color:red;
+margin-left:-115px;
+}
+#nameValid{
+color:red;
+margin-left:-175px;
+margin-top:-10px;
+font-size:14px;
+
+}
   </style>
 </head>
 <body>
   <div class="wrapper">
     <form action="adminLogin" method="post">
       <h2>Login</h2>
+      <h4 class="failure">${failure}</h4>
         <div class="input-field">
-        <input type="text" id="email" name="email" required>
+        <input type="text" id="email" name="email" onblur="onField()" required>
         <label>Enter your email</label>
       </div>
+      <span id="nameValid"></span>
       <div class="input-field">
         <input type="password" id="Password" name="password" required>
         <label>Enter your password</label>
@@ -172,5 +185,22 @@ button:hover {
       </div>
     </form>
   </div>
+
+  <script>
+  const onField=()=>{
+  var placeName=document.getElementById("email");
+     var placeValue=placeName.value;
+  if(placeValue!=""){
+        var xhttp=new XMLHttpRequest();
+          xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
+          xhttp.send();
+
+          xhttp.onload = function() {
+              document.getElementById("nameValid").innerHTML = this.responseText;
+          }
+          }
+
+  }
+  </script>
 </body>
 </html>

@@ -1,70 +1,33 @@
 <%@ page isELIgnored = "false"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Form Details</title>
+    <title>Two Forms on the Same Page</title>
     <style>
-        .form-container {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            width: 300px;
-        }
-
-        .details-container {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 300px;
-        }
-
-        .details-container h3 {
-            margin: 0;
-            padding-bottom: 10px;
+        #secondForm {
+            display: none; /* Initially hide the second form */
         }
     </style>
-</head>
-<body>
-    <h1>Enter Your Details</h1>
-
-    <div class="form-container">
-        <form action="followUp">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <div class="details-container" id="detailsContainer" style="display: none;">
-        <h3>Submitted Details</h3>
-        <p><strong>Name:</strong> <span id="displayName"></span></p>
-        <p><strong>Email:</strong> <span id="displayEmail"></span></p>
-        <p><strong>Age:</strong> <span id="displayAge"></span></p>
-    </div>
-
     <script>
-        function displayDetails(event) {
-            event.preventDefault(); // Prevent form from submitting and page refresh
-
-            // Get values from the form
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const age = document.getElementById("age").value;
-
-            // Display entered details
-            document.getElementById("displayName").textContent = name;
-            document.getElementById("displayEmail").textContent = email;
-            document.getElementById("displayAge").textContent = age;
-
-            // Show the details container
-            document.getElementById("detailsContainer").style.display = "block";
-
-            // Optionally clear the form after submission
-            document.getElementById("detailsForm").reset();
+        function showSecondForm() {
+            document.getElementById("secondForm").style.display = "block"; // Show the second form
+            return false; // Prevent default form submission
         }
     </script>
+</head>
+<body>
+    <form id="firstForm" action="submitFirstFom" method="post">
+        <h3>First Form</h3>
+        <label for="firstInput">First Input:</label>
+        <input type="text" id="firstInput" name="firstInput" required>
+        <button type="submit"  onclick="showSecondForm()">Submit First Form</button>
+    </form>
+
+    <form id="secondForm" action="/submitSecondForm" method="post">
+        <h3>Second Form</h3>
+        <label for="secondInput">Second Input:</label>
+        <input type="text" id="secondInput" name="secondInput" required>
+        <button type="submit">Submit Second Form</button>
+    </form>
 </body>
 </html>

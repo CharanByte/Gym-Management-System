@@ -6,23 +6,55 @@ import com.xworkz.gym.entity.AdminEntity;
 import com.xworkz.gym.entity.EnquiryEntity;
 import com.xworkz.gym.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class GymServiceImp implements GymService{
 
     @Autowired
     private GymRepository gymRepository;
+    private  final BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
+
+
 
     @Override
-    public boolean validateUser(AdminLoginDTO adminLoginDTO) {
+    public boolean validateAdminUser(AdminLoginDTO adminLoginDTO) {
       AdminEntity adminEntity=gymRepository.validateUser(adminLoginDTO);
         System.out.println(adminEntity);
-        if(adminEntity!=null && adminLoginDTO.getPassword().equals(adminEntity.getPassword())){
+        if(adminEntity!=null && bCryptPasswordEncoder.matches(adminLoginDTO.getPassword(),adminEntity.getPassword())){
             return  true;
         }
         return false;
     }
+    @Override
+    public Long getCountOfAdminUserName(String email) {
+       long count= gymRepository.getCountOfAdminUserName(email);
+        return count;
+    }
+
+    @Override
+    public void validAndSaveNewPassword(AdminLoginDTO adminLoginDTO) {
+        if(adminLoginDTO.getPassword()!=null){
+            String encodedPassword=bCryptPasswordEncoder.encode(adminLoginDTO.getPassword());
+            AdminEntity adminEntity=gymRepository.validateUser(adminLoginDTO);
+            adminEntity.setPassword(encodedPassword);
+            adminEntity.setLogin_count(0);
+            gymRepository.updateAdminPasswordAndCount(adminEntity);
+        }
+    }
+
+
+    @Override
+    public AdminEntity getAdminDetails(AdminLoginDTO adminLoginDTO) {
+
+        return gymRepository.validateUser(adminLoginDTO);
+    }
+
+
 
     @Override
     public boolean validateCustomerDetails(EnquiryDTO enquiryDTO) {
@@ -74,5 +106,13 @@ public class GymServiceImp implements GymService{
         }
         return valid;
     }
+
+    @Override
+    public EnquiryEntity getUserDetailsByName(String name) {
+       EnquiryEntity enquiryEntity= gymRepository.getUserDetailsByName(name);
+        return enquiryEntity;
+    }
+
+
 
 }

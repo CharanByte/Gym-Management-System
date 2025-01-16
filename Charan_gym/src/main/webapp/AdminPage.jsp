@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glassmorphism Login Form | CodingNepal</title>
+  <title>Home</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
 
@@ -90,7 +90,7 @@
     <div class="logo">Logo</div>
     <nav class="nav">
       <a href="enquiry">Enquiry</a>
-      <a href="">Follow</a>
+      <a href="followup">FollowUp</a>
       <a href="#">Registration</a>
       <a href="#">Update</a>
     </nav>

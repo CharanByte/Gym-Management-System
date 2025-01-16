@@ -146,7 +146,7 @@ button:hover {
 }
 .failure{
 color:red;
-margin-left:-115px;
+margin-left:-127px;
 }
 #nameValid{
 color:red;
@@ -161,7 +161,7 @@ font-size:14px;
   <div class="wrapper">
     <form action="adminLogin" method="post">
       <h2>Login</h2>
-      <h4 class="failure">${failure}</h4>
+      <p class="failure">${failure}</p>
         <div class="input-field">
         <input type="text" id="email" name="email" onblur="onField()" required>
         <label>Enter your email</label>

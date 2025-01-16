@@ -108,8 +108,8 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public EnquiryEntity getUserDetailsByName(String name) {
-       EnquiryEntity enquiryEntity= gymRepository.getUserDetailsByName(name);
+    public List<EnquiryEntity> getUserDetailsByName(String name) {
+        List<EnquiryEntity> enquiryEntity= gymRepository.getUserDetailsByName(name);
         return enquiryEntity;
     }
 

@@ -32,5 +32,7 @@ public class EnquiryEntity {
     private String status;
     @Column(name = "customer_area")
     private String areaName;
+    @Column(name = "customer_reason")
+    private String reason;
 
 }

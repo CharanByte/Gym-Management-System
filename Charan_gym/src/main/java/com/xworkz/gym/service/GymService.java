@@ -19,7 +19,7 @@ public interface GymService {
 
      void validAndSaveNewPassword(AdminLoginDTO adminLoginDTO);
 
-    EnquiryEntity getUserDetailsByName(String name);
+    List<EnquiryEntity> getUserDetailsByName(String name);
 
     Long getCountOfAdminUserName(String email);
 }

@@ -1,15 +1,18 @@
 <%@ page isELIgnored = "false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Enquiry Form</title>
-
+    <!--<title>Registration Form in HTML CSS</title>-->
+    <!---Custom CSS File--->
     <link rel="stylesheet" href="re.css" />
     <style>
-
+        /* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 * {
   margin: 0;
@@ -56,7 +59,7 @@ body {
 }
 .form :where(.input-box input, .select-box) {
   position: relative;
-  height: 50px;
+  height: 40px;
   width: 100%;
   outline: none;
   font-size: 1rem;
@@ -152,11 +155,11 @@ body {
   color: white; /* Match text color for better contrast */
 }
 .container {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(px);
-  box-shadow: 0 4px 8px rgb(251, 250, 250);
-  border-radius: 8px;
-  padding: 20px;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  backdrop-filter: blur(px); /* Optional blur for enhanced aesthetics */
+  box-shadow: 0 4px 8px rgb(251, 250, 250); /* Add box shadow */
+  border-radius: 8px; /* Optional: Ensure consistent rounded corners */
+  padding: 20px; /* Optional: Add inner spacing for better visual appeal */
 
 }
 
@@ -168,7 +171,7 @@ body {
 
 .input-box select {
   height: 48px;
-  width: 100%;
+  width: 100%; /* Ensure it occupies the same width as the input field */
   outline: none;
   font-size: 1rem;
   color: #707070;
@@ -176,72 +179,28 @@ body {
   border-radius: 6px;
   padding: 0 15px;
   margin-top: 15px;
+  /* Optional: To ensure the select background is consistent */
 }
 
     </style>
-</head>
-<body>
-<section class="container">
-    <header>Enquiry Form</header>
-    <form action="enquiry" class="form" method="post">
-        <div class="input-box">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter full name" name="name" required />
-        </div>
+  </head>
+  <body>
+    <section class="container">
+      <header>Enquiry Form</header>
+      <form action="a" class="form">
 
-        <div class="input-box">
-            <label>Email Address</label>
-            <input type="text" placeholder="Enter email address" name="email" required />
-        </div>
+<div class="form-group">
+                        <label for="location">Location</label>
+                        <select class="form-control" id="location" name="location">
+                        <option value="">Select option</option>
+                        <c:forEach items="${packagesEnumList}" var="loc">
+                        <option value="${loc}">${loc}</option>
+                        </c:forEach>
+                        </select>
 
-        <div class="column">
-            <div class="input-box">
-                <label>Phone Number</label>
-                <input type="number" placeholder="Enter phone number" name="phoneNumber" required />
-            </div>
-            <div class="input-box">
-                <label>Age</label>
-                <input type="number" placeholder="Enter your age" name="age" required />
-            </div>
-        </div>
-        <div class="gender-box">
-            <h3 style="color: #fff;">Gender</h3>
-            <div class="gender-option">
-                <div class="gender">
-                    <input type="radio" id="check-male" name="gender" value="male" checked />
-                    <label for="check-male">Male</label>
-                </div>
-                <div class="gender">
-                    <input type="radio" id="check-female" name="gender" value="female" />
-                    <label for="check-female">Female</label>
-                </div>
-                <div class="gender">
-                    <input type="radio" id="check-other" name="gender" value="prefer_not_to_say" />
-                    <label for="check-other">Prefer not to say</label>
-                </div>
-            </div>
-
-        </div>
-        <div class="input-box address">
-            <label>Address</label>
-            <input type="text" placeholder="Enter street address" name="address" required />
-            <div class="column">
-                <div class="input-box">
-                    <select name="status" id="status">
-                        <option>Select status</option>
-                        <option value="Enquiry">Enquiry</option>
-
-                    </select>
-                </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Enter your area" name="areaName" required />
-                </div>
-            </div>
-
-
-        </div>
+                    </div>
         <button>Submit</button>
-    </form>
-</section>
-</body>
+      </form>
+    </section>
+  </body>
 </html>

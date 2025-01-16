@@ -106,18 +106,16 @@ public class GymRepositoryImp implements GymRepository{
 
 
     @Override
-    public EnquiryEntity getUserDetailsByName(String name) {
+    public List<EnquiryEntity> getUserDetailsByName(String name) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        EnquiryEntity enquiryEntity = null;
+
+        List<EnquiryEntity> list= em.createNamedQuery("getUserDetailsByName",EnquiryEntity.class).setParameter("namePattern",name+"%").getResultList();
+
 
         try {
             et.begin();
-           List<EnquiryEntity> list= em.createNamedQuery("getUserDetailsByName",EnquiryEntity.class).setParameter("namePattern",name).getResultList();
 
-           if(!list.isEmpty()){
-               enquiryEntity=list.get(0);
-           }
             et.commit();
         } catch (Exception e) {
             if (et.isActive()) {
@@ -126,7 +124,7 @@ public class GymRepositoryImp implements GymRepository{
         } finally {
             em.close();
         }
-        return enquiryEntity;
+        return list;
     }
 
 

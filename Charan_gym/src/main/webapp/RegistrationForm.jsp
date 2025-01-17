@@ -1,206 +1,201 @@
 <%@ page isELIgnored = "false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!---Coding By CodingLab | www.codinglabweb.com--->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Enquiry Form</title>
-    <!--<title>Registration Form in HTML CSS</title>-->
-    <!---Custom CSS File--->
-    <link rel="stylesheet" href="re.css" />
-    <style>
-        /* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: url("https://img.freepik.com/premium-photo/sneakers-dumbbells-sport-fitness-healthy-lifestyle_645697-4779.jpg?w=1380"), #000;
-  background-position: center;
-  background-size: cover;
-}
-.container {
-  position: relative;
-  max-width: 700px;
-  width: 100%;
-  background: #fff;
-  padding: 25px;
-  border-radius: 8px;
-
-}
-.container header {
-  font-size: 1.5rem;
-  color: #333;
-  font-weight: 500;
-  text-align: center;
-}
-.container .form {
-  margin-top: 30px;
-}
-
-
-.form .input-box {
-  width: 100%;
-  margin-top: 20px;
-}
-.input-box label {
-  color: #333;
-}
-.form :where(.input-box input, .select-box) {
-  position: relative;
-  height: 40px;
-  width: 100%;
-  outline: none;
-  font-size: 1rem;
-  color: #707070;
-  margin-top: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0 15px;
-}
-.input-box input:focus {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-}
-.form .column {
-  display: flex;
-  column-gap: 15px;
-}
-.form .gender-box {
-  margin-top: 20px;
-}
-.gender-box h3 {
-  color: #333;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-.form :where(.gender-option, .gender) {
-  display: flex;
-  align-items: center;
-  column-gap: 50px;
-  flex-wrap: wrap;
-}
-.form .gender {
-  column-gap: 5px;
-}
-.gender input {
-  accent-color: rgb(70, 35, 247);
-}
-.form :where(.gender input, .gender label) {
-  cursor: pointer;
-}
-.gender label {
-  color: #707070;
-}
-.address :where(input, .select-box) {
-  margin-top: 15px;
-}
-.select-box select {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  color: #707070;
-  font-size: 1rem;
-}
-.form button {
-    margin-left: 30%;
-  height: 40px;
-  width: 30%;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 30px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgb(102, 74, 241);
-}
-.form button:hover {
-  background: rgb(45, 6, 240);
-}
-/*Responsive*/
-@media screen and (max-width: 500px) {
-  .form .column {
-    flex-wrap: wrap;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  body {
+      margin: 0;
+      background-image: url("https://img.freepik.com/premium-photo/3d-rendering-iron-fitness-equipment-black-podium_338925-153.jpg?w=1060");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #000;
   }
-  .form :where(.gender-option, .gender) {
-    row-gap: 15px;
+
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 999;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background-color: #1B1E23;
   }
-}
 
+  .header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+  }
 
-.container {
-  background: url("https://img.freepik.com/free-photo/confident-sportswoman-with-dumbbell-dark_23-2147752923.jpg?t=st=1736603951~exp=1736607551~hmac=3ddc491f7863cb2de154b06fbf52371c2f1bf2df52c068ff3d30de72ca78b66b&w=1060") no-repeat center center / cover;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  color: white; /* Ensure text is readable */
-}
-.container header,
-.container label
- {
-  color: white; /* Match text color for better contrast */
-}
-.container {
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-  backdrop-filter: blur(px); /* Optional blur for enhanced aesthetics */
-  box-shadow: 0 4px 8px rgb(251, 250, 250); /* Add box shadow */
-  border-radius: 8px; /* Optional: Ensure consistent rounded corners */
-  padding: 20px; /* Optional: Add inner spacing for better visual appeal */
+  .header .nav {
+      display: flex;
+      gap: 20px;
+  }
 
-}
+  .header .nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+  }
 
+  .header .nav a:hover {
+      color: #f0c14b;
+  }
 
-.column {
-  display: flex;
-  column-gap: 15px;
-}
+  .header .logo {
+      display: flex;
+      align-items: center;
+  }
 
-.input-box select {
-  height: 48px;
-  width: 100%; /* Ensure it occupies the same width as the input field */
-  outline: none;
-  font-size: 1rem;
-  color: #707070;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0 15px;
-  margin-top: 15px;
-  /* Optional: To ensure the select background is consistent */
-}
+  .logo-img {
+      max-height: 51px;
+      max-width: 120%;
+      height: auto;
+  }
 
-    </style>
-  </head>
-  <body>
-    <section class="container">
-      <header>Enquiry Form</header>
-      <form action="a" class="form">
+  .form-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      border: 5px solid #333; /* Adds a border around the container */
+      border-radius: 10px; /* Optional: rounded corners */
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      margin-top: 80px; /* Add margin to push form down to avoid overlap with sticky header */
+  }
 
-<div class="form-group">
-                        <label for="location">Location</label>
-                        <select class="form-control" id="location" name="location">
-                        <option value="">Select option</option>
-                        <c:forEach items="${packagesEnumList}" var="loc">
-                        <option value="${loc}">${loc}</option>
-                        </c:forEach>
-                        </select>
+  .form-image {
+      max-width: 100%;
+      height: auto;
+      height: 100%;
+  }
+  </style>
+</head>
+<body>
 
-                    </div>
-        <button>Submit</button>
-      </form>
-    </section>
-  </body>
+<header class="header">
+  <div class="logo">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+  </div>
+  <nav class="nav">
+    <a href="index.jsp">Home</a>
+    <a href="followup">FollowUp</a>
+    <a href="registration">Registration</a>
+    <a href="update">Update</a>
+  </nav>
+</header>
+
+  <div class="container mt-5 form-container">
+    <div class="row">
+      <div class="col-md-5">
+        <img src="https://media.istockphoto.com/id/542197916/photo/running-on-treadmill.jpg?s=612x612&w=0&k=20&c=CYywmb71uOepSHWa534hG9230AzawSa4i3sA89o4qCQ=" alt="Form Image" class="form-image">
+      </div>
+      <div class="col-md-7">
+        <h2 class="text-center">Registration Form</h2>
+        <form>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Password</label>
+              <input type="password" class="form-control" id="email" name="password" placeholder="Enter password">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="city">Package</label>
+                <select class="form-control" id="location" name="package">
+                                      <option value="">Select package</option>
+                                      <c:forEach items="${packagesEnumList}" var="loc">
+                                      <option value="${loc}">${loc}</option>
+                                      </c:forEach>
+                               </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="state">Trainer</label>
+              <select class="form-control" id="location" name="trainer">
+                                                    <option value="">Select trainer</option>
+                                                    <c:forEach items="${packagesEnumList}" var="loc">
+                                                    <option value="${loc}">${loc}</option>
+                                                    </c:forEach>
+                                             </select>
+            </div>
+          </div>
+          <div class="form-row">
+           <div class="form-group col-md-6">
+            <label for="city">Discount</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter discount">
+             </div>
+            <div class="form-group col-md-6">
+            <label for="state">State</label>
+              <input type="text" class="form-control" id="state" placeholder="Enter state">
+             </div>
+         </div>
+          <div class="form-group">
+            <label for="zipcode">Zip Code</label>
+            <input type="text" class="form-control" id="zipcode" placeholder="Enter zip code">
+          </div>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" class="form-control" id="dob">
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

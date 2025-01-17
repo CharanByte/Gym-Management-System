@@ -73,10 +73,11 @@ h2 {
   transition: 0.15s ease;
 }
 
+
 .input-field input {
   width: 100%;
   height: 40px;
-  background: transparent;
+  background: transparent; /* Ensure the background is transparent */
   border: none;
   outline: none;
   font-size: 16px;
@@ -139,6 +140,8 @@ button:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
+
+
 .register {
   text-align: center;
   margin-top: 30px;
@@ -155,6 +158,23 @@ margin-top:-10px;
 font-size:14px;
 
 }
+/* Remove background color for autofill in Chrome and Safari */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  background-color: transparent !important;
+  color: #fff !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+/* For other browsers */
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+
   </style>
 </head>
 <body>

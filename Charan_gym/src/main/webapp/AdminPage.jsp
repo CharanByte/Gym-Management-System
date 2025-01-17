@@ -45,11 +45,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #fff;
-    }
+
 
     .nav a {
       margin-left: 20px;
@@ -82,12 +78,24 @@
       font-weight: bold;
       color: #fff;
     }
+    .header .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-img {
+        max-height: 50px; /* Adjust the height as needed */
+        max-width: 100%;
+        height: auto;
+      }
   </style>
 </head>
 <body>
   <!-- Header Section -->
   <header class="header">
-    <div class="logo">Logo</div>
+ <div class="logo">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+  </div>
     <nav class="nav">
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>

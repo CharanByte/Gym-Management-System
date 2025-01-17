@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Table(name = "enquiry_table")
 @Data
 @RequiredArgsConstructor
-@NamedQuery(name = "getUserDetailsByName", query = "select a from EnquiryEntity a WHERE a.name LIKE:namePattern")
+@NamedQuery(name = "getAllUserDetailsByStatus", query = "select a from EnquiryEntity a WHERE a.status=:getStatus")
+@NamedQuery(name = "getAllUserDetails", query = "select a from EnquiryEntity a")
+@NamedQuery(name = "updateUserEnquiryDetailsById", query = "UPDATE EnquiryEntity a SET a.status=:getStatus,a.reason=:getReason where a.id=:getId")
 
 public class EnquiryEntity {
     @Id

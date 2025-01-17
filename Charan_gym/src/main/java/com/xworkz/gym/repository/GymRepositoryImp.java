@@ -63,6 +63,7 @@ public class GymRepositoryImp implements GymRepository{
         return count;
     }
 
+
     @Override
     public void updateAdminPasswordAndCount(AdminEntity adminEntity) {
 
@@ -106,11 +107,11 @@ public class GymRepositoryImp implements GymRepository{
 
 
     @Override
-    public List<EnquiryEntity> getUserDetailsByName(String name) {
+    public List<EnquiryEntity> getAllUserDetails() {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
 
-        List<EnquiryEntity> list= em.createNamedQuery("getUserDetailsByName",EnquiryEntity.class).setParameter("namePattern",name+"%").getResultList();
+        List<EnquiryEntity> list= em.createNamedQuery("getAllUserDetails",EnquiryEntity.class).getResultList();
 
 
         try {
@@ -127,6 +128,47 @@ public class GymRepositoryImp implements GymRepository{
         return list;
     }
 
+
+    @Override
+    public int updateUserEnquiryDetails(int enquiryId, String status, String reason) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        int value=0;
+        try {
+            et.begin();
+             value=em.createNamedQuery("updateUserEnquiryDetailsById").setParameter("getStatus",status).setParameter("getReason",reason).setParameter("getId",enquiryId).executeUpdate();
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return value;
+    }
+
+    @Override
+    public List<EnquiryEntity> getAllUserDetailsByStatus(String status) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<EnquiryEntity> list= em.createNamedQuery("getAllUserDetailsByStatus",EnquiryEntity.class).setParameter("getStatus",status).getResultList();
+
+
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return list;
+    }
 
 
 }

@@ -15,7 +15,11 @@ public interface GymRepository {
 
     void updateAdminPasswordAndCount(AdminEntity adminEntity);
 
-    List<EnquiryEntity> getUserDetailsByName(String name);
+    List<EnquiryEntity> getAllUserDetails();
 
     long getCountOfAdminUserName(String email);
+
+    int updateUserEnquiryDetails(int enquiryId, String status, String reason);
+
+    List<EnquiryEntity> getAllUserDetailsByStatus(String status);
 }

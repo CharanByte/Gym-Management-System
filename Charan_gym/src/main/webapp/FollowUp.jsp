@@ -8,124 +8,253 @@
   <title>Follow-up</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
-   body {
-     min-height: 100vh;
-     margin: 0;
-     background-image: url("https://img.freepik.com/premium-photo/3d-rendering-iron-fitness-equipment-black-podium_338925-153.jpg?w=1060"); /* Replace with the actual image URL */
-     background-size: cover; /* Ensures the image covers the entire page */
-     background-position: center; /* Centers the image */
-     background-repeat: no-repeat; /* Prevents the image from repeating */
-     background-attachment: fixed; /* Makes the background image fixed while scrolling */
-     color: #000; /* Black text color */
-   }
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background-image: url("https://img.freepik.com/premium-photo/3d-rendering-iron-fitness-equipment-black-podium_338925-153.jpg?w=1060");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #000;
+    padding-top: 80px;
+     overflow: hidden;
 
-   .container {
-     margin: 50px auto;
-     width: 95%;
-     background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque background */
-     padding: 20px;
-     border-radius: 10px;
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer shadow for a smoother effect */
-     transition: background-color 0.3s ease; /* Smooth transition for background-color */
-   }
+  }
 
-    .search-row {
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
+ .table-container {
+   margin-top: 0;
+   background-color: #fff;
+   padding: 20px;
+   padding-top:0px;
+   border-radius: 10px;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+   max-height: calc(100vh - 170px);
+   overflow-y: auto;
+ }
 
-    .table-container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
+ .table-name {
+   position: sticky;
+   top: 0;
+   background-color: #f8f9fa;
+   padding: 10px;
+   z-index: 2;
+   text-align: center;
+   font-size: 1.25rem;
+   font-weight: bold;
+   border-bottom: 1px solid #dee2e6;
+ }
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
+ table thead tr {
+   position: sticky;
+   top: 40px; /* Adjusted for the height of the table name */
+   background-color: #f8f9fa;
+   z-index: 1;
+ }
 
-    .page-link {
-      color: #007bff;
-      text-decoration: none;
-      margin: 0 5px;
-      padding: 8px 12px;
-      border: 1px solid #007bff;
-      border-radius: 5px;
-    }
+ table th {
+   background-color: #f8f9fa;
+ }
 
-    .page-link:hover {
-      background-color: #007bff;
-      color: #fff;
-    }
 
-    .page-link.active {
-      background-color: #007bff;
-      color: #fff;
+  .container {
+    margin-top: 40px;
+    margin-bottom: 50px; /* Add margin to the bottom */
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer shadow for a smoother effect */
+    transition: background-color 0.3s ease; /* Smooth transition for background-color */
+    margin-bottom: 10px;
+  }
+
+
+  .search-row {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .page-link {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+  }
+
+  .page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .page-link.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px; /* Ensure consistent height */
+    z-index: 1000;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .header .nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .header .nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+
+  .header .nav a:hover {
+    color: #f0c14b; /* Highlight color for links on hover */
+  }
+  .header .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    max-height: 51px; /* Adjust the height as needed */
+    max-width: 120%;
+    height: auto;
+  }
+    .update{
+    font-size:30px;
     }
   </style>
 </head>
 <body>
+  <!-- Centered Message -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+    <h5 style="color: red;">${failure}</h5>
+    <p class="update" style="colr:red">${notupdated}</p>
+     <p class="update" style="color:green">${enquiryName}</p>
+
+  </div>
+
+<!-- Header Section -->
+<header class="header">
+  <div class="logo">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+  </div>
+  <nav class="nav">
+    <a href="index.jsp">Home</a>
+    <a href="enquiry">Enquiry</a>
+    <a href="registration">Registration</a>
+    <a href="update">Update</a>
+  </nav>
+</header>
+
+
   <div class="container">
     <!-- Search Row -->
     <div class="search-row">
       <form action="followupoperation" method="POST" style="display: flex; gap: 10px;">
-        <input type="text" class="form-control" id="id" name="name" placeholder="Enter Enquiry Name" required>
-        <button type="submit" class="btn btn-primary">Find</button>
+         <select class="form-control" name="status" required >
+         <option value="select">filter on status</option>
+                            <option value="Enquiry">Enquiry</option>
+                            <option value="Registration">Registration</option>
+                             <option value="Registred">Registred</option>
+                              <option value="Not Interested">Not Interested</option>
+                               <option value="Interested">Interested</option>
+                           </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
       </form>
     </div>
 
     <!-- Table Container -->
     <c:if test="${not empty list}">
-      <div class="table-container">
-        <h4 class="text-center">Enquiry Details</h4>
-        <form action="updateStatus" method="POST">
-          <table class="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>Enquiry ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Area</th>
-                <th>Age</th>
-                <th>Status</th>
-                <th>Reason</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach items="${list}" var="enquiry">
-                <tr>
-                  <td>${enquiry.id}</td>
-                  <td>${enquiry.name}</td>
-                  <td>${enquiry.email}</td>
-                  <td>${enquiry.phoneNumber}</td>
-                  <td>${enquiry.areaName}</td>
-                  <td>${enquiry.age}</td>
-                  <td>
-                    <select class="form-select" name="status" required>
-                      <option value="Enquiry" ${enquiry.status == 'Pending' ? 'selected' : ''}>Enquiry</option>
-                      <option value="Joining" ${enquiry.status == 'Completed' ? 'selected' : ''}>Joining</option>
-                      <option value="Not Answering" ${enquiry.status == 'Pending' ? 'selected' : ''}>Not Answering</option>
-                      <option value="Not Interested" ${enquiry.status == 'In Progress' ? 'selected' : ''}>Not Interested</option>
-                    </select>
-                  </td>
-                  <td>
-                    <textarea class="form-control" name="reason" rows="2">${enquiry.reason}</textarea>
-                  </td>
-                  <td>
-                    <button type="submit" class="btn btn-success">Update</button>
-                  </td>
-                </tr>
-              </c:forEach>
-            </tbody>
-          </table>
-        </form>
+     <div class="table-container">
+       <h4 class="table-name">Enquiry Details</h4>
+       <form action="updateStatus" method="POST">
+         <table class="table table-striped table-bordered table-hover">
+           <colgroup>
+
+             <col style="width: 15%;">
+             <col style="width: 15%;">
+             <col style="width: 10%;">
+             <col style="width: 10%;">
+             <col style="width: 15%;">
+             <col style="width: 20%;">
+             <col style="width: 10%;">
+           </colgroup>
+           <thead>
+             <tr>
+
+               <th>Name</th>
+               <th>Email</th>
+               <th>Phone Number</th>
+               <th>Area</th>
+               <th>Status</th>
+               <th>Reason</th>
+               <th>Action</th>
+             </tr>
+           </thead>
+           <tbody>
+           <c:forEach items="${list}" var="enquiry">
+             <tr>
+               <form action="updateStatus" method="POST">  <!-- Form for each row -->
+                 <!-- Hidden input to store the enquiry id -->
+                 <input type="hidden" name="enquiryId" value="${enquiry.id}" />
+                 <input type="hidden" name="enquiryName" value="${enquiry.name}" />
+
+
+                 <td>${enquiry.name}</td>
+                 <td>${enquiry.email}</td>
+                 <td>${enquiry.phoneNumber}</td>
+                 <td>${enquiry.areaName}</td>
+                 <td>
+                   <select class="form-select" name="status" required value="${enquiry.status}">
+                     <option value="Enquiry" ${enquiry.status == 'Enquiry' ? 'selected' : ''}>Enquiry</option>
+                     <option value="Registration" ${enquiry.status == 'Registration' ? 'selected' : ''}>Registration</option>
+                     <option value="Registred" ${enquiry.status == 'Registred' ? 'selected' : ''}>Registred</option>
+                     <option value="Not Interested" ${enquiry.status == 'Not Interested' ? 'selected' : ''}>Not Interested</option>
+                   </select>
+                 </td>
+                 <td>
+                   <textarea class="form-control" name="reason" rows="2">${enquiry.reason}</textarea>
+                 </td>
+                 <td>
+                   <button type="submit" class="btn btn-success">Update</button>  <!-- Update button for each row -->
+                 </td>
+               </form>
+             </tr>
+           </c:forEach>
+
+           </tbody>
+         </table>
+       </form>
+     </div>
+
+
 
         <!-- Pagination Links -->
         <c:if test="${totalPages > 1}">
@@ -139,4 +268,5 @@
     </c:if>
   </div>
 </body>
+
 </html>

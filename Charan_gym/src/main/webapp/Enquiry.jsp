@@ -142,6 +142,7 @@ body {
 .container {
   background: url("https://img.freepik.com/free-photo/confident-sportswoman-with-dumbbell-dark_23-2147752923.jpg?t=st=1736603951~exp=1736607551~hmac=3ddc491f7863cb2de154b06fbf52371c2f1bf2df52c068ff3d30de72ca78b66b&w=1060") no-repeat center center / cover;
   padding: 25px;
+  margin-top:80px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   color: white; /* Ensure text is readable */
@@ -178,9 +179,67 @@ body {
   margin-top: 15px;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: fixed;
+             top: 0;
+    width: 100%;
+    height: 60px; /* Ensure consistent height */
+    z-index: 999;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden
+  }
+
+  .header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .header .nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .header .nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+
+  .header .nav a:hover {
+    color: #f0c14b; /* Highlight color for links on hover */
+  }
+  .header .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    max-height: 51px; /* Adjust the height as needed */
+    max-width: 120%;
+    height: auto;
+  }
+
     </style>
 </head>
 <body>
+<!-- Header Section -->
+<header class="header">
+  <div class="logo">
+    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+  </div>
+  <nav class="nav">
+    <a href="index.jsp">Home</a>
+    <a href="followup">FollowUp</a>
+    <a href="registration">Registration</a>
+    <a href="update">Update</a>
+  </nav>
+</header>
 <section class="container">
     <header>Enquiry Form</header>
     <form action="enquiry" class="form" method="post">
@@ -228,7 +287,6 @@ body {
             <div class="column">
                 <div class="input-box">
                     <select name="status" id="status">
-                        <option>Select status</option>
                         <option value="Enquiry">Enquiry</option>
 
                     </select>

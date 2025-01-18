@@ -1,226 +1,142 @@
 <%@ page isELIgnored = "false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
+  <title>Registration Form</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+    body {
+      margin: 0;
+      height: 100vh; /* Full height of the viewport */
+      display: flex;
+      justify-content: center; /* Horizontally center the content */
+      align-items: center; /* Vertically center the content */
+      background-image: url("https://img.freepik.com/premium-photo/sneakers-dumbbells-sport-fitness-healthy-lifestyle_645697-4779.jpg?w=1380");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #000;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
-}
+    .form-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      width: 50%;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0);
+      box-shadow: 0px 2px 10px rgba(200 200, 200, 20);
+    }
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 0 10px;
-}
+    .form-image {
+      max-width: 100%;
+      height: auto;
+      height: 100%;
+            border-radius: 10px;
 
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url("https://img.freepik.com/premium-photo/close-up-black-gym-dumbbells-isolated_312869-59.jpg?w=1060"), #000;
-  background-position: center;
-  background-size: cover;
-}
+            box-shadow: 0px 2px 10px rgba(100 100, 100, 20);
 
-.wrapper {
-  width: 400px;
-  border-radius: 8px;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
+    }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
+    label {
+      color: white;
+      font-weight: 500;
+    }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #fff;
-}
+    .btn-center {
+      display: block;
+      margin: 20px auto;
+      padding: 8px 60px;
+      font-size: 1.2rem;
+    }
 
-.input-field {
-  position: relative;
-  border-bottom: 2px solid #ccc;
-  margin: 15px 0;
-}
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 42px;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #007bff;
+    }
 
-.input-field label {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.15s ease;
-}
-
-
-.input-field input {
-  width: 100%;
-  height: 40px;
-  background: transparent; /* Ensure the background is transparent */
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #fff;
-}
-
-.input-field input:focus~label,
-.input-field input:valid~label {
-  font-size: 0.8rem;
-  top: 10px;
-  transform: translateY(-120%);
-}
-
-.forget {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 25px 0 35px 0;
-  color: #fff;
-}
-
-#remember {
-  accent-color: #fff;
-}
-
-.forget label {
-  display: flex;
-  align-items: center;
-}
-
-.forget label p {
-  margin-left: 8px;
-}
-
-.wrapper a {
-  color: #efefef;
-  text-decoration: none;
-}
-
-.wrapper a:hover {
-  text-decoration: underline;
-}
-
-button {
-  background: #fff;
-  color: #000;
-  font-weight: 600;
-  border: none;
-  padding: 12px 20px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 16px;
-  border: 2px solid transparent;
-  transition: 0.3s ease;
-}
-
-button:hover {
-  color: #fff;
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-
-
-.register {
-  text-align: center;
-  margin-top: 30px;
-  color: #fff;
-}
-.failure{
-color:red;
-margin-left:-127px;
-}
-#nameValid{
-color:red;
-margin-left:-175px;
-margin-top:-10px;
-font-size:14px;
-
-}
-/* Remove background color for autofill in Chrome and Safari */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  background-color: transparent !important;
-  color: #fff !important;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-  box-shadow: 0 0 0px 1000px transparent inset !important;
-}
-
-/* For other browsers */
-input:-internal-autofill-selected {
-  background-color: transparent !important;
-  color: #fff !important;
-}
-
-
+    .form-group {
+      position: relative;
+    }
+    .message{
+    color:red;
+    }
+    #nameValid{
+    color:red;
+    font-size:15px;
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <form action="adminLogin" method="post">
-      <h2>Login</h2>
-      <p class="failure">${failure}</p>
-        <div class="input-field">
-        <input type="text" id="email" name="email" onblur="onField()" required>
-        <label>Enter your email</label>
-      </div>
-      <span id="nameValid"></span>
-      <div class="input-field">
-        <input type="password" id="Password" name="password" required>
-        <label>Enter your password</label>
-      </div>
-      <div class="forget">
-        <label for="remember">
-          <input type="checkbox" id="remember">
-          <p>Remember me</p>
-        </label>
-        <a href="#">Forgot password?</a>
 
+  <div class="container form-container">
+    <div class="row">
+      <div class="col-md-5">
+        <img src="https://media.istockphoto.com/id/542197916/photo/running-on-treadmill.jpg?s=612x612&w=0&k=20&c=CYywmb71uOepSHWa534hG9230AzawSa4i3sA89o4qCQ=" alt="Form Image" class="form-image">
       </div>
-      <button type="submit">Log In</button>
-      <div class="register">
-        <p>Don't have an account? <a href="#">Register</a></p>
+      <div class="col-md-7">
+        <h2 class="text-center" style="color:white">Login</h2>
+        <form action="adminLogin" method="post">
+        <span class="message">${failure}</span>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required onblur="onField()">
+            <span id="nameValid"></span>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+            <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePassword()"></i> <!-- Font Awesome icon -->
+          </div>
+          <button type="submit" class="btn btn-primary btn-center">Login</button>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-  const onField=()=>{
-  var placeName=document.getElementById("email");
-     var placeValue=placeName.value;
-  if(placeValue!=""){
-        var xhttp=new XMLHttpRequest();
-          xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
-          xhttp.send();
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      const toggleIcon = document.getElementById('togglePassword');
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash'); // Change to eye-slash icon when password is visible
+      } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye'); // Change back to eye icon when password is hidden
+      }
+    }
 
-          xhttp.onload = function() {
-              document.getElementById("nameValid").innerHTML = this.responseText;
-          }
-          }
+      const onField=()=>{
+      var placeName=document.getElementById("email");
+         var placeValue=placeName.value;
+      if(placeValue!=""){
+            var xhttp=new XMLHttpRequest();
+              xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
+              xhttp.send();
 
-  }
+              xhttp.onload = function() {
+                  document.getElementById("nameValid").innerHTML = this.responseText;
+              }
+              }
+
+      }
   </script>
 </body>
 </html>

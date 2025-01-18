@@ -187,11 +187,13 @@ body {
     position: fixed;
              top: 0;
     width: 100%;
-    height: 60px; /* Ensure consistent height */
+    height: 65px;
     z-index: 999;
     color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
     overflow: hidden
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+          background-color: #2F2D2E;
   }
 
   .header .logo {
@@ -236,7 +238,7 @@ body {
   <nav class="nav">
     <a href="index.jsp">Home</a>
     <a href="followup">FollowUp</a>
-    <a href="registration">Registration</a>
+    <a href="register">Registration</a>
     <a href="update">Update</a>
   </nav>
 </header>

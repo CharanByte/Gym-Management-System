@@ -16,13 +16,9 @@
     }
 
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
       width: 100%;
-      padding: 0 10px;
-      position: relative;
+      padding: 0 0px;
       background: url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"), #000;
       background-position: center;
       background-size: cover;
@@ -31,76 +27,87 @@
     }
 
     .header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 15px 30px;
-      z-index: 1000;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 65px;
+      z-index: 999;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background-color: #0E0E0E;
     }
 
+    .header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
 
+    .header .nav {
+      display: flex;
+      gap: 20px;
+    }
 
-    .nav a {
-      margin-left: 20px;
-      color: #fff;
+    .header .nav a {
+      color: white;
       text-decoration: none;
       font-size: 1rem;
-      transition: color 0.3s ease;
+      transition: color 0.3s;
     }
 
-    .nav a:hover {
-      color: #ddd;
+    .header .nav a:hover {
+      color: #f0c14b;
+    }
+
+    .header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      max-height: 51px;
+      max-width: 120%;
+      height: auto;
     }
 
     .message-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50%;
-      height: 200px;
-      background: rgba(255, 255, 255, 0.15);
+      width: 100%;
+      height: 100px;
+      background: rgba(255, 255, 255, -1);
       backdrop-filter: blur(8px);
       border-radius: 12px;
       text-align: center;
       padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 190px; /* Adjusting margin to ensure it doesn't overlap with header */
     }
 
     .message-container h1 {
       font-size: 2rem;
       font-weight: bold;
-      color: #fff;
+      color: yellow;
     }
-    .header .logo {
-        display: flex;
-        align-items: center;
-      }
 
-      .logo-img {
-        max-height: 50px; /* Adjust the height as needed */
-        max-width: 100%;
-        height: auto;
-      }
   </style>
 </head>
 <body>
   <!-- Header Section -->
   <header class="header">
- <div class="logo">
-    <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
-  </div>
+    <div class="logo">
+      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+    </div>
     <nav class="nav">
+      <a href="index.jsp">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
-      <a href="#">Registration</a>
-      <a href="#">Update</a>
+      <a href="register">Registration</a>
+      <a href="update">Update</a>
     </nav>
   </header>
 

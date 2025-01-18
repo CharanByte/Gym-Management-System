@@ -110,7 +110,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 80px; /* Ensure consistent height */
+    height: 65px; /* Ensure consistent height */
     z-index: 1000;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -168,7 +168,7 @@
   <nav class="nav">
     <a href="index.jsp">Home</a>
     <a href="enquiry">Enquiry</a>
-    <a href="registration">Registration</a>
+    <a href="register">Registration</a>
     <a href="update">Update</a>
   </nav>
 </header>

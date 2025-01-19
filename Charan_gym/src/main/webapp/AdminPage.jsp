@@ -107,7 +107,7 @@
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
-      <a href="update">Update</a>
+      <a href="registrationUpdate">Update</a>
     </nav>
   </header>
 

@@ -188,7 +188,7 @@ body {
              top: 0;
     width: 100%;
     height: 65px;
-    z-index: 999;
+    z-index: 1000;
     color: white;
 
     overflow: hidden
@@ -207,10 +207,10 @@ body {
   }
 
   .header .nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s;
+   color: white;
+       text-decoration: none;
+       font-size: 1rem;
+       transition: color 0.3s;
   }
 
   .header .nav a:hover {
@@ -239,7 +239,7 @@ body {
     <a href="index.jsp">Home</a>
     <a href="followup">FollowUp</a>
     <a href="register">Registration</a>
-    <a href="update">Update</a>
+    <a href="registrationUpdate">Update</a>
   </nav>
 </header>
 <section class="container">
@@ -288,8 +288,7 @@ body {
             <input type="text" placeholder="Enter street address" name="address" required />
             <div class="column">
                 <div class="input-box">
-                    <select name="status" id="status">
-                        <option value="Enquiry">Enquiry</option>
+                  <input type="text" id="status" name="status" value="Enquiry" disabled style="background-color:white"/>
 
                     </select>
                 </div>

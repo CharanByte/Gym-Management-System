@@ -71,6 +71,8 @@
       max-width: 100%;
       height: auto;
       height: 100%;
+        border-radius: 10px;
+       box-shadow: 0px 2px 10px rgba(100 100, 100, 20);
     }
     label {
       color: white;
@@ -93,7 +95,7 @@
       <a href="index.jsp">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
-      <a href="update">Update</a>
+      <a href="registrationUpdate">Update</a>
     </nav>
   </header>
   <div class="container mt-5 form-container">
@@ -103,29 +105,29 @@
       </div>
       <div class="col-md-7">
         <h2 class="text-center" style="color:white">Registration Form</h2>
-        <form>
+        <form action="registeration" method="post">
           <div class="form-group">
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name">
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required>
           </div>
           <div class="form-group">
             <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="email">Password</label>
-              <input type="password" class="form-control" id="email" name="password" placeholder="Enter password">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number">
+              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="city">Package</label>
-              <select class="form-control" id="location" name="package">
+              <select class="form-control" id="gympackage" name="gympackage" required>
                 <option value="">Select package</option>
                 <c:forEach items="${packagesEnumList}" var="loc">
                   <option value="${loc}">${loc}</option>
@@ -134,7 +136,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="state">Trainer</label>
-              <select class="form-control" id="location" name="trainer">
+              <select class="form-control" id="trainer" name="trainer" required>
                 <option value="">Select trainer</option>
                 <c:forEach items="${gymTrainersEnums}" var="loc">
                   <option value="${loc}">${loc}</option>
@@ -146,15 +148,15 @@
             <div class="form-group col-md-6">
               <label for="state">Discount</label>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter discount" name="discount" aria-label="Server">
+                <input type="text" class="form-control" id="discount" placeholder="Enter discount" name="discount" aria-label="Server" required>
                 <span class="input-group-text">%</span>
               </div>
             </div>
             <div class="form-group col-md-6">
-              <label for="zipcode">Amount</label>
+              <label for="zipcode">Total Amount</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">&#8377;</span>
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="amount">
+                <input type="text" class="form-control" id="amount" aria-label="Amount (to the nearest dollar)" name="amount">
                 <span class="input-group-text">.00</span>
               </div>
             </div>
@@ -164,7 +166,7 @@
               <label for="password">Amount paid</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">&#8377;</span>
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="amountPaid">
+                <input type="text" class="form-control" id="amountPaid" aria-label="Amount (to the nearest dollar)" name="amountPaid" required>
                 <span class="input-group-text">.00</span>
               </div>
             </div>
@@ -172,7 +174,7 @@
               <label for="confirmPassword">Balance Amount</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">&#8377;</span>
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="balanceAmount">
+                <input type="text" class="form-control" id="balanceamount" aria-label="Amount (to the nearest dollar)" name="balanceAmount">
                 <span class="input-group-text">.00</span>
               </div>
             </div>
@@ -182,6 +184,79 @@
       </div>
     </div>
   </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const packagePrices = {
+      "BASIC": 10000,
+      "PRO": 13000,
+      "ELITE": 15000,
+      "VIP": 25000
+    };
+
+    const trainerPrices = {
+      "NOT_REQUIED": 0,
+      "LIKI": 1000,
+      "NANDAN": 1000,
+      "RAJU": 1000
+    };
+
+    const packageSelect = document.getElementById('gympackage');
+    const trainerSelect = document.getElementById('trainer');
+    const discountInput = document.querySelector('input[name="discount"]');
+    const amountInput = document.querySelector('input[name="amount"]');
+    const amountPaidInput = document.querySelector('input[name="amountPaid"]');
+    const balanceAmountInput = document.querySelector('input[name="balanceAmount"]');
+
+    function updateAmount() {
+      let packageAmount = 0;
+      let trainerAmount = 0;
+      let discount = 0;
+
+      const selectedPackage = packageSelect.value;
+      const selectedTrainer = trainerSelect.value;
+
+      if (packagePrices[selectedPackage]) {
+        packageAmount = packagePrices[selectedPackage];
+      }
+
+      if (trainerPrices[selectedTrainer]) {
+        trainerAmount = trainerPrices[selectedTrainer];
+      }
+
+      if (discountInput.value) {
+        discount = parseFloat(discountInput.value) || 0;
+      }
+
+      let totalAmount = packageAmount + trainerAmount;
+
+      totalAmount -= (totalAmount * discount) / 100;
+
+      amountInput.value = totalAmount.toFixed(2);
+
+      updateBalance();
+    }
+
+    function updateBalance() {
+      const amount = parseFloat(amountInput.value) || 0;
+      const amountPaid = parseFloat(amountPaidInput.value) || 0;
+
+      // Calculate balance
+      const balance = amount - amountPaid;
+
+      balanceAmountInput.value = balance.toFixed(2);
+    }
+
+    packageSelect.addEventListener('change', updateAmount);
+    trainerSelect.addEventListener('change', updateAmount);
+    discountInput.addEventListener('input', updateAmount);
+
+    amountPaidInput.addEventListener('input', updateBalance);
+
+    amountInput.addEventListener('input', updateBalance);
+  });
+</script>
+
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

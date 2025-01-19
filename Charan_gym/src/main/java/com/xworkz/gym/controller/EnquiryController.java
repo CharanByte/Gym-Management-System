@@ -23,7 +23,7 @@ public class EnquiryController {
     @PostMapping("/enquiry")
     public String SubmitEnquiryDetails(EnquiryDTO enquiryDTO, Model model){
         System.out.println(enquiryDTO);
-        boolean valid=gymService.validateCustomerDetails(enquiryDTO);
+        boolean valid=gymService.validateCustomerEnquiryDetails(enquiryDTO);
         if(valid){
            model.addAttribute("enquiryDTO",enquiryDTO);
            return "DisplayEnquiryDetails";

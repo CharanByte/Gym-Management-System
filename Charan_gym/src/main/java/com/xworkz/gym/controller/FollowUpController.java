@@ -18,7 +18,7 @@ public class FollowUpController {
 
     @GetMapping("/followup")
     public String onFollowUp(Model model){
-        List<EnquiryEntity> enquiryEntity=gymService.getAllUserDetails();
+        List<EnquiryEntity> enquiryEntity=gymService.getAllEnquiryUsersDetails();
         System.out.println(enquiryEntity);
         if(!enquiryEntity.isEmpty()){
             model.addAttribute("list",enquiryEntity);
@@ -42,7 +42,6 @@ public class FollowUpController {
     @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
     public String updateStatus(@RequestParam("enquiryId") int enquiryId,@RequestParam("enquiryName") String enquiryName, @RequestParam("status") String status, @RequestParam("reason") String reason,Model model) {
 
-        System.out.println(enquiryName+enquiryId+status+reason);
         int updatedValue=gymService.updateUserEnquiryDetails(enquiryId,status,reason);
         if(updatedValue>0){
         model.addAttribute("enquiryName","Successfully Updated Details Of "+ enquiryName);

@@ -11,6 +11,5 @@ public class EnquiryDTO {
     private int age;
     private String gender;
     private String address;
-    private String status;
     private String areaName;
 }

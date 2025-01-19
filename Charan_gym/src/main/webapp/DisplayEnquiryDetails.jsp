@@ -35,10 +35,15 @@
         }
 
         .table {
-            background-color: #fff;
+            background-color: #FFDEE9;
+            background-image: linear-gradient(270deg, #FFDEE9 0%, #B5FFFC 100%);
+
             color: #333;
-            margin: 0 auto; /* Center the table inside the container */
-            width: auto; /* Ensure the table width is based on content */
+            margin: 0 auto;
+            width: auto;
+            border-radius: 10px;
+             box-shadow: 0px 2px 10px rgba(200 200, 200, 70);
+
         }
 
         .table th, .table td {
@@ -101,11 +106,11 @@
                     <td>${enquiryDTO.address}</td>
                 </tr>
                 <tr>
-                    <th>Country</th>
-                    <td>${enquiryDTO.status}</td>
+                    <th>Status</th>
+                    <td>Enquiry</td>
                 </tr>
                 <tr>
-                    <th>City</th>
+                    <th>Area</th>
                     <td>${enquiryDTO.areaName}</td>
                 </tr>
             </tbody>

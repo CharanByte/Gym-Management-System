@@ -3,13 +3,13 @@ package com.xworkz.gym.repository;
 import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.entity.AdminEntity;
 import com.xworkz.gym.entity.EnquiryEntity;
+import com.xworkz.gym.entity.RegistrationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import java.util.Collections;
 import java.util.List;
 @Repository
 public class GymRepositoryImp implements GymRepository{
@@ -86,7 +86,7 @@ public class GymRepositoryImp implements GymRepository{
 
 
     @Override
-    public void saveCustomerDetails(EnquiryEntity enquiryEntity) {
+    public void saveCustomerEnquiryDetails(EnquiryEntity enquiryEntity) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
 
@@ -107,7 +107,7 @@ public class GymRepositoryImp implements GymRepository{
 
 
     @Override
-    public List<EnquiryEntity> getAllUserDetails() {
+    public List<EnquiryEntity> getAllEnquiryUsersDetails() {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
 
@@ -168,6 +168,64 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
         return list;
+    }
+
+    @Override
+    public void saveRegistredDetails(RegistrationEntity registrationEntity) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.merge(registrationEntity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<RegistrationEntity> getAllRegistredUsersDetails() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<RegistrationEntity> list= em.createNamedQuery("getAllRegistredUsersDetails",RegistrationEntity.class).getResultList();
+
+
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+
+    @Override
+    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
     }
 
 

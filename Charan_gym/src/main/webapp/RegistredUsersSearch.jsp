@@ -47,7 +47,7 @@
 
  table thead tr {
    position: sticky;
-   top: 40px; /* Adjusted for the height of the table name */
+   top: 40px;
    background-color: #f8f9fa;
    z-index: 1;
  }
@@ -168,8 +168,8 @@
   <nav class="nav">
     <a href="index.jsp">Home</a>
     <a href="enquiry">Enquiry</a>
+    <a href="followup">follow Up</a>
     <a href="register">Registration</a>
-    <a href="registrationUpdate">Update</a>
   </nav>
 </header>
 
@@ -177,16 +177,9 @@
   <div class="container">
     <!-- Search Row -->
     <div class="search-row">
-      <form action="followupoperation" method="POST" style="display: flex; gap: 10px;">
-         <select class="form-control" name="status" required >
-         <option value="select">filter on status</option>
-                            <option value="Enquiry">Enquiry</option>
-                            <option value="Registration">Registration</option>
-                             <option value="Registred">Registred</option>
-                              <option value="Not Interested">Not Interested</option>
-                               <option value="Interested">Interested</option>
-                           </select>
-        <button type="submit" class="btn btn-primary">Filter</button>
+      <form action="searchName" method="POST" style="display: flex; gap: 10px;">
+            <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Search name" required >
+        <button type="submit" class="btn btn-primary">Search</button>
       </form>
     </div>
 
@@ -194,7 +187,7 @@
     <c:if test="${not empty list}">
      <div class="table-container">
        <h4 class="table-name">Enquiry Details</h4>
-       <form action="updateStatus" method="POST">
+       <form action="updatebutton" method="post">
          <table class="table table-striped table-bordered table-hover">
            <colgroup>
 
@@ -202,46 +195,48 @@
              <col style="width: 15%;">
              <col style="width: 10%;">
              <col style="width: 10%;">
-             <col style="width: 15%;">
-             <col style="width: 20%;">
+             <col style="width: 10%;">
+             <col style="width: 10%;">
+             <col style="width: 10%;">
+             <col style="width: 10%;">
+             <col style="width: 10%;">
              <col style="width: 10%;">
            </colgroup>
            <thead>
              <tr>
-
                <th>Name</th>
                <th>Email</th>
                <th>Phone Number</th>
-               <th>Area</th>
-               <th>Status</th>
-               <th>Reason</th>
-               <th>Action</th>
+               <th>Package</th>
+               <th>Trainer</th>
+               <th>Total Amount</th>
+               <th>Amount Paid</th>
+               <th>Balance Amount</th>
+                <th>update</th>
              </tr>
            </thead>
            <tbody>
            <c:forEach items="${list}" var="enquiry">
              <tr>
-               <form action="updateStatus" method="POST">  <!-- Form for each row -->
+               <form action="updatebutton" >  <!-- Form for each row -->
                  <!-- Hidden input to store the enquiry id -->
-                 <input type="hidden" name="enquiryId" value="${enquiry.id}" />
-                 <input type="hidden" name="enquiryName" value="${enquiry.name}" />
+                 <input type="hidden" name="id" value="${enquiry.id}" />
+                 <input type="hidden" name="name" value="${enquiry.name}" />
+                  <input type="hidden" name="trainer" value="${enquiry.trainer}" />
+                    <input type="hidden" name="phoneNumber" value="${enquiry.phoneNumber}" />
+                 <input type="hidden" name="gympackage" value="${enquiry.gympackage}" />
+                   <input type="hidden" name="balanceAmount" value="${enquiry.balanceAmount}" />
 
 
                  <td>${enquiry.name}</td>
                  <td>${enquiry.email}</td>
                  <td>${enquiry.phoneNumber}</td>
-                 <td>${enquiry.areaName}</td>
-                 <td>
-                   <select class="form-select" name="status" required value="${enquiry.status}">
-                     <option value="Enquiry" ${enquiry.status == 'Enquiry' ? 'selected' : ''}>Enquiry</option>
-                     <option value="Registration" ${enquiry.status == 'Registration' ? 'selected' : ''}>Registration</option>
-                     <option value="Registred" ${enquiry.status == 'Registred' ? 'selected' : ''}>Registred</option>
-                     <option value="Not Interested" ${enquiry.status == 'Not Interested' ? 'selected' : ''}>Not Interested</option>
-                   </select>
-                 </td>
-                 <td>
-                   <textarea class="form-control" name="reason" rows="2">${enquiry.reason}</textarea>
-                 </td>
+                 <td>${enquiry.gympackage}</td>
+                 <td>${enquiry.trainer}</td>
+                 <td>${enquiry.amount}</td>
+                 <td>${enquiry.amountPaid}</td>
+                  <td>${enquiry.balanceAmount}</td>
+
                  <td>
                    <button type="submit" class="btn btn-success">Update</button>  <!-- Update button for each row -->
                  </td>

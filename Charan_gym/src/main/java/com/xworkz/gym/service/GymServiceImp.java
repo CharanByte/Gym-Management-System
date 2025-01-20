@@ -152,9 +152,9 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount) {
-        int value=gymRepository.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount);
-    return 1;
+    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount,double totalAmount) {
+        int value=gymRepository.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount,totalAmount);
+    return value;
 
     }
 

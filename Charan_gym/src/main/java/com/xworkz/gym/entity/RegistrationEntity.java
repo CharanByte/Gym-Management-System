@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 
 @NamedQuery(name = "getAllRegistredUsersDetails", query = "select a from RegistrationEntity a")
-
+@NamedQuery(name = "updateRegistredUserDetails", query = "UPDATE RegistrationEntity a SET a.amountPaid=a.amountPaid + :getAmountPaid,a.gympackage=:getPackage,a.trainer=:getTrainer,a.balanceAmount=:getBalanceAmount,a.amount=:getAmount where a.id=:getId")
 public class RegistrationEntity {
 
     @Id

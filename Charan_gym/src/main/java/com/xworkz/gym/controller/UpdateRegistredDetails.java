@@ -31,7 +31,7 @@ public class UpdateRegistredDetails {
     }
 
     @RequestMapping(value = "/updatebutton", method = RequestMethod.POST)
-    public String onupdatebutton(@RequestParam("id") int id,@RequestParam("name") String name, @RequestParam("phoneNumber") long phoneNumber, @RequestParam("gympackage") String gympackage, @RequestParam("trainer") String trainer,@RequestParam("balanceAmount") String balanceAmount, Model model) {
+    public String onupdatebutton(@RequestParam("id") int id,@RequestParam("name") String name, @RequestParam("phoneNumber") long phoneNumber, @RequestParam("gympackage") String gympackage, @RequestParam("trainer") String trainer,@RequestParam("balanceAmount") String balanceAmount,@RequestParam("totalAmount") String totalAmount ,Model model) {
 
         System.out.println(trainer+gympackage);
         model.addAttribute("id",id);
@@ -39,6 +39,7 @@ public class UpdateRegistredDetails {
         model.addAttribute("phoneNumber",phoneNumber);
         model.addAttribute("packag",gympackage);
         model.addAttribute("trainer",trainer);
+        model.addAttribute("totalAmount",totalAmount);
         model.addAttribute("balanceAmount",balanceAmount);
         model.addAttribute("packagesEnumList", packagesEnumList);
         model.addAttribute("gymTrainersEnums", gymTrainersEnums);
@@ -47,9 +48,21 @@ public class UpdateRegistredDetails {
     }
 
     @PostMapping("/updateRegister")
-    public String onRegistredDetailsUpdate(int id,String gympackage,String trainer,double amountPaid,double balanceAmount){
-        System.out.println(id+gympackage+trainer+amountPaid+balanceAmount);
-        int updatedVlaue=gymService.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount);
+    public String onRegistredDetailsUpdate(int id,String gympackage,String trainer,double amountPaid,double balanceAmount,double totalAmount,String name,String phoneNo,Model model){
+        System.out.println(totalAmount);
+        int updatedVlaue=gymService.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount,totalAmount);
+        if(updatedVlaue>0){
+            model.addAttribute("name",name);
+            model.addAttribute("no",phoneNo);
+            model.addAttribute("gympackage",gympackage);
+            model.addAttribute("trainer",trainer);
+            model.addAttribute("balanceAmount",balanceAmount);
+            model.addAttribute("paid",amountPaid);
+            model.addAttribute("totalAmount",totalAmount);
+
+            return "DisplayUpdatedRegistredDetails";
+        }
+
         return "UpdateRegistredDetails";
     }
 

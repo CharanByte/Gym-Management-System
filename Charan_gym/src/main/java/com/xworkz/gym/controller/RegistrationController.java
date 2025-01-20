@@ -39,7 +39,10 @@ public class RegistrationController {
         model.addAttribute("gymTrainersEnums", gymTrainersEnums);
 
         boolean saved=gymService.validateAndSaveRegistredDetails(registrationDTO);
-
+        if(saved){
+            model.addAttribute("registerDTO",registrationDTO);
+            return "DisplayRegistredDetails";
+        }
         return "RegistrationForm";
     }
 

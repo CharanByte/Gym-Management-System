@@ -211,13 +211,13 @@ public class GymRepositoryImp implements GymRepository{
     }
 
     @Override
-    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount) {
+    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount,double totalAmount) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        
+        int updatedValue=0;
         try {
             et.begin();
-
+             updatedValue=em.createNamedQuery("updateRegistredUserDetails").setParameter("getPackage",gympackage).setParameter("getTrainer",trainer).setParameter("getAmountPaid",amountPaid).setParameter("getBalanceAmount",balanceAmount).setParameter("getAmount",totalAmount).setParameter("getId",id).executeUpdate();
             et.commit();
         } catch (Exception e) {
             if (et.isActive()) {
@@ -226,6 +226,7 @@ public class GymRepositoryImp implements GymRepository{
         } finally {
             em.close();
         }
+        return updatedValue;
     }
 
 

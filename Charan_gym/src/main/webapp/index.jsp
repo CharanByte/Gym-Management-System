@@ -5,5 +5,6 @@
 <a href="FollowUp.jsp">follow</a>
 <a href="register">registration</a>
 <a href="registrationUpdate">update</a>
+<a href="ViewRegitrationDetails.jsp">view</a>
 </body>
 </html>

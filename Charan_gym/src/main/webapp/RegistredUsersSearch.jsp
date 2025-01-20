@@ -218,10 +218,11 @@
            <tbody>
            <c:forEach items="${list}" var="enquiry">
              <tr>
-               <form action="updatebutton" >  <!-- Form for each row -->
+               <form action="updatebutton" method="post" >  <!-- Form for each row -->
                  <!-- Hidden input to store the enquiry id -->
                  <input type="hidden" name="id" value="${enquiry.id}" />
                  <input type="hidden" name="name" value="${enquiry.name}" />
+                   <input type="hidden" name="totalAmount" value="${enquiry.amount}" />
                   <input type="hidden" name="trainer" value="${enquiry.trainer}" />
                     <input type="hidden" name="phoneNumber" value="${enquiry.phoneNumber}" />
                  <input type="hidden" name="gympackage" value="${enquiry.gympackage}" />

@@ -33,5 +33,5 @@ public interface GymService {
 
     List<RegistrationEntity> getAllRegistredUsersDetails();
 
-    int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount);
+    int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount,double totalAmount);
 }

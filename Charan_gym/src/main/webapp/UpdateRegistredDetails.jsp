@@ -119,6 +119,10 @@
       <h2 class="text-center" style="color: white;">Update Form</h2>
 
           <input type="hidden" name="id" value="${id}" />
+           <input type="hidden" name="totalAmount" value="${totalAmount}" id="totalAmount" />
+           <input type="hidden" name="name" value="${name}" />
+           <input type="hidden" name="phoneNo" value="${phoneNumber}" />
+
 
       <div class="form-group">
         <label for="firstName">Full Name</label>
@@ -192,9 +196,11 @@
       const balanceAmountField = document.querySelector("input[name='balancePrice']");
       const amountPayingField = document.querySelector("input[name='amountPaid']");
       const remainingBalanceField = document.querySelector("input[name='balanceAmount']");
+      const totalAmountField = document.querySelector("input[name='totalAmount']");
 
       const initialPackage = packageField.value;
       const initialBalance = parseFloat(balanceAmountField.value) || 0;
+      const initialTotalAmount = parseFloat(totalAmountField.value) || 0;
 
       const updateBalances = () => {
         const selectedPackage = packageField.value;
@@ -210,6 +216,10 @@
 
         const remainingBalance = newBalanceAmount - amountPaying;
         remainingBalanceField.value = remainingBalance.toFixed(2);
+
+        // Update the total amount
+        const newTotalAmount = initialTotalAmount + priceDifference;
+        totalAmountField.value = newTotalAmount.toFixed(2);
       };
 
       packageField.addEventListener("change", updateBalances);

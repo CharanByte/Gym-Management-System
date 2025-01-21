@@ -225,7 +225,8 @@
                  <!-- Hidden input to store the enquiry id -->
                  <input type="hidden" name="enquiryId" value="${enquiry.id}" />
                  <input type="hidden" name="enquiryName" value="${enquiry.name}" />
-
+                  <input type="hidden" name="phoneNo" value="${enquiry.phoneNumber}" />
+                   <input type="hidden" name="email" value="${enquiry.email}" />
 
                  <td>${enquiry.name}</td>
                  <td>${enquiry.email}</td>

@@ -40,10 +40,18 @@ public class FollowUpController {
     }
 
     @RequestMapping(value = "/updateStatus", method = RequestMethod.POST)
-    public String updateStatus(@RequestParam("enquiryId") int enquiryId,@RequestParam("enquiryName") String enquiryName, @RequestParam("status") String status, @RequestParam("reason") String reason,Model model) {
+    public String updateStatus(@RequestParam("enquiryId") int enquiryId,@RequestParam("enquiryName") String enquiryName, @RequestParam("status") String status, @RequestParam("reason") String reason ,@RequestParam("email") String email, @RequestParam("phoneNo") String phoneNo,Model model) {
 
         int updatedValue=gymService.updateUserEnquiryDetails(enquiryId,status,reason);
         if(updatedValue>0){
+            if(status.equals("Registration")){
+                model.addAttribute("name",enquiryName);
+                model.addAttribute("id",enquiryId);
+                model.addAttribute("email",email);
+                model.addAttribute("phoneNo",phoneNo);
+                return "RegistrationForm";
+            }
+
         model.addAttribute("enquiryName","Successfully Updated Details Of "+ enquiryName);
         }
         else {

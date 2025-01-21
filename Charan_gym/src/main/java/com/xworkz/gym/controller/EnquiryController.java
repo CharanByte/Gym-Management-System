@@ -28,7 +28,7 @@ public class EnquiryController {
            model.addAttribute("enquiryDTO",enquiryDTO);
            return "DisplayEnquiryDetails";
         }
-        return "index";
+        return "Enquiry";
     }
 
 

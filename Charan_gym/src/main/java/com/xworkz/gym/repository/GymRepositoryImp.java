@@ -4,6 +4,7 @@ import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.entity.AdminEntity;
 import com.xworkz.gym.entity.EnquiryEntity;
 import com.xworkz.gym.entity.RegistrationEntity;
+import com.xworkz.gym.entity.UpdatedEnquiryDetailsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -227,6 +228,23 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
         return updatedValue;
+    }
+
+    @Override
+    public void saveUserUpdatedEnquiryDetails(UpdatedEnquiryDetailsEntity entity) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.persist(entity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
     }
 
 

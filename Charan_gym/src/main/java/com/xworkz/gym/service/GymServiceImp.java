@@ -6,12 +6,12 @@ import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.AdminEntity;
 import com.xworkz.gym.entity.EnquiryEntity;
 import com.xworkz.gym.entity.RegistrationEntity;
+import com.xworkz.gym.entity.UpdatedEnquiryDetailsEntity;
 import com.xworkz.gym.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -118,6 +118,11 @@ public class GymServiceImp implements GymService{
     @Override
     public int updateUserEnquiryDetails(int enquiryId, String status, String reason) {
         int updatedValue=gymRepository.updateUserEnquiryDetails(enquiryId,status,reason);
+        UpdatedEnquiryDetailsEntity updatedEnquiryDetails=new UpdatedEnquiryDetailsEntity();
+        updatedEnquiryDetails.setId(enquiryId);
+        updatedEnquiryDetails.setCustomer_status(status);
+        updatedEnquiryDetails.setCustomer_reason(reason);
+        gymRepository.saveUserUpdatedEnquiryDetails(updatedEnquiryDetails);
         return updatedValue;
     }
 

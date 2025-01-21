@@ -108,11 +108,11 @@
         <form action="registeration" method="post">
           <div class="form-group">
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required>
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${name}">
           </div>
           <div class="form-group">
             <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -121,7 +121,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required>
+              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${phoneNo}">
             </div>
           </div>
           <div class="form-row">
@@ -185,6 +185,22 @@
     </div>
   </div>
 <script>
+
+
+ const onField=()=>{
+      var placeName=document.getElementById("email");
+         var placeValue=placeName.value;
+      if(placeValue!=""){
+            var xhttp=new XMLHttpRequest();
+              xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
+              xhttp.send();
+
+              xhttp.onload = function() {
+                  document.getElementById("nameValid").innerHTML = this.responseText;
+              }
+              }
+
+
   document.addEventListener('DOMContentLoaded', function () {
     const packagePrices = {
       "BASIC": 10000,

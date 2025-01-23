@@ -108,12 +108,14 @@
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
       <a href="registrationUpdate">Update</a>
+
     </nav>
   </header>
 
+
   <!-- Welcome Message Section -->
   <div class="message-container">
-    <h1>Welcome back, ${success}! You have successfully logged in.</h1>
+    <h1>Welcome back, ${adminEntity.name}! You have successfully logged in.</h1>
   </div>
 </body>
 </html>

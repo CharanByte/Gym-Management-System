@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -12,9 +13,9 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NamedQuery(name = "getAllUserDetailsByStatus", query = "select a from EnquiryEntity a WHERE a.status=:getStatus")
 @NamedQuery(name = "getAllUserDetails", query = "select a from EnquiryEntity a")
-@NamedQuery(name = "updateUserEnquiryDetailsById", query = "UPDATE EnquiryEntity a SET a.status=:getStatus,a.reason=:getReason where a.id=:getId")
+@NamedQuery(name = "updateUserEnquiryDetailsById", query = "UPDATE EnquiryEntity a SET a.status=:getStatus,a.reason=:getReason,a.updatedBy=:getUpdatedName,a.updatedDate=:getUpdatedDate where a.id=:getId")
 
-public class EnquiryEntity {
+public class EnquiryEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -36,5 +37,13 @@ public class EnquiryEntity {
     private String areaName;
     @Column(name = "customer_reason")
     private String reason;
+    @Column(name = "created_by")
+    private String createdBy;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
+    @Column(name = "updated_by")
+    private String updatedBy;
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
 }

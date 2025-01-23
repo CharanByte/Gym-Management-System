@@ -3,15 +3,14 @@ package com.xworkz.gym.service;
 import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.dto.EnquiryDTO;
 import com.xworkz.gym.dto.RegistrationDTO;
-import com.xworkz.gym.entity.AdminEntity;
-import com.xworkz.gym.entity.EnquiryEntity;
-import com.xworkz.gym.entity.RegistrationEntity;
-import com.xworkz.gym.entity.UpdatedEnquiryDetailsEntity;
+import com.xworkz.gym.entity.*;
 import com.xworkz.gym.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -59,7 +58,7 @@ public class GymServiceImp implements GymService{
 
 
     @Override
-    public boolean validateCustomerEnquiryDetails(EnquiryDTO enquiryDTO) {
+    public boolean validateCustomerEnquiryDetails(EnquiryDTO enquiryDTO,String createdName) {
         boolean valid=true;
         String name=enquiryDTO.getName();
         if(name!=null && name.length()>1 && name.length()<30){
@@ -104,6 +103,8 @@ public class GymServiceImp implements GymService{
         enquiryEntity.setAddress(enquiryDTO.getAddress());
         enquiryEntity.setStatus("Enquiry");
         enquiryEntity.setAreaName(enquiryDTO.getAreaName());
+        enquiryEntity.setCreatedBy(createdName);
+
         gymRepository.saveCustomerEnquiryDetails(enquiryEntity);
         }
         return valid;
@@ -116,12 +117,16 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public int updateUserEnquiryDetails(int enquiryId, String status, String reason) {
-        int updatedValue=gymRepository.updateUserEnquiryDetails(enquiryId,status,reason);
+    public int updateUserEnquiryDetails(int enquiryId, String status, String reason,String adminName) {
+
+        LocalDateTime  localDateTime=LocalDateTime.now();
+        int updatedValue=gymRepository.updateUserEnquiryDetails(enquiryId,status,reason,adminName,localDateTime);
         UpdatedEnquiryDetailsEntity updatedEnquiryDetails=new UpdatedEnquiryDetailsEntity();
         updatedEnquiryDetails.setId(enquiryId);
         updatedEnquiryDetails.setCustomer_status(status);
         updatedEnquiryDetails.setCustomer_reason(reason);
+        updatedEnquiryDetails.setUpdatedBy(adminName);
+        updatedEnquiryDetails.setUpdatedDate(localDateTime);
         gymRepository.saveUserUpdatedEnquiryDetails(updatedEnquiryDetails);
         return updatedValue;
     }
@@ -133,7 +138,7 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public boolean validateAndSaveRegistredDetails(RegistrationDTO registrationDTO) {
+    public boolean validateAndSaveRegistredDetails(RegistrationDTO registrationDTO,String adminName) {
 
         RegistrationEntity registrationEntity=new RegistrationEntity();
         registrationEntity.setName(registrationDTO.getName());
@@ -146,6 +151,8 @@ public class GymServiceImp implements GymService{
         registrationEntity.setAmount(registrationDTO.getAmount());
         registrationEntity.setAmountPaid(registrationDTO.getAmountPaid());
         registrationEntity.setBalanceAmount(registrationDTO.getBalanceAmount());
+        registrationEntity.setTotalAmountPaid(registrationDTO.getAmountPaid());
+        registrationEntity.setCreatedBy(adminName);
         gymRepository.saveRegistredDetails(registrationEntity);
         return true;
     }
@@ -157,10 +164,39 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount,double totalAmount) {
-        int value=gymRepository.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount,totalAmount);
-    return value;
+    public int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount, double totalAmount,String adminName) {
 
+        int value=gymRepository.upadteRegistredUsersDetails(id,gympackage,trainer,amountPaid,balanceAmount,totalAmount);
+        UpdatedRegistrationDetailsEntity details=new UpdatedRegistrationDetailsEntity();
+        details.setId(id);
+        details.setAmount_paid(amountPaid);
+        details.setAmount_balance(balanceAmount);
+        details.setUpdated_packagel(gympackage);
+        details.setUpdated_trainer(trainer);
+        details.setUpdated_by(adminName);
+
+        gymRepository.saveUpadteRegistredUsersDetails(details);
+        return value;
+
+    }
+
+    @Override
+    public List<UpdatedEnquiryDetailsEntity> getAllViewDetails(int id) {
+
+        List<UpdatedEnquiryDetailsEntity> list=gymRepository.getAllViewDetails(id);
+        return list;
+    }
+
+    @Override
+    public List<RegistrationEntity> getAllRegistredUsersDetailsByNameAndPhoneNo(String searchName, Long searchPhoneNo) {
+
+
+        return gymRepository.getAllRegistredUsersDetailsByNameAndPhoneNo( searchName, searchPhoneNo);
+    }
+
+    @Override
+    public List<UpdatedRegistrationDetailsEntity> getAllRegistredUsersUpdatedDetails(int id) {
+        return gymRepository.getAllRegistredUsersUpdatedDetails(id);
     }
 
 }

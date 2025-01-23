@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/")
 public class AdminLoginController {
@@ -21,7 +24,7 @@ public class AdminLoginController {
     }
 
     @PostMapping("/adminLogin")
-    public String onLigin(AdminLoginDTO adminLoginDTO, Model model){
+    public String onLigin(AdminLoginDTO adminLoginDTO, Model model,HttpSession httpSession){
         System.out.println(adminLoginDTO);
         boolean valid=gymService.validateAdminUser(adminLoginDTO);
         if(valid) {
@@ -29,7 +32,10 @@ public class AdminLoginController {
             if(adminEntity.getLogin_count()==-1){
                 return "SetNewPassword";
             }
-            model.addAttribute("success",adminEntity.getName());
+            httpSession.setAttribute("adminEntity",adminEntity);
+
+
+           // model.addAttribute("success",adminEntity.getName());
             return "AdminPage";
         }
         model.addAttribute("failure","email or password is invalid");

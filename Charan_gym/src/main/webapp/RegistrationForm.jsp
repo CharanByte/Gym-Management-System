@@ -108,7 +108,7 @@
         <form action="registeration" method="post">
           <div class="form-group">
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${name}">
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${enquiryName}">
           </div>
           <div class="form-group">
             <label for="lastName">Email</label>
@@ -187,18 +187,6 @@
 <script>
 
 
- const onField=()=>{
-      var placeName=document.getElementById("email");
-         var placeValue=placeName.value;
-      if(placeValue!=""){
-            var xhttp=new XMLHttpRequest();
-              xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
-              xhttp.send();
-
-              xhttp.onload = function() {
-                  document.getElementById("nameValid").innerHTML = this.responseText;
-              }
-              }
 
 
   document.addEventListener('DOMContentLoaded', function () {

@@ -1,16 +1,15 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.entity.AdminEntity;
-import com.xworkz.gym.entity.EnquiryEntity;
-import com.xworkz.gym.entity.RegistrationEntity;
-import com.xworkz.gym.entity.UpdatedEnquiryDetailsEntity;
+import com.xworkz.gym.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 @Repository
 public class GymRepositoryImp implements GymRepository{
@@ -131,13 +130,13 @@ public class GymRepositoryImp implements GymRepository{
 
 
     @Override
-    public int updateUserEnquiryDetails(int enquiryId, String status, String reason) {
+    public int updateUserEnquiryDetails(int enquiryId, String status, String reason, String adminName, LocalDateTime date) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
         int value=0;
         try {
             et.begin();
-             value=em.createNamedQuery("updateUserEnquiryDetailsById").setParameter("getStatus",status).setParameter("getReason",reason).setParameter("getId",enquiryId).executeUpdate();
+             value=em.createNamedQuery("updateUserEnquiryDetailsById").setParameter("getStatus",status).setParameter("getReason",reason).setParameter("getUpdatedName",adminName).setParameter("getUpdatedDate",date).setParameter("getId",enquiryId).executeUpdate();
             et.commit();
         } catch (Exception e) {
             if (et.isActive()) {
@@ -245,6 +244,84 @@ public class GymRepositoryImp implements GymRepository{
         } finally {
             em.close();
         }
+    }
+
+    @Override
+    public void saveUpadteRegistredUsersDetails(UpdatedRegistrationDetailsEntity details) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.persist(details);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<UpdatedEnquiryDetailsEntity> getAllViewDetails(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<UpdatedEnquiryDetailsEntity> list = em.createNamedQuery("getAllViewDetailsById", UpdatedEnquiryDetailsEntity.class).setParameter("getId",id).getResultList();
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return list ;
+    }
+
+    @Override
+    public List<RegistrationEntity> getAllRegistredUsersDetailsByNameAndPhoneNo(String searchName, Long searchPhoneNo) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<RegistrationEntity> list=em.createNamedQuery("getAllRegistredUsersDetailsByNameAndPhoneNo").setParameter("getName",searchName).setParameter("getPhoneNo",searchPhoneNo).getResultList();
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<UpdatedRegistrationDetailsEntity> getAllRegistredUsersUpdatedDetails(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<UpdatedRegistrationDetailsEntity> list=em.createNamedQuery("getAllRegDetails",UpdatedRegistrationDetailsEntity.class).setParameter("getId",id).getResultList();
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return list ;
     }
 
 

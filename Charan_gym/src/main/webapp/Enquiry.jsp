@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Enquiry Form</title>
-
-    <link rel="stylesheet" href="re.css" />
     <style>
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
@@ -247,22 +245,26 @@ body {
     <form action="enquiry" class="form" method="post">
         <div class="input-box">
             <label>Full Name</label>
-            <input type="text" placeholder="Enter full name" name="name" required />
+            <input type="text" placeholder="Enter full name" name="name" required onblur="validData(event)" />
+            <span id="nameValid"></span>
         </div>
 
         <div class="input-box">
             <label>Email Address</label>
-            <input type="text" placeholder="Enter email address" name="email" required />
+            <input type="text" placeholder="Enter email address" name="email" required onblur="validData(event)" />
+            <span id="emailvalid"></span>
         </div>
 
         <div class="column">
             <div class="input-box">
                 <label>Phone Number</label>
-                <input type="number" placeholder="Enter phone number" name="phoneNumber" required />
+                <input type="text" placeholder="Enter phone number" name="phoneNumber" required onblur="validData(event)" />
+                <span id="phonevalid"></span>
             </div>
             <div class="input-box">
                 <label>Age</label>
-                <input type="number" placeholder="Enter your age" name="age" required />
+                <input type="text" placeholder="Enter your age" name="age" required oninput="validData(event)" />
+                 <span id="agevalid"></span>
             </div>
         </div>
         <div class="gender-box">
@@ -302,5 +304,54 @@ body {
         <button>Submit</button>
     </form>
 </section>
+<script>
+const validData=(event)=>{
+    const {name,value}=event.target;
+   const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    var regex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     var regex2 = /^[0-9]+$/;
+    if(name==="name" && value.length>=2 && regex.test(value) && value!==""){
+        console.log("valid name");
+      document.getElementById("nameValid").innerHTML="<span></span>"
+    }
+    else if(name==="name" && (value.length<2 || !regex.test(value) || value==="" )){
+    console.log("name not valid");
+    document.getElementById("nameValid").innerHTML="<span style='color:red'}> name invalid</span>"
+    }
+
+    if(name==="email" && (regex1.test(value))){
+        console.log("valid email");
+        document.getElementById("emailvalid").innerHTML="<span}></span>"
+    }
+    else if(name==="email" && !regex1.test(value)){
+    console.log("email not valid");
+    document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email invalid</span>"
+    }
+
+
+    if(name==="phoneNumber" && value.length==10 && regex2.test(value)){
+        console.log("phoneNo valid");
+        document.getElementById("phonevalid").innerHTML="<span}></span>"
+    }
+    else if(name==="phoneNumber" && (value.length!=10 || !regex2.test(value))){
+    console.log("phoneNo invalid");
+    document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number invalid</span>"
+    }
+
+if(name==="age" && value>12 && value<50){
+        console.log("age valid");
+        document.getElementById("agevalid").innerHTML="<span}></span>"
+    }
+    else if(name==="age" && value<12 || value>50){
+    console.log("age invalid");
+    document.getElementById("agevalid").innerHTML="<span style='color:red'}>age must be Inbetween 12 to 50</span>"
+    }
+
+
+
+
+}
+
+</script>
 </body>
 </html>

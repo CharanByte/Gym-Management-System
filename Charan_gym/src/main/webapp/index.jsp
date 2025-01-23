@@ -166,7 +166,7 @@
 
              }
 .products {
-    padding: 50px 0;
+    padding: 130px 0;
     text-align: center;
     background: #C6FFDD;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
@@ -225,10 +225,10 @@
              .top-notch-facilities {
                padding: 50px 0;
                text-align: center;
-            background: #ADA996;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+           background: #0F2027;  /* fallback for old browsers */
+           background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+           background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
              }
 
              .top-notch-facilities .facility-list {
@@ -241,6 +241,7 @@
              .top-notch-facilities .facility-item {
                width: 22%;
                text-align: center;
+               box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
              }
 
              .top-notch-facilities .facility-item img {
@@ -249,6 +250,24 @@
                object-fit: cover;
                border-radius: 8px;
              }
+             .exclusive-banner {
+                 position: absolute; /* Absolute positioning */
+                 top: -130px; /* Adjust as needed to position it above */
+                 left: 50%;
+                 transform: translateX(-50%); /* Center horizontally */
+                 z-index: 2; /* Ensure it appears above other content */
+                 text-align: center;
+                 width: auto; /* Maintain original image size */
+             }
+
+             .products .container {
+                 position: relative; /* Set a relative context for absolute positioning */
+             }
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -265,6 +284,7 @@
                     <li><a href="#">CARE</a></li>
                     <li><a href="#">MIND</a></li>
                     <li><a href="#">STORE</a></li>
+                      <li><a href="#">STORE</a></li>
                 </ul>
             </nav>
             <div class="actions">
@@ -290,18 +310,21 @@
         <div class="container">
             <div class="hero-text">
                 <h1>REPUBLIC DAY SALE</h1>
-                <h2>60% OFF on cultpass</h2>
+                <h2>60% OFF</h2>
                 <p>WORKOUT IN GROUP CLASSES, GYMS & AT-HOME</p>
-                <button class="try-for-free">TRY FOR FREE</button>
+
             </div>
         </div>
     </section>
 
     <section class="products">
         <div class="container">
-            <h2>Exclusive Packages</h2>
-            <div class="product-list">
 
+ <div class="exclusive-banner">
+            <img src="https://i.ibb.co/HNXwjbn/Exclusive-Packages-1-22-2025-1.png" alt="Exclusive Packages">
+        </div>
+
+            <div class="product-list">
                 <div class="product-item">
                     <img src="https://img.freepik.com/free-photo/gym-fitness-woman-working-gym-exercises-workout-fit-gym_169016-63231.jpg?t=st=1737456398~exp=1737459998~hmac=8a10aa4f45cc34880d58c1d251f1dfc63b61ea9e75b5fea51fc919f5935dcee9&w=900" alt="Personal Training">
                     <h3>VIP PACK</h3>
@@ -330,7 +353,9 @@
 
     <section class="top-notch-facilities">
         <div class="text-center py-8 bg-gradient-to-b from-black to-purple-900">
-            <h1 class="text-4xl font-bold text-white">TOP NOTCH FACILITIES</h1>
+          <div class="exclusive-banne">
+                      <img src="https://i.ibb.co/M7QNrMW/TOP-NOTCH-FACILITIES-1-22-2025.png" alt="Exclusive Packages">
+                  </div>
         </div>
         <div class="facility-list">
             <div class="facility-item">
@@ -346,6 +371,7 @@
                 <img src="https://storage.googleapis.com/a1aa/image/vSxdV45RT4phC5rel4FeuC7ld5RyUe1SuxwGS1wnegBmCLcQB.jpg" alt="Group of people in the gym">
             </div>
         </div>
+
     </section>
 
 

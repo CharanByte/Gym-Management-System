@@ -9,8 +9,10 @@ import javax.persistence.*;
 @Data
 
 @NamedQuery(name = "getAllRegistredUsersDetails", query = "select a from RegistrationEntity a")
-@NamedQuery(name = "updateRegistredUserDetails", query = "UPDATE RegistrationEntity a SET a.amountPaid=a.amountPaid + :getAmountPaid,a.gympackage=:getPackage,a.trainer=:getTrainer,a.balanceAmount=:getBalanceAmount,a.amount=:getAmount where a.id=:getId")
-public class RegistrationEntity {
+@NamedQuery(name = "updateRegistredUserDetails", query = "UPDATE RegistrationEntity a SET a.totalAmountPaid=a.totalAmountPaid + :getAmountPaid,a.gympackage=:getPackage,a.trainer=:getTrainer,a.balanceAmount=:getBalanceAmount,a.amount=:getAmount where a.id=:getId")
+@NamedQuery(name = "getAllRegistredUsersDetailsByNameAndPhoneNo", query = "select a from RegistrationEntity a where a.name=:getName and a.phoneNumber=:getPhoneNo")
+
+public class RegistrationEntity extends AbstractAdutEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +37,8 @@ public class RegistrationEntity {
     private double amountPaid;
     @Column(name = "balanceAmount")
     private double balanceAmount;
+    @Column(name = "total_paidAmount")
+    private double totalAmountPaid;
+
 
 }

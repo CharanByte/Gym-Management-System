@@ -1,12 +1,10 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.entity.AdminEntity;
-import com.xworkz.gym.entity.EnquiryEntity;
-import com.xworkz.gym.entity.RegistrationEntity;
-import com.xworkz.gym.entity.UpdatedEnquiryDetailsEntity;
+import com.xworkz.gym.entity.*;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,7 +19,7 @@ public interface GymRepository {
 
     long getCountOfAdminUserName(String email);
 
-    int updateUserEnquiryDetails(int enquiryId, String status, String reason);
+    int updateUserEnquiryDetails(int enquiryId, String status, String reason, String adminName, LocalDateTime date);
 
     List<EnquiryEntity> getAllUserDetailsByStatus(String status);
 
@@ -32,4 +30,12 @@ public interface GymRepository {
     int upadteRegistredUsersDetails(int id, String gympackage, String trainer, double amountPaid, double balanceAmount,double totalAmount);
 
     void saveUserUpdatedEnquiryDetails(UpdatedEnquiryDetailsEntity updatedEnquiryDetails);
+
+    void saveUpadteRegistredUsersDetails(UpdatedRegistrationDetailsEntity details);
+
+    List<UpdatedEnquiryDetailsEntity> getAllViewDetails(int id);
+
+    List<RegistrationEntity> getAllRegistredUsersDetailsByNameAndPhoneNo(String searchName, Long searchPhoneNo);
+
+    List<UpdatedRegistrationDetailsEntity> getAllRegistredUsersUpdatedDetails(int id);
 }

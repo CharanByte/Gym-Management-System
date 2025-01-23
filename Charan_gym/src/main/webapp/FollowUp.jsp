@@ -147,8 +147,11 @@
     height: auto;
   }
     .update{
+
     font-size:30px;
     }
+
+
   </style>
 </head>
 <body>
@@ -216,6 +219,7 @@
                <th>Status</th>
                <th>Reason</th>
                <th>Action</th>
+               <th>View</th>
              </tr>
            </thead>
            <tbody>
@@ -245,6 +249,9 @@
                  </td>
                  <td>
                    <button type="submit" class="btn btn-success">Update</button>  <!-- Update button for each row -->
+                         </td>
+                         <td>
+                                   <a href="onView?id=${enquiry.id}" class="btn btn-success">View</a>
                  </td>
                </form>
              </tr>

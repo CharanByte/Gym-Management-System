@@ -70,12 +70,28 @@
   }
 
 
-  .search-row {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
+
+   .search-message {
+          display: flex;
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically within the flex container */
+          margin-top: 20px; /* Add some spacing from the search-row */
+          text-align: center; /* Ensure text is centered */
+      }
+
+      /* Optional: Styling for search-row */
+      .search-row {
+          display: flex;
+          justify-content: right;
+          align-items: center;
+          margin-bottom: 20px;
+      }
+
+      /* Optional: Style the form controls */
+      .form-control {
+          padding: 10px;
+          font-size: 16px;
+      }
 
   .pagination {
     display: flex;
@@ -149,6 +165,10 @@
     .update{
     font-size:30px;
     }
+       #nameValid {
+                margin-top: 10px;
+                color: green;
+            }
   </style>
 </head>
 <body>
@@ -176,22 +196,36 @@
 
   <div class="container">
     <!-- Search Row -->
-    <div class="search-row">
-      <form action="searchName" method="POST" style="display: flex; gap: 10px;">
-            <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Search name" required >
-        <button type="submit" class="btn btn-primary">Search</button>
-      </form>
+    <div class="search-row" style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
+           <form action="searchDetails" style="display: flex; gap: 10px; align-items: center;">
+               <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Search name" oninput="onField()" required>
+               <input type="text" class="form-control" id="searchPhoneNo" name="searchPhoneNo" placeholder="Search phone number" oninput="onField()" required>
+               <button type="submit" class="btn btn-primary">Search</button>
+           </form>
+
+           <!-- Div to display validation or result message below the form -->
+           <div id="nameValid" style="margin-top: 0px; color: red; margin-right:170px"></div>
+       </div>
+
+
+
+
+    <!-- This div is for the messages -->
+    <div class="search-message">
+        <h4 style="color: red;">${listEmpty}</h4>
+        <h4 style="color: red;">${notFound}</h4>
     </div>
+
 
     <!-- Table Container -->
     <c:if test="${not empty list}">
      <div class="table-container">
-       <h4 class="table-name">Enquiry Details</h4>
+       <h4 class="table-name">Registred User Details</h4>
        <form action="updatebutton" method="post">
          <table class="table table-striped table-bordered table-hover">
            <colgroup>
 
-             <col style="width: 15%;">
+             <col style="width: 18%;">
              <col style="width: 15%;">
              <col style="width: 10%;">
              <col style="width: 10%;">
@@ -213,6 +247,7 @@
                <th>Amount Paid</th>
                <th>Balance Amount</th>
                 <th>update</th>
+                <th>View</th>
              </tr>
            </thead>
            <tbody>
@@ -241,16 +276,18 @@
                  <td>
                    <button type="submit" class="btn btn-success">Update</button>  <!-- Update button for each row -->
                  </td>
+                  <td>
+                                <a href="view?id=${enquiry.id}" class="btn btn-success">View</a>
+                                  </td>
                </form>
              </tr>
            </c:forEach>
 
            </tbody>
          </table>
+
        </form>
      </div>
-
-
 
         <!-- Pagination Links -->
         <c:if test="${totalPages > 1}">
@@ -263,6 +300,32 @@
       </div>
     </c:if>
   </div>
+
+
+  <script>
+     const onField = () => {
+         var searchName = document.getElementById("searchName").value;
+         var searchPhoneNo = document.getElementById("searchPhoneNo").value;
+
+         if (searchName !== "" && searchPhoneNo !== "") {
+             var xhttp = new XMLHttpRequest();
+
+             // Send both values as query parameters in the URL
+             var url = "http://localhost:8080/Charan_gym/search?searchName=" + encodeURIComponent(searchName) + "&searchPhoneNo=" + encodeURIComponent(searchPhoneNo);
+
+             xhttp.open("GET", url, true);
+             xhttp.send();
+
+             xhttp.onload = function() {
+                 // Update the DOM with the server's response
+                 document.getElementById("nameValid").innerHTML = this.responseText;
+             };
+         } else {
+             alert("Both fields are required!");
+         }
+     };
+
+    </script>
 </body>
 
 </html>

@@ -49,7 +49,11 @@ public class RegistrationController {
             model.addAttribute("registerDTO",registrationDTO);
             return "DisplayRegistredDetails";
         }
-        return "RegistrationForm";
+        else {
+            model.addAttribute("notsaved","Please Fill Valid Details");
+            return "DisplayRegistredDetails";
+        }
+
     }
 
 

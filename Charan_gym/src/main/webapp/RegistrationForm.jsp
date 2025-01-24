@@ -108,20 +108,24 @@
         <form action="registeration" method="post">
           <div class="form-group">
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${enquiryName}">
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${enquiryName}" onblur="validData(event)">
+            <span id="nameValid"></span>
           </div>
           <div class="form-group">
             <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}" onblur="validData(event)">
+            <span id="emailvalid"></span>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="email">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required onblur="validData(event)">
+              <span id="passwordValid"></span>
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${phoneNo}">
+              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${phoneNo}" onblur="validData(event)">
+               <span id="phonevalid"></span>
             </div>
           </div>
           <div class="form-row">
@@ -186,9 +190,51 @@
   </div>
 <script>
 
+const validData=(event)=>{
+    const {name,value}=event.target;
+   const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    const regex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     const regex2 = /^[0-9]+$/;
+     const passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+    if(name==="name" && value.length>=2 && regex.test(value) && value!==""){
+        console.log("valid name");
+      document.getElementById("nameValid").innerHTML="<span></span>"
+    }
+    else if(name==="name" && (value.length<2 || !regex.test(value) || value==="" )){
+    console.log("name not valid");
+    document.getElementById("nameValid").innerHTML="<span style='color:red'}> UserName invalid</span>"
+    }
+
+    if(name==="email" && (regex1.test(value))){
+        console.log("valid email");
+        document.getElementById("emailvalid").innerHTML="<span}></span>"
+    }
+    else if(name==="email" && !regex1.test(value)){
+    console.log("email not valid");
+    document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email invalid</span>"
+    }
 
 
+    if(name==="phoneNo" && value.length==10 && regex2.test(value)){
+        console.log("phoneNo valid");
+        document.getElementById("phonevalid").innerHTML="<span}></span>"
+    }
+    else if(name==="phoneNo" && (value.length!=10 || !regex2.test(value))){
+    console.log("phoneNo invalid");
+    document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number invalid</span>"
+    }
 
+    if(name==="password" && passwordRegex.test(value) && value!==""){
+            console.log("valid password");
+          document.getElementById("passwordValid").innerHTML="<span></span>"
+        }
+        else if(name==="password" && (!passwordRegex.test(value) || value==="" )){
+        console.log("password not valid");
+        document.getElementById("passwordValid").innerHTML="<span style='color:red'}>Password Invalid</span>"
+        }
+
+
+}
   document.addEventListener('DOMContentLoaded', function () {
     const packagePrices = {
       "BASIC": 10000,
@@ -258,6 +304,7 @@
 
     amountInput.addEventListener('input', updateBalance);
   });
+
 </script>
 
 

@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 @Service
 public class GymServiceImp implements GymService{
@@ -106,6 +110,67 @@ public class GymServiceImp implements GymService{
         enquiryEntity.setCreatedBy(createdName);
 
         gymRepository.saveCustomerEnquiryDetails(enquiryEntity);
+
+
+            final String username = "fittnessgym6@gmail.com";
+            final String userPassword = "dfxi ijpe mliy povj";
+
+            Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
+            prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+            Session session = Session.getInstance(prop,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, userPassword);
+                        }
+                    });
+            try {
+                String emailContent = String.format(
+                        "Dear %s,\n\n" +
+                                "Thank you for reaching out to us! We have successfully received your enquiry with the following details:\n\n" +
+                                "Name: %s\n" +
+                                "Email: %s\n" +
+                                "Phone Number: %s\n" +
+                                "Age: %d\n" +
+                                "Gender: %s\n" +
+                                "Address: %s\n" +
+                                "Area Name: %s\n" +
+                                "Status: %s\n\n" +
+                                "Our team will review your enquiry and get back to you shortly. If you have any additional questions or require further assistance, feel free to contact us.\n\n" +
+                                "Best regards,\n" +
+                                "%s",
+                        enquiryEntity.getName(),
+                        enquiryEntity.getName(),
+                        enquiryEntity.getEmail(),
+                        enquiryEntity.getPhoneNumber(),
+                        enquiryEntity.getAge(),
+                        enquiryEntity.getGender(),
+                        enquiryEntity.getAddress(),
+                        enquiryEntity.getAreaName(),
+                        enquiryEntity.getStatus(),
+                        "Fittnes Gym"
+                );
+
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipients(
+                        Message.RecipientType.TO,
+                        InternetAddress.parse(enquiryEntity.getEmail())
+                );
+                message.setSubject("Enquiry Submission Confirmation");
+                message.setText(emailContent);
+
+                Transport.send(message);
+
+                System.out.println("Email sent successfully!");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         }
         return valid;
     }
@@ -139,22 +204,128 @@ public class GymServiceImp implements GymService{
 
     @Override
     public boolean validateAndSaveRegistredDetails(RegistrationDTO registrationDTO,String adminName) {
+        boolean valid=true;
+        String name=registrationDTO.getName();
+        if(name!=null && name.length()>1 && name.length()<30 &&  name.matches("^[A-Za-z]+(?: [A-Za-z]+)*$")){
+            System.out.println("name is valid");
+        }
+        else {
+            valid=false;
+            System.out.println("name is in valid");
+        }
+        String email=registrationDTO.getEmail();
+        if(email!=null && email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")){
+            System.out.println("email valid");
+        }
+        else {
+            valid=false;
+            System.out.println("email Invalid");
+        }
+        String phoneNo= String.valueOf(registrationDTO.getPhoneNo());
+        if(phoneNo!=null && phoneNo.matches("^[0-9]{10}$")){
+            System.out.println("phoneNo valid");
+        }
+        else {
+            valid=false;
+            System.out.println("phoneNo Invalid");
+        }
+        String password = registrationDTO.getPassword();
+        if (password != null && password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
+            System.out.println("Password is valid");
+        } else {
+            valid = false;
+            System.out.println("Password is invalid");
+        }
 
-        RegistrationEntity registrationEntity=new RegistrationEntity();
-        registrationEntity.setName(registrationDTO.getName());
-        registrationEntity.setEmail(registrationDTO.getEmail());
-        registrationEntity.setPassword(registrationDTO.getPassword());
-        registrationEntity.setPhoneNumber(registrationDTO.getPhoneNo());
-        registrationEntity.setGympackage(registrationDTO.getGympackage());
-        registrationEntity.setTrainer(registrationDTO.getTrainer());
-        registrationEntity.setDiscount(registrationDTO.getDiscount());
-        registrationEntity.setAmount(registrationDTO.getAmount());
-        registrationEntity.setAmountPaid(registrationDTO.getAmountPaid());
-        registrationEntity.setBalanceAmount(registrationDTO.getBalanceAmount());
-        registrationEntity.setTotalAmountPaid(registrationDTO.getAmountPaid());
-        registrationEntity.setCreatedBy(adminName);
-        gymRepository.saveRegistredDetails(registrationEntity);
-        return true;
+
+
+        if(valid) {
+
+            RegistrationEntity registrationEntity = new RegistrationEntity();
+            registrationEntity.setName(registrationDTO.getName());
+            registrationEntity.setEmail(registrationDTO.getEmail());
+            registrationEntity.setPassword(registrationDTO.getPassword());
+            registrationEntity.setPhoneNumber(registrationDTO.getPhoneNo());
+            registrationEntity.setGympackage(registrationDTO.getGympackage());
+            registrationEntity.setTrainer(registrationDTO.getTrainer());
+            registrationEntity.setDiscount(registrationDTO.getDiscount());
+            registrationEntity.setAmount(registrationDTO.getAmount());
+            registrationEntity.setAmountPaid(registrationDTO.getAmountPaid());
+            registrationEntity.setBalanceAmount(registrationDTO.getBalanceAmount());
+            registrationEntity.setTotalAmountPaid(registrationDTO.getAmountPaid());
+            registrationEntity.setCreatedBy(adminName);
+            gymRepository.saveRegistredDetails(registrationEntity);
+
+
+            final String username = "fittnessgym6@gmail.com";
+            final String userPassword = "dfxi ijpe mliy povj";
+
+            Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
+            prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+            Session session = Session.getInstance(prop,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, userPassword);
+                        }
+                    });
+            try {
+                String emailContent = String.format(
+                        "Subject: Registration Confirmation\n\n" +
+                                "Dear %s,\n\n" +
+                                "Thank you for registering with us! Here are your registration details:\n\n" +
+                                "Name: %s\n" +
+                                "Email: %s\n" +
+                                "Password: %s\n" +
+                                "Phone Number: %s\n" +
+                                "Gym Package: %s\n" +
+                                "Trainer Name: %s\n" +
+                                "Discount: %s%%\n" +
+                                "Total Amount: %.2f\n" +
+                                "Amount Paid: %.2f\n" +
+                                "Balance Amount: %.2f\n" +
+                                "Total Amount Paid: %.2f\n\n" +
+                                "We recommend keeping your password secure and not sharing it with anyone.\n\n" +
+                                "We’re excited to have you on board and look forward to helping you achieve your fitness goals. If you have any questions or need further assistance, please feel free to contact us.\n\n" +
+                                "Best regards,\n" +
+                                "Fittness Gym",
+                        registrationEntity.getName(),
+                        registrationEntity.getName(),
+                        registrationEntity.getEmail(),
+                        registrationEntity.getPassword(),
+                        registrationEntity.getPhoneNumber(),
+                        registrationEntity.getGympackage(),
+                        registrationEntity.getTrainer(),
+                        registrationEntity.getDiscount(),
+                        registrationEntity.getAmount(),
+                        registrationEntity.getAmountPaid(),
+                        registrationEntity.getBalanceAmount(),
+                        registrationEntity.getTotalAmountPaid()
+
+                );
+
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipients(
+                        Message.RecipientType.TO,
+                        InternetAddress.parse(registrationEntity.getEmail())
+                );
+                message.setSubject("Registration Confirmation");
+                message.setText(emailContent);
+
+                Transport.send(message);
+
+                System.out.println("Registration email sent successfully!");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+        return valid;
     }
 
     @Override

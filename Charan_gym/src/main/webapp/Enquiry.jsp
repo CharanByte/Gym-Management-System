@@ -342,7 +342,7 @@ if(name==="age" && value>12 && value<50){
         console.log("age valid");
         document.getElementById("agevalid").innerHTML="<span}></span>"
     }
-    else if(name==="age" && value<12 || value>50){
+    else if(name==="age" && (value<12 || value>50)){
     console.log("age invalid");
     document.getElementById("agevalid").innerHTML="<span style='color:red'}>age must be Inbetween 12 to 50</span>"
     }

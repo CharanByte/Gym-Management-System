@@ -77,10 +77,12 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <h2>Submitted Details</h2>
     <table class="table table-bordered">
         <tbody>
+        <h2 style="color:red">${notsaved}</h2>
         <tr>
             <th>full Name</th>
             <td>${registerDTO.name}</td>

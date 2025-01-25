@@ -370,4 +370,15 @@ public class GymServiceImp implements GymService{
         return gymRepository.getAllRegistredUsersUpdatedDetails(id);
     }
 
+    @Override
+    public List<RegistrationEntity> getAllRegistredUserDetailsById(int id) {
+
+        return gymRepository.getAllRegistredUserDetailsById(id);
+    }
+
+    @Override
+    public Long getCountOfRegisteredUserEmail(String email) {
+        return gymRepository.getCountOfRegisteredUserEmail(email);
+    }
+
 }

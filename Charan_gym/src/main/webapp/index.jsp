@@ -289,7 +289,7 @@
             </nav>
             <div class="actions">
                 <a href="AdminLogin.jsp" style="text-decoration: none;">Admin</a>
-                <button class="get-app">User</button>
+                <a href="UserLogin" style="text-decoration: none;">User</a>
             </div>
         </div>
     </header>

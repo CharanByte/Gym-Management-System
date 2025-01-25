@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NamedQuery;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -309,7 +310,7 @@ public class GymRepositoryImp implements GymRepository{
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
 
-        List<UpdatedRegistrationDetailsEntity> list=em.createNamedQuery("getAllRegDetails",UpdatedRegistrationDetailsEntity.class).setParameter("getId",id).getResultList();
+        List<UpdatedRegistrationDetailsEntity> list=em.createNamedQuery("getAllRegUpdatedDetailsById",UpdatedRegistrationDetailsEntity.class).setParameter("getId",id).getResultList();
         try {
             et.begin();
 
@@ -322,6 +323,51 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
         return list ;
+    }
+
+    @Override
+    public List<RegistrationEntity> getAllRegistredUserDetailsById(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        List<RegistrationEntity> list=em.createNamedQuery("getAllRegDetailsById",RegistrationEntity.class).setParameter("getId",id).getResultList();
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        System.out.println(list);
+        return list;
+    }
+
+    @Override
+    public Long getCountOfRegisteredUserEmail(String email) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+
+        Object object=em.createNamedQuery("getCountOfRegistredUserEmail").setParameter("getEmail",email).getSingleResult();
+        Long count =(Long) object;
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        System.out.println(count);
+        return count;
+
     }
 
 

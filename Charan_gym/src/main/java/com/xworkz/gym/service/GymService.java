@@ -38,4 +38,8 @@ public interface GymService {
     List<RegistrationEntity> getAllRegistredUsersDetailsByNameAndPhoneNo(String searchName, Long searchPhoneNo);
 
     List<UpdatedRegistrationDetailsEntity> getAllRegistredUsersUpdatedDetails(int id);
+
+    List<RegistrationEntity> getAllRegistredUserDetailsById(int id);
+
+    Long getCountOfRegisteredUserEmail(String email);
 }

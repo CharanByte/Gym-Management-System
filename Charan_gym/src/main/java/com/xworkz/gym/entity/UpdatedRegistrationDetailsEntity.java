@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "regupdate_table")
-@NamedQuery(name = "getAllRegDetails",query = "select a from UpdatedRegistrationDetailsEntity a where a.id=:getId")
+@NamedQuery(name = "getAllRegUpdatedDetailsById",query = "select a from UpdatedRegistrationDetailsEntity a where a.id=:getId")
 public class UpdatedRegistrationDetailsEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

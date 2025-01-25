@@ -92,9 +92,11 @@ public class UpdateRegistredDetails {
     public String onView(@RequestParam int id,Model model){
         System.out.println(id);
        List<UpdatedRegistrationDetailsEntity> list= gymService.getAllRegistredUsersUpdatedDetails(id);
+        List<RegistrationEntity> list1= gymService.getAllRegistredUserDetailsById(id);
 
         System.out.println(list);
         model.addAttribute("list",list);
+        model.addAttribute("list",list1);
 
        return "ViewRegistrationUpdatedDetials";
     }

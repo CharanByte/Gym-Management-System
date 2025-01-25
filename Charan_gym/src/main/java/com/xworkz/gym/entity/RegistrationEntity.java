@@ -11,6 +11,8 @@ import javax.persistence.*;
 @NamedQuery(name = "getAllRegistredUsersDetails", query = "select a from RegistrationEntity a")
 @NamedQuery(name = "updateRegistredUserDetails", query = "UPDATE RegistrationEntity a SET a.totalAmountPaid=a.totalAmountPaid + :getAmountPaid,a.gympackage=:getPackage,a.trainer=:getTrainer,a.balanceAmount=:getBalanceAmount,a.amount=:getAmount where a.id=:getId")
 @NamedQuery(name = "getAllRegistredUsersDetailsByNameAndPhoneNo", query = "select a from RegistrationEntity a where a.name=:getName and a.phoneNumber=:getPhoneNo")
+@NamedQuery(name = "getAllRegDetailsById",query = "select a from RegistrationEntity a where a.id=:getId")
+@NamedQuery(name = "getCountOfRegistredUserEmail", query = "select count(a.email) from RegistrationEntity a where a.email=:getEmail")
 
 public class RegistrationEntity extends AbstractAdutEntity{
 

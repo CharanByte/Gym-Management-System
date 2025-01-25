@@ -87,11 +87,11 @@
       </div>
       <div class="col-md-7">
         <h2 class="text-center" style="color:white">Login</h2>
-        <form action="adminLogin" method="post">
+        <form action="userLogin" method="post">
         <span class="message">${failure}</span>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required onblur="onField()">
+            <input type="email" class="form-control" id="email" name="useremail" placeholder="Enter email" required onblur="onField()">
             <span id="nameValid"></span>
           </div>
           <div class="form-group">
@@ -124,11 +124,11 @@
     }
 
       const onField=()=>{
-      var placeName=document.getElementById("email");
-         var placeValue=placeName.value;
-      if(placeValue!=""){
+      var name=document.getElementById("email");
+         var value=name.value;
+      if(value!=""){
             var xhttp=new XMLHttpRequest();
-              xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
+              xhttp.open("GET","http://localhost:8080/Charan_gym/name/" + value,true);
               xhttp.send();
 
               xhttp.onload = function() {

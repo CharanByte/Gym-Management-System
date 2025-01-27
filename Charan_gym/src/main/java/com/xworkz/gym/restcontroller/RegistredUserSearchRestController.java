@@ -18,6 +18,7 @@ public class RegistredUserSearchRestController {
     public String search(@RequestParam String searchName,@RequestParam Long searchPhoneNo) {
 
       List<RegistrationEntity> registrationEntityList=gymService.getAllRegistredUsersDetailsByNameAndPhoneNo(searchName,searchPhoneNo);
+
         if(registrationEntityList.isEmpty()){
 
             return "Please enter valid Name and Phone Number";

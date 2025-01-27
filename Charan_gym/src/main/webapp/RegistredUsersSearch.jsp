@@ -321,7 +321,7 @@
                  document.getElementById("nameValid").innerHTML = this.responseText;
              };
          } else {
-             alert("Both fields are required!");
+
          }
      };
 

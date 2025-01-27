@@ -193,9 +193,7 @@ public class GymRepositoryImp implements GymRepository{
     public List<RegistrationEntity> getAllRegistredUsersDetails() {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
-
         List<RegistrationEntity> list= em.createNamedQuery("getAllRegistredUsersDetails",RegistrationEntity.class).getResultList();
-
 
         try {
             et.begin();
@@ -365,9 +363,95 @@ public class GymRepositoryImp implements GymRepository{
         } finally {
             em.close();
         }
-        System.out.println(count);
         return count;
 
+    }
+
+    @Override
+    public RegistrationEntity getAllByEmail(String email) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        RegistrationEntity registrationEntity=null;
+       List<RegistrationEntity> list=em.createNamedQuery("getAllByuserEmail").setParameter("getEmail",email).getResultList();
+
+      if (!list.isEmpty()){
+          registrationEntity=list.get(0);
+      }
+        System.out.println(registrationEntity);
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return registrationEntity ;
+    }
+
+    @Override
+    public void updateLockCount(String email,int count) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+           int value= em.createNamedQuery("updateLockCount").setParameter("getEmail",email).setParameter("getCount",count).executeUpdate();
+            System.out.println("updateLockCount "+value);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+
+    }
+
+    @Override
+    public void updateLockTime(String email, LocalDateTime localDateTime) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            int value= em.createNamedQuery("updateLockTime").setParameter("getEmail",email).setParameter("getLockTime",localDateTime).executeUpdate();
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+
+    }
+
+
+    @Override
+    public int validateAndupdateNewPassword(int id, String password, String confirmpassword) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+      int value=0;
+        try {
+            et.begin();
+             value=em.createNamedQuery("updateUserNewPassword").setParameter("getPassword",password).setParameter("getLockCount",0).setParameter("getId",id).executeUpdate();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return value;
     }
 
 

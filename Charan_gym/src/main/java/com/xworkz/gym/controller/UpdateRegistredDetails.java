@@ -31,6 +31,7 @@ public class UpdateRegistredDetails {
     public String onUpdate(Model model){
         List<RegistrationEntity> registrationEntityList=gymService.getAllRegistredUsersDetails();
         model.addAttribute("list",registrationEntityList);
+        System.out.println(registrationEntityList);
         if(registrationEntityList.isEmpty()){
             model.addAttribute("listEmpty","No One Registred Yet. Please Register!");
             return "RegistredUsersSearch";
@@ -92,11 +93,10 @@ public class UpdateRegistredDetails {
     public String onView(@RequestParam int id,Model model){
         System.out.println(id);
        List<UpdatedRegistrationDetailsEntity> list= gymService.getAllRegistredUsersUpdatedDetails(id);
-        List<RegistrationEntity> list1= gymService.getAllRegistredUserDetailsById(id);
 
         System.out.println(list);
         model.addAttribute("list",list);
-        model.addAttribute("list",list1);
+
 
        return "ViewRegistrationUpdatedDetials";
     }

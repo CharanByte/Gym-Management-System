@@ -42,4 +42,10 @@ public interface GymService {
     List<RegistrationEntity> getAllRegistredUserDetailsById(int id);
 
     Long getCountOfRegisteredUserEmail(String email);
+
+    int validteUserPasswordNyEmail(String email, String password);
+
+    int validateAndupdateNewPassword( int id,String password, String confirmpassword);
+
+    RegistrationEntity getAllRegistredUsersDetailsByEmail(String useremail);
 }

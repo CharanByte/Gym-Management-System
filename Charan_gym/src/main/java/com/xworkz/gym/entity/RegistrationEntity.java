@@ -3,6 +3,7 @@ package com.xworkz.gym.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="registration_table")
@@ -12,7 +13,11 @@ import javax.persistence.*;
 @NamedQuery(name = "updateRegistredUserDetails", query = "UPDATE RegistrationEntity a SET a.totalAmountPaid=a.totalAmountPaid + :getAmountPaid,a.gympackage=:getPackage,a.trainer=:getTrainer,a.balanceAmount=:getBalanceAmount,a.amount=:getAmount where a.id=:getId")
 @NamedQuery(name = "getAllRegistredUsersDetailsByNameAndPhoneNo", query = "select a from RegistrationEntity a where a.name=:getName and a.phoneNumber=:getPhoneNo")
 @NamedQuery(name = "getAllRegDetailsById",query = "select a from RegistrationEntity a where a.id=:getId")
+@NamedQuery(name = "updateUserNewPassword", query = "UPDATE RegistrationEntity a SET a.password=:getPassword , a.lockCount=:getLockCount where a.id=:getId")
 @NamedQuery(name = "getCountOfRegistredUserEmail", query = "select count(a.email) from RegistrationEntity a where a.email=:getEmail")
+@NamedQuery(name = "getAllByuserEmail", query = "select a from RegistrationEntity a where a.email=:getEmail")
+@NamedQuery(name = "updateLockCount", query = "UPDATE RegistrationEntity a SET a.lockCount=:getCount where a.email=:getEmail")
+@NamedQuery(name = "updateLockTime", query = "UPDATE RegistrationEntity a SET a.lockTime=:getLockTime where a.email=:getEmail")
 
 public class RegistrationEntity extends AbstractAdutEntity{
 
@@ -41,6 +46,12 @@ public class RegistrationEntity extends AbstractAdutEntity{
     private double balanceAmount;
     @Column(name = "total_paidAmount")
     private double totalAmountPaid;
+    @Column(name = "lock_count")
+    private int lockCount;
+    @Column(name = "lock_time")
+    private LocalDateTime lockTime;
+    @Column(name = "profile_image")
+    private LocalDateTime profileImage;
 
 
 }

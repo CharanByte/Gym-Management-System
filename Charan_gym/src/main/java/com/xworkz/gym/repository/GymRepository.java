@@ -42,4 +42,13 @@ public interface GymRepository {
     List<RegistrationEntity> getAllRegistredUserDetailsById(int id);
 
     Long getCountOfRegisteredUserEmail(String email);
+
+    RegistrationEntity getAllByEmail(String email);
+
+    void updateLockCount(String email,int count);
+
+    void updateLockTime(String email, LocalDateTime localDateTime);
+
+
+    int validateAndupdateNewPassword(int id, String password, String confirmpassword);
 }

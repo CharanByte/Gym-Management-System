@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -253,6 +254,7 @@ public class GymServiceImp implements GymService{
             registrationEntity.setAmountPaid(registrationDTO.getAmountPaid());
             registrationEntity.setBalanceAmount(registrationDTO.getBalanceAmount());
             registrationEntity.setTotalAmountPaid(registrationDTO.getAmountPaid());
+            registrationEntity.setLockCount(-1);
             registrationEntity.setCreatedBy(adminName);
             gymRepository.saveRegistredDetails(registrationEntity);
 
@@ -330,7 +332,6 @@ public class GymServiceImp implements GymService{
 
     @Override
     public List<RegistrationEntity> getAllRegistredUsersDetails() {
-
         return gymRepository.getAllRegistredUsersDetails();
     }
 
@@ -379,6 +380,68 @@ public class GymServiceImp implements GymService{
     @Override
     public Long getCountOfRegisteredUserEmail(String email) {
         return gymRepository.getCountOfRegisteredUserEmail(email);
+    }
+
+    @Override
+    public int validteUserPasswordNyEmail(String email, String password) {
+
+        RegistrationEntity list=gymRepository.getAllByEmail(email);
+
+        if(list!=null && password.equals(list.getPassword()) && list.getLockCount()==-1){
+            System.out.println("set New Password");
+            return 1;
+        }
+
+        else if (list!=null && password.equals(list.getPassword()) && list.getLockCount()>=0 &&list.getLockCount()<3 ) {
+            int count=0;
+                gymRepository.updateLockCount(email,count);
+            return 2;
+        } else if (list!=null && !password.equals(list.getPassword()) && (list.getLockCount()>=0 ||list.getLockCount()==-1 )) {
+
+            gymRepository.updateLockCount(email,list.getLockCount()+1);
+                System.out.println("incorrect password increase count by 1");
+
+            if(list.getLockCount()==3){
+                System.out.println("locked");
+                LocalDateTime localDateTime = LocalDateTime.now();
+                System.out.println(localDateTime);
+                gymRepository.updateLockTime(email, localDateTime);
+                return 4;
+            }
+            return 3;
+        } else if (list!=null && password.equals(list.getPassword()) && list.getLockCount()>3) {
+            LocalDateTime a = list.getLockTime();
+            LocalDateTime b = a.plusMinutes(3);
+            LocalDateTime time = LocalDateTime.now();
+            if (time.isAfter(b)) {
+                System.out.println("successfully signined");
+                gymRepository.updateLockCount(email, 0);
+                return 2;
+            } else {
+                System.out.println("try after 2 min");
+                return 5;
+            }
+
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int validateAndupdateNewPassword(int id,String password, String confirmpassword) {
+      if(password.equals(confirmpassword)){
+
+          return gymRepository.validateAndupdateNewPassword(id,password,confirmpassword);
+
+      }
+
+        return 0;
+    }
+
+    @Override
+    public RegistrationEntity getAllRegistredUsersDetailsByEmail(String useremail) {
+
+        return gymRepository.getAllByEmail(useremail);
     }
 
 }

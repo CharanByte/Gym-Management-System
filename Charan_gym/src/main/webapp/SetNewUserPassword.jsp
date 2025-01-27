@@ -70,14 +70,15 @@
       position: relative;
     }
     .message{
-    color:red;
+    color:green;
     }
     #nameValid{
     color:red;
     font-size:15px;
     }
-    h6{
-    color:red;
+    .link{
+    color:white;
+    margin-left:41%;
     }
   </style>
 </head>
@@ -89,24 +90,31 @@
         <img src="https://media.istockphoto.com/id/542197916/photo/running-on-treadmill.jpg?s=612x612&w=0&k=20&c=CYywmb71uOepSHWa534hG9230AzawSa4i3sA89o4qCQ=" alt="Form Image" class="form-image">
       </div>
       <div class="col-md-7">
-      <h6>${locked}</h6>
-      <h6>${tryafter2min}</h6>
-        <h2 class="text-center" style="color:white">Login</h2>
-        <form action="userLogin" method="post">
-        <span class="message">${failure}</span>
+              <span class="message" >${Setnewpassword}</span>
+                          <span class="message">${notSetnewpassword}</span>
+
+        <h2 class="text-center" style="color:white">Reset Password</h2>
+        <form action="setuserPassword" method="post">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="useremail" placeholder="Enter email" required onblur="onField()">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="${userEmail}">
             <span id="nameValid"></span>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Enter New Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
             <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePassword()"></i> <!-- Font Awesome icon -->
-            <span id="nameValid">${invalidPassword}</span>
           </div>
-          <button type="submit" class="btn btn-primary btn-center">Login</button>
+
+          <div class="form-group">
+            <label for="password">Re-enter New Password</label>
+            <input type="password" class="form-control" id="password" name="confirmpassword" placeholder="Enter password" required>
+            <i class="fas fa-eye password-toggle" id="toggleconPassword" onclick="togglePassword()"></i> <!-- Font Awesome icon -->
+          </div>
+          <button type="submit" class="btn btn-primary btn-center">Reset</button>
         </form>
+                  <a class="link" href="UserLoginPage.jsp">Login in ?</a>
+
       </div>
     </div>
   </div>
@@ -127,14 +135,30 @@
         toggleIcon.classList.remove('fa-eye-slash');
         toggleIcon.classList.add('fa-eye'); // Change back to eye icon when password is hidden
       }
+
     }
+     function toggleConPassword() {
+          const passwordField = document.getElementById('password');
+          const toggleIcon = document.getElementById('togglePassword');
+          if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash'); // Change to eye-slash icon when password is visible
+          } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye'); // Change back to eye icon when password is hidden
+          }
+
+        }
+
 
       const onField=()=>{
-      var name=document.getElementById("email");
-         var value=name.value;
-      if(value!=""){
+      var placeName=document.getElementById("email");
+         var placeValue=placeName.value;
+      if(placeValue!=""){
             var xhttp=new XMLHttpRequest();
-              xhttp.open("GET","http://localhost:8080/Charan_gym/name/" + value,true);
+              xhttp.open("GET","http://localhost:8080/Charan_gym/placeName/" + placeValue,true);
               xhttp.send();
 
               xhttp.onload = function() {

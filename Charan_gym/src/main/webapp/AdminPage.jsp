@@ -18,7 +18,6 @@
     body {
       min-height: 100vh;
       width: 100%;
-      padding: 0 0px;
       background: url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"), #000;
       background-position: center;
       background-size: cover;
@@ -42,12 +41,18 @@
     }
 
     .header .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      max-height: 51px;
+      height: auto;
     }
 
     .header .nav {
       display: flex;
+      align-items: center;
       gap: 20px;
     }
 
@@ -62,30 +67,42 @@
       color: #f0c14b;
     }
 
-    .header .logo {
-      display: flex;
-      align-items: center;
+    .header .profile-img {
+      max-height: 40px;
+      width: 40px;
+      border-radius: 50%;
+
     }
 
-    .logo-img {
-      max-height: 51px;
-      max-width: 120%;
-      height: auto;
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .center-container img {
+      height: 150px;
+      width: 150px;
+      border-radius: 75px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
     .message-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100px;
-      background: rgba(255, 255, 255, -1);
+      width: auto;
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
       border-radius: 12px;
       text-align: center;
       padding: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 190px; /* Adjusting margin to ensure it doesn't overlap with header */
+      margin-top: 20px;
     }
 
     .message-container h1 {
@@ -93,7 +110,6 @@
       font-weight: bold;
       color: yellow;
     }
-
   </style>
 </head>
 <body>
@@ -108,14 +124,16 @@
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
       <a href="registrationUpdate">Update</a>
-
+      <img src="photo/${list.image}" alt="Profile Picture" class="profile-img">
     </nav>
   </header>
 
-
-  <!-- Welcome Message Section -->
-  <div class="message-container">
-    <h1>Welcome back, ${adminEntity.name}! You have successfully logged in.</h1>
+  <!-- Center Section -->
+  <div class="center-container">
+    <img src="photo/${list.image}" alt="Centered Image" class="centreImg">
+    <div class="message-container">
+      <h1>Welcome back, ${list.name}</h1>
+    </div>
   </div>
 </body>
 </html>

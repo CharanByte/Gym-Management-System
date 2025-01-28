@@ -1,5 +1,7 @@
 package com.xworkz.gym.controller;
 
+import com.xworkz.gym.constants.ProfileImagePath;
+import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.RegistrationEntity;
 import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -32,6 +41,8 @@ public class UserLoginController {
        }
        if(valid==2){
            System.out.println("login Successfull");
+
+           model.addAttribute("list",registrationEntity);
            return "UserPage";
        }
        if(valid==3){
@@ -65,4 +76,43 @@ public class UserLoginController {
         model.addAttribute("notSetnewpassword","New Password Not Updated");
         return "SetNewUserPassword";
     }
+
+    @GetMapping("/updateProfile")
+    public String onUpdate(HttpSession httpSession,Model model){
+        RegistrationEntity entity1=(RegistrationEntity) httpSession.getAttribute("userRegEntity");
+        int id=entity1.getId();
+        RegistrationEntity entity=gymService.getAllRegistredUsersDetailsById(id);
+        model.addAttribute("entity",entity);
+        return "UpdateUserProfile";
+    }
+
+
+    @PostMapping("/updateUserProfile")
+    public String onupdate(@RequestParam("thisfile") MultipartFile multipartFile, RegistrationDTO registrationDTO, Model model,HttpSession httpSession) throws IOException {
+        RegistrationEntity entity1 = (RegistrationEntity) httpSession.getAttribute("userRegEntity");
+        int id = entity1.getId();
+        String filePath;
+
+        if (multipartFile.isEmpty()) {
+            return "UpdateUserDetails.jsp";
+        } else {
+            System.out.println(multipartFile);
+            System.out.println(multipartFile.getOriginalFilename());
+            byte[] bytes = multipartFile.getBytes();
+            Path path = Paths.get(ProfileImagePath.ProfileImagePath.getPath() + System.currentTimeMillis() + ".jpg");
+            Files.write(path, bytes);
+            filePath = path.getFileName().toString();
+        }
+        int updatedValue=gymService.updateUserProfile(registrationDTO,filePath,id);
+        if(updatedValue>0) {
+            RegistrationEntity entity=gymService.getAllRegistredUsersDetailsById(id);
+           model.addAttribute("list",entity);
+            return "UserPage";
+        }
+        return "UserPage";
+    }
+
+
+
+
 }

@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 @NamedQuery(name = "updateLockCount", query = "UPDATE RegistrationEntity a SET a.lockCount=:getCount where a.email=:getEmail")
 @NamedQuery(name = "updateLockTime", query = "UPDATE RegistrationEntity a SET a.lockTime=:getLockTime where a.email=:getEmail")
 
+@NamedQuery(name = "getAllRegistredUsersDetailsById",query = "select a from RegistrationEntity a where a.id=:getId")
+@NamedQuery(name = "updateUserProfile", query = "UPDATE RegistrationEntity a SET a.profileImage=:getprofileImage where a.id=:getId")
+
 public class RegistrationEntity extends AbstractAdutEntity{
 
     @Id
@@ -51,7 +54,7 @@ public class RegistrationEntity extends AbstractAdutEntity{
     @Column(name = "lock_time")
     private LocalDateTime lockTime;
     @Column(name = "profile_image")
-    private LocalDateTime profileImage;
+    private String profileImage;
 
 
 }

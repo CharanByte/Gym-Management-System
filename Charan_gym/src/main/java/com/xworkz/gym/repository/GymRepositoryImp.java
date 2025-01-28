@@ -1,6 +1,7 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
+import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -451,6 +452,48 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
 
+        return value;
+    }
+
+    @Override
+    public RegistrationEntity getAllRegistredUsersDetailsById(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        RegistrationEntity registrationEntity=null;
+        try {
+            et.begin();
+         List<RegistrationEntity> list =em.createNamedQuery("getAllRegistredUsersDetailsById").setParameter("getId",id).getResultList();
+        if(!list.isEmpty()){
+            registrationEntity=list.get(0);
+        }
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return registrationEntity;
+    }
+
+    @Override
+    public int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        int value=0;
+        try {
+            et.begin();
+             value=em.createNamedQuery("updateUserProfile").setParameter("getprofileImage",filePath).setParameter("getId",id).executeUpdate();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
         return value;
     }
 

@@ -24,4 +24,6 @@ public class AdminEntity {
     private  String password;
     @Column(name = "login_count")
     private  int login_count;
+    @Column(name = "profile_image")
+    private  String image;
 }

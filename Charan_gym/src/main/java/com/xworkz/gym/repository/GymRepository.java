@@ -1,6 +1,7 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
+import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.*;
 import org.springframework.stereotype.Repository;
 
@@ -51,4 +52,8 @@ public interface GymRepository {
 
 
     int validateAndupdateNewPassword(int id, String password, String confirmpassword);
+
+    RegistrationEntity getAllRegistredUsersDetailsById(int id);
+
+    int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id);
 }

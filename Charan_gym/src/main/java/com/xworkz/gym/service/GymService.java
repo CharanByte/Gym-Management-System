@@ -48,4 +48,8 @@ public interface GymService {
     int validateAndupdateNewPassword( int id,String password, String confirmpassword);
 
     RegistrationEntity getAllRegistredUsersDetailsByEmail(String useremail);
+
+    RegistrationEntity getAllRegistredUsersDetailsById(int id);
+
+    int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id);
 }

@@ -33,9 +33,9 @@ public class AdminLoginController {
                 return "SetNewPassword";
             }
             httpSession.setAttribute("adminEntity",adminEntity);
+            AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
 
-
-           // model.addAttribute("success",adminEntity.getName());
+            model.addAttribute("list",entity);
             return "AdminPage";
         }
         model.addAttribute("failure","email or password is invalid");

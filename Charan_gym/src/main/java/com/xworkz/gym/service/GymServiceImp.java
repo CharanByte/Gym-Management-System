@@ -444,4 +444,16 @@ public class GymServiceImp implements GymService{
         return gymRepository.getAllByEmail(useremail);
     }
 
+    @Override
+    public RegistrationEntity getAllRegistredUsersDetailsById(int id) {
+
+
+        return gymRepository.getAllRegistredUsersDetailsById(id);
+    }
+
+    @Override
+    public int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id) {
+        return gymRepository.updateUserProfile(registrationDTO,filePath,id);
+    }
+
 }

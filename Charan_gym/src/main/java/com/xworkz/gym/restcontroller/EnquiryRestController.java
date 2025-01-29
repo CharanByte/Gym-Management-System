@@ -1,6 +1,5 @@
 package com.xworkz.gym.restcontroller;
 
-import com.xworkz.gym.entity.RegistrationEntity;
 import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,27 +9,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class RegistredUserSearchRestController {
+public class EnquiryRestController {
+
     @Autowired
     private GymService gymService;
-
-    @GetMapping("/search")
-    public String search(@RequestParam String searchName,@RequestParam Long searchPhoneNo) {
-
-      List<RegistrationEntity> registrationEntityList=gymService.getAllRegistredUsersDetailsByNameAndPhoneNo(searchName,searchPhoneNo);
-
-        if(registrationEntityList.isEmpty()){
-
-            return "Please enter valid Name and Phone Number";
-    }
-        return "";
-    }
-
-    @GetMapping(value = "/regEmail/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/emailid/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getName(@PathVariable String email) {
         System.out.println(email);
 
-        Long count = gymService.getCountOfRegEmail(email);
+        Long count = gymService.getCountOfEmail(email);
 
         if (count > 0) {
             System.out.println("enquiry Email exists");
@@ -40,4 +27,5 @@ public class RegistredUserSearchRestController {
             return "";
         }
     }
+
 }

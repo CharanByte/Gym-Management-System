@@ -181,9 +181,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 30px 30px;
     position: fixed;
-             top: 0;
+             top: 0px;
     width: 100%;
     height: 65px;
     z-index: 1000;
@@ -202,6 +202,7 @@ body {
   .header .nav {
     display: flex;
     gap: 20px;
+
   }
 
   .header .nav a {
@@ -224,6 +225,11 @@ body {
     max-width: 120%;
     height: auto;
   }
+    .profile-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+      }
 
     </style>
 </head>
@@ -238,6 +244,8 @@ body {
     <a href="followup">FollowUp</a>
     <a href="register">Registration</a>
     <a href="registrationUpdate">Update</a>
+          <img src="photo/${list.image}" alt="Profile Picture" class="profile-img">
+
   </nav>
 </header>
 <section class="container">
@@ -251,8 +259,8 @@ body {
 
         <div class="input-box">
             <label>Email Address</label>
-            <input type="text" placeholder="Enter email address" name="email" required onblur="validData(event)" />
-            <span id="emailvalid"></span>
+            <input type="text" placeholder="Enter email address" id="emailId" name="email" required oninput="validData(event)"  onblur="onField()"/>
+            <span style="color:red" id="emailvalid"></span>
         </div>
 
         <div class="column">
@@ -305,6 +313,21 @@ body {
     </form>
 </section>
 <script>
+  const onField=()=>{
+      var emailid=document.getElementById("emailId");
+         var emailvalue=emailid.value;
+      if(emailvalue!=""){
+            var xhttp=new XMLHttpRequest();
+              xhttp.open("GET","http://localhost:8080/Charan_gym/emailid/" + emailvalue,true);
+              xhttp.send();
+
+              xhttp.onload = function() {
+                  document.getElementById("emailvalid").innerHTML = this.responseText;
+              }
+              }
+
+      }
+
 const validData=(event)=>{
     const {name,value}=event.target;
    const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;

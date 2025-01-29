@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NamedQuery(name = "getAllUserDetailsByStatus", query = "select a from EnquiryEntity a WHERE a.status=:getStatus")
 @NamedQuery(name = "getAllUserDetails", query = "select a from EnquiryEntity a")
 @NamedQuery(name = "updateUserEnquiryDetailsById", query = "UPDATE EnquiryEntity a SET a.status=:getStatus,a.reason=:getReason,a.updatedBy=:getUpdatedName,a.updatedDate=:getUpdatedDate where a.id=:getId")
+@NamedQuery(name = "getCountOfEnquiryEmail", query = "select count(a.email) from EnquiryEntity a where a.email=:getEmail")
 
 public class EnquiryEntity  {
     @Id

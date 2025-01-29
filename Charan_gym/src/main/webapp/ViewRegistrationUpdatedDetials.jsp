@@ -123,6 +123,12 @@
     .hide-column {
         display: none;
       }
+       .header .profile-img {
+            max-height: 40px;
+            width: 40px;
+            border-radius: 50%;
+
+          }
   </style>
 </head>
 <body>
@@ -137,6 +143,8 @@
      <a href="followup">FollowUp</a>
      <a href="register">Registration</a>
      <a href="registrationUpdate">Update</a>
+           <img src="photo/${listimg.image}" alt="Profile Picture" class="profile-img">
+
    </nav>
  </header>
 

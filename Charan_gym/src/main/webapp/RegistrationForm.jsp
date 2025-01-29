@@ -84,6 +84,12 @@
       padding: 4px 100px;
       font-size: 1.2rem;
     }
+     .header .profile-img {
+          max-height: 40px;
+          width: 40px;
+          border-radius: 50%;
+
+        }
   </style>
 </head>
 <body>
@@ -96,6 +102,8 @@
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="registrationUpdate">Update</a>
+            <img src="photo/${list.image}" alt="Profile Picture" class="profile-img">
+
     </nav>
   </header>
   <div class="container mt-5 form-container">
@@ -113,8 +121,8 @@
           </div>
           <div class="form-group">
             <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}" onblur="validData(event)">
-            <span id="emailvalid"></span>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}" oninput="validData(event)" onblur="onField()">
+            <span style="color:red" id="emailvalid"></span>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -190,6 +198,21 @@
   </div>
 <script>
 
+
+  const onField=()=>{
+      var regEmail=document.getElementById("email");
+         var regValue=regEmail.value;
+      if(regValue!=""){
+            var xhttp=new XMLHttpRequest();
+              xhttp.open("GET","http://localhost:8080/Charan_gym/regEmail/" + regValue,true);
+              xhttp.send();
+
+              xhttp.onload = function() {
+                  document.getElementById("emailvalid").innerHTML = this.responseText;
+              }
+              }
+
+      }
 const validData=(event)=>{
     const {name,value}=event.target;
    const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;

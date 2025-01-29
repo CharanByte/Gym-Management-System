@@ -28,10 +28,12 @@ public class RegistrationController {
     @Autowired
     private GymService gymService;
     @GetMapping("/register")
-    public String getRegisteration(Model model) {
+    public String getRegisteration(HttpSession httpSession,Model model) {
         model.addAttribute("packagesEnumList", packagesEnumList);
         model.addAttribute("gymTrainersEnums", gymTrainersEnums);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
 
+        model.addAttribute("list",entity);
         return "RegistrationForm";
     }
 

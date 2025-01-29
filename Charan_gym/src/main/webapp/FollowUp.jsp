@@ -150,6 +150,12 @@
 
     font-size:30px;
     }
+     .header .profile-img {
+          max-height: 40px;
+          width: 40px;
+          border-radius: 50%;
+
+        }
 
 
   </style>
@@ -173,6 +179,8 @@
     <a href="enquiry">Enquiry</a>
     <a href="register">Registration</a>
     <a href="registrationUpdate">Update</a>
+          <img src="photo/${listimg.image}" alt="Profile Picture" class="profile-img">
+
   </nav>
 </header>
 

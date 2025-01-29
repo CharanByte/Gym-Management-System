@@ -456,4 +456,16 @@ public class GymServiceImp implements GymService{
         return gymRepository.updateUserProfile(registrationDTO,filePath,id);
     }
 
+    @Override
+    public Long getCountOfEmail(String email) {
+
+
+        return gymRepository.getCountOfEmail(email);
+    }
+
+    @Override
+    public Long getCountOfRegEmail(String email) {
+        return gymRepository.getCountOfRegEmail(email);
+    }
+
 }

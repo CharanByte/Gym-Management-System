@@ -497,5 +497,46 @@ public class GymRepositoryImp implements GymRepository{
         return value;
     }
 
+    @Override
+    public Long getCountOfEmail(String email) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        Object object=em.createNamedQuery("getCountOfEnquiryEmail").setParameter("getEmail",email).getSingleResult();
+       Long aLong=(Long) object;
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return aLong;
+    }
+
+    @Override
+    public Long getCountOfRegEmail(String email) {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        Object object=em.createNamedQuery("getCountOfRegEmail").setParameter("getEmail",email).getSingleResult();
+        Long aLong=(Long) object;
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return aLong;
+    }
+
 
 }

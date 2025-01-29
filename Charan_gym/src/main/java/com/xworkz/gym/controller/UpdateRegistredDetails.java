@@ -28,31 +28,40 @@ public class UpdateRegistredDetails {
     private GymService gymService;
 
     @GetMapping("/registrationUpdate")
-    public String onUpdate(Model model){
+    public String onUpdate(HttpSession httpSession,Model model){
         List<RegistrationEntity> registrationEntityList=gymService.getAllRegistredUsersDetails();
         model.addAttribute("list",registrationEntityList);
         System.out.println(registrationEntityList);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+
+        model.addAttribute("listimg",entity);
         if(registrationEntityList.isEmpty()){
             model.addAttribute("listEmpty","No One Registred Yet. Please Register!");
+
+            model.addAttribute("listimg",entity);
             return "RegistredUsersSearch";
         }
         return "RegistredUsersSearch";
     }
 
     @RequestMapping("/searchDetails")
-    public String onSearch(String searchName,Long searchPhoneNo,Model model){
+    public String onSearch(String searchName,Long searchPhoneNo,Model model,HttpSession httpSession){
         List<RegistrationEntity> registrationEntityList=gymService.getAllRegistredUsersDetailsByNameAndPhoneNo(searchName,searchPhoneNo);
         System.out.println(registrationEntityList);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+
+        model.addAttribute("listimg",entity);
         if(registrationEntityList.isEmpty()){
+            model.addAttribute("list",entity);
             model.addAttribute("notFound","No One Registred With This Name And Phone Number. Please Check Name And Phone Number");
             return "RegistredUsersSearch";
         }
-        model.addAttribute("list",registrationEntityList);
+        model.addAttribute("listimg",registrationEntityList);
         return "RegistredUsersSearch";
     }
 
     @RequestMapping(value = "/updatebutton", method = RequestMethod.POST)
-    public String onupdatebutton(@RequestParam("id") int id,@RequestParam("name") String name, @RequestParam("phoneNumber") long phoneNumber, @RequestParam("gympackage") String gympackage, @RequestParam("trainer") String trainer,@RequestParam("balanceAmount") String balanceAmount,@RequestParam("totalAmount") String totalAmount ,Model model) {
+    public String onupdatebutton(@RequestParam("id") int id,@RequestParam("name") String name, @RequestParam("phoneNumber") long phoneNumber, @RequestParam("gympackage") String gympackage, @RequestParam("trainer") String trainer,@RequestParam("balanceAmount") String balanceAmount,@RequestParam("totalAmount") String totalAmount ,HttpSession httpSession,Model model) {
 
         System.out.println(trainer+gympackage);
         model.addAttribute("id",id);
@@ -64,6 +73,9 @@ public class UpdateRegistredDetails {
         model.addAttribute("balanceAmount",balanceAmount);
         model.addAttribute("packagesEnumList", packagesEnumList);
         model.addAttribute("gymTrainersEnums", gymTrainersEnums);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+
+        model.addAttribute("listimg",entity);
 
         return "UpdateRegistredDetails";
     }
@@ -83,6 +95,8 @@ public class UpdateRegistredDetails {
             model.addAttribute("paid",amountPaid);
             model.addAttribute("totalAmount",totalAmount);
 
+
+            model.addAttribute("listimg",adminEntity);
             return "DisplayUpdatedRegistredDetails";
         }
 
@@ -90,13 +104,15 @@ public class UpdateRegistredDetails {
     }
 
     @GetMapping("/view")
-    public String onView(@RequestParam int id,Model model){
+    public String onView(@RequestParam int id,Model model ,HttpSession httpSession){
         System.out.println(id);
        List<UpdatedRegistrationDetailsEntity> list= gymService.getAllRegistredUsersUpdatedDetails(id);
 
         System.out.println(list);
         model.addAttribute("list",list);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
 
+        model.addAttribute("listimg",entity);
 
        return "ViewRegistrationUpdatedDetials";
     }

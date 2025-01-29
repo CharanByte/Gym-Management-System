@@ -98,6 +98,12 @@
       background-color: #0056b3;
       color:#bdc7c0;
     }
+     .header .profile-img {
+          max-height: 40px;
+          width: 40px;
+          border-radius: 50%;
+
+        }
   </style>
 </head>
 <body>
@@ -109,8 +115,12 @@
         <a href="index.jsp">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
+    <a href="registrationUpdate">Update</a>
+    <a href="register">Registration</a>
+              <img src="photo/${listimg.image}" alt="Profile Picture" class="profile-img">
 
-            <a href="register">Registration</a>
+
+
       </nav>
     </header>
 

@@ -56,4 +56,8 @@ public interface GymRepository {
     RegistrationEntity getAllRegistredUsersDetailsById(int id);
 
     int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id);
+
+    Long getCountOfEmail(String email);
+
+    Long getCountOfRegEmail(String email);
 }

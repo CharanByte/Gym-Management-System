@@ -169,6 +169,13 @@
                 margin-top: 10px;
                 color: green;
             }
+
+             .header .profile-img {
+                  max-height: 40px;
+                  width: 40px;
+                  border-radius: 50%;
+
+                }
   </style>
 </head>
 <body>
@@ -190,6 +197,8 @@
     <a href="enquiry">Enquiry</a>
     <a href="followup">follow Up</a>
     <a href="register">Registration</a>
+          <img src="photo/${listimg.image}" alt="Profile Picture" class="profile-img">
+
   </nav>
 </header>
 

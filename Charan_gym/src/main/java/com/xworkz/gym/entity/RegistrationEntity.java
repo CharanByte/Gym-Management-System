@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 
 @NamedQuery(name = "getAllRegistredUsersDetailsById",query = "select a from RegistrationEntity a where a.id=:getId")
 @NamedQuery(name = "updateUserProfile", query = "UPDATE RegistrationEntity a SET a.profileImage=:getprofileImage where a.id=:getId")
+@NamedQuery(name = "getCountOfRegEmail", query = "select count(a.email) from AdminEntity a where a.email=:getEmail")
 
 public class RegistrationEntity extends AbstractAdutEntity{
 

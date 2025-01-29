@@ -27,11 +27,15 @@ public class FollowUpController {
     List<GymTrainersEnum> gymTrainersEnums = new ArrayList<>(Arrays.asList(GymTrainersEnum.values()));
 
     @GetMapping("/followup")
-    public String onFollowUp(Model model) {
+    public String onFollowUp(Model model,HttpSession httpSession) {
         List<EnquiryEntity> enquiryEntity = gymService.getAllEnquiryUsersDetails();
         System.out.println(enquiryEntity);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+
+        model.addAttribute("list",entity);
         if (!enquiryEntity.isEmpty()) {
             model.addAttribute("list", enquiryEntity);
+            model.addAttribute("listimg",entity);
             return "FollowUp";
         }
         return "FollowUp";

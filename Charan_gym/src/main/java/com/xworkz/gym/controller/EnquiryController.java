@@ -21,7 +21,10 @@ public class EnquiryController {
     @Autowired
     private GymService gymService;
     @GetMapping("/enquiry")
-    public String enquiry(){
+    public String enquiry(HttpSession httpSession,Model model){
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+
+        model.addAttribute("list",entity);
 
         return "Enquiry";
     }

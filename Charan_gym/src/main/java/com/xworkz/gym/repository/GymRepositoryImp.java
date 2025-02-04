@@ -1,7 +1,6 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -478,13 +477,13 @@ public class GymRepositoryImp implements GymRepository{
     }
 
     @Override
-    public int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id) {
+    public int updateUserProfile(RegistrationEntity entity, String filePath,int id) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
         int value=0;
         try {
             et.begin();
-             value=em.createNamedQuery("updateUserProfile").setParameter("getprofileImage",filePath).setParameter("getId",id).executeUpdate();
+             value=em.createNamedQuery("updateUserProfile").setParameter("getprofileImage",filePath).setParameter("getName",entity.getName()).setParameter("getEmail",entity.getEmail()).setParameter("getPhoneNo",entity.getPhoneNumber()).setParameter("getAge",entity.getAge()).setParameter("getWeight",entity.getWeight()).setParameter("getHeight",entity.getHeight()).setParameter("getChestSize",entity.getChestSize()).setParameter("getId",id).executeUpdate();
 
             et.commit();
         } catch (Exception e) {
@@ -536,6 +535,105 @@ public class GymRepositoryImp implements GymRepository{
             em.close();
         }
         return aLong;
+    }
+
+    @Override
+    public void saveTrainerDetails(TrainerEntity trainerEntity) {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.persist(trainerEntity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+    }
+
+    @Override
+    public void saveslots(SlotsEntity entity) {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.persist(entity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<SlotsEntity> getAllSlotsDetails() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        List<SlotsEntity> slotsEntityList=em.createNamedQuery("getAllSlotsDetails", SlotsEntity.class).getResultList();
+        System.out.println(slotsEntityList);
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return slotsEntityList;
+    }
+
+    @Override
+    public List<TrainerEntity> getAllTrainerDetails() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        List<TrainerEntity> trainerEntities=em.createNamedQuery("getAllTrainerDetails", TrainerEntity.class).getResultList();
+        System.out.println(trainerEntities);
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return trainerEntities;
+    }
+
+    @Override
+    public int deleteSlotById(int idForDelete) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        int val=0;
+       try {
+            et.begin();
+            val=em.createNamedQuery("deleteSlotById").setParameter("getId",idForDelete).executeUpdate();
+           System.out.println(val);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return val;
     }
 
 

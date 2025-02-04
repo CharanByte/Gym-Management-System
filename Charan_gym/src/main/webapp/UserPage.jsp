@@ -113,6 +113,22 @@
                 padding: 10px;
             }
         }
+
+                      .profile-details {
+                          display: flex;
+                          flex-direction: column;
+                          gap: 10px;
+                          margin-left: 0px;
+                          padding-top:20px;
+                      }
+                      .profile-details p {
+                          margin: 0;
+                      }
+                      .profile-details strong {
+                          font-weight: bold;
+                      }
+
+
     </style>
 </head>
 <body>
@@ -137,10 +153,14 @@
                 </div>
 
             </div>
-            <p style="margin-left:200px;">Age: ${profile.location}</p>
-             <p style="margin-left:200px;">Weight: ${profile.location}</p>
-            <p style="margin-left:200px;">Height: ${profile.location}</p>
-            <p style="margin-left:200px;">Chest size: ${profile.location}</p>
+          <div class="profile-details">
+              <p><strong>Age:</strong> ${list.age}</p>
+              <p><strong>Weight:</strong> ${list.weight}</p>
+              <p><strong>Height:</strong> ${list.height}</p>
+              <p><strong>Chest size:</strong> ${list.chestSize}</p>
+          </div>
+
+
 
             <div class="personal-info">
                 <h3>Personal Info</h3>

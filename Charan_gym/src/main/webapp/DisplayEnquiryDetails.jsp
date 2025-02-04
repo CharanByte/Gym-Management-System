@@ -116,7 +116,7 @@
             </tbody>
         </table>
         <div class="go-back">
-            <a href="Enquiry.jsp" class="btn btn-primary">Go Back</a>
+            <a href="enquiry" class="btn btn-primary">Go Back</a>
         </div>
     </div>
 

@@ -18,4 +18,10 @@ public class RegistrationDTO {
     private double amountPaid;
     private double balanceAmount;
 
+    private int age;
+    private double weight;
+    private double height;
+    private double chestSize;
+
+
 }

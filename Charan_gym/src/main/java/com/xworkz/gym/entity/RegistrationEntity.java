@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @NamedQuery(name = "updateLockTime", query = "UPDATE RegistrationEntity a SET a.lockTime=:getLockTime where a.email=:getEmail")
 
 @NamedQuery(name = "getAllRegistredUsersDetailsById",query = "select a from RegistrationEntity a where a.id=:getId")
-@NamedQuery(name = "updateUserProfile", query = "UPDATE RegistrationEntity a SET a.profileImage=:getprofileImage where a.id=:getId")
+@NamedQuery(name = "updateUserProfile", query = "UPDATE RegistrationEntity a SET a.profileImage=:getprofileImage ,a.name=:getName,a.email=:getEmail,a.phoneNumber=:getPhoneNo,a.age=:getAge,a.weight=:getWeight,a.height=:getHeight,a.chestSize=:getChestSize where a.id=:getId")
 @NamedQuery(name = "getCountOfRegEmail", query = "select count(a.email) from AdminEntity a where a.email=:getEmail")
 
 public class RegistrationEntity extends AbstractAdutEntity{
@@ -56,6 +56,10 @@ public class RegistrationEntity extends AbstractAdutEntity{
     private LocalDateTime lockTime;
     @Column(name = "profile_image")
     private String profileImage;
+    private int age;
+    private double weight;
+    private double height;
+    private double chestSize;
 
 
 }

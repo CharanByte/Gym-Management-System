@@ -17,46 +17,109 @@
       background-attachment: fixed;
       color: #000;
     }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 60px;
-      z-index: 999;
-      color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      background-color: #1B1E23;
-    }
-    .header .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .header .nav {
-      display: flex;
-      gap: 20px;
-    }
-    .header .nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-    .header .nav a:hover {
-      color: #f0c14b;
-    }
-    .header .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo-img {
-      max-height: 51px;
-      max-width: 120%;
-      height: auto;
-    }
+     .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 30px;
+          position: sticky;
+          top: 0;
+          width: 100%;
+          height: 65px;
+          z-index: 999;
+          color: white;
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+             background-color: #1B1E23;
+        }
+
+        .logo-img {
+          max-height: 51px;
+          height: auto;
+        }
+
+        /* Center navigation */
+        .nav {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .nav a {
+          color: white;
+          text-decoration: none;
+          font-size: 1rem;
+          transition: color 0.3s;
+        }
+
+        .nav a:hover {
+          color: #f0c14b;
+        }
+
+        /* Profile Image */
+        .profile-img {
+          max-height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        /* Toggle button */
+        .menu-toggle {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+        }
+
+        .menu-toggle div {
+          width: 30px;
+          height: 3px;
+          background-color: white;
+          margin: 5px 0;
+          transition: 0.3s;
+        }
+
+        /* Dropdown menu - hidden by default */
+        .mobile-nav {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 65px;
+          right: 0;
+          background: rgba(14, 14, 14, 0.9);
+          width: 100%;
+          padding: 15px 0;
+          align-items: center;
+        }
+
+        .mobile-nav a {
+          padding: 10px;
+          color: white;
+          text-decoration: none;
+          font-size: 1rem;
+          text-align: center;
+          display: block;
+          width: 100%;
+          transition: color 0.3s;
+        }
+
+        .mobile-nav a:hover {
+          color: #f0c14b;
+        }
+
+        .mobile-nav.show {
+          display: flex;
+        }
+
+        /* Adjust layout for small screens */
+        @media (max-width: 768px) {
+          .nav {
+            display: none;
+          }
+        }
+
     .form-container {
       display: flex;
       align-items: center;
@@ -94,18 +157,41 @@
 </head>
 <body>
   <header class="header">
-    <div class="logo">
-      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
-    </div>
-    <nav class="nav">
-      <a href="index.jsp">Home</a>
-      <a href="enquiry">Enquiry</a>
-      <a href="followup">FollowUp</a>
-      <a href="registrationUpdate">Update</a>
-            <img src="photo/${list.image}" alt="Profile Picture" class="profile-img">
+      <!-- Logo -->
+      <div class="logo">
+        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+      </div>
 
-    </nav>
-  </header>
+      <!-- Navigation centered -->
+      <nav class="nav">
+        <a href="index.jsp">Home</a>
+        <a href="enquiry">Enquiry</a>
+        <a href="followup">FollowUp</a>
+        <a href="register">Registration</a>
+      </nav>
+
+      <!-- Profile Image + Toggle Menu (Right Side) -->
+      <div style="display: flex; align-items: center;">
+        <img src="photo/${list.image}" alt="Profile Picture" class="profile-img">
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <!-- Toggle Menu -->
+      <nav class="mobile-nav">
+        <a href="index.jsp">Home</a>
+        <a href="enquiry">Enquiry</a>
+        <a href="followup">FollowUp</a>
+        <a href="register">Registration</a>
+        <a href="registrationUpdate">Update</a>
+        <a href="addSlots">Slots</a>
+        <a href="viewtrainer">View Trainer</a>
+      </nav>
+    </header>
+
   <div class="container mt-5 form-container">
     <div class="row">
       <div class="col-md-5">
@@ -198,7 +284,9 @@
   </div>
 <script>
 
-
+  function toggleMenu() {
+      document.querySelector('.mobile-nav').classList.toggle('show');
+    }
   const onField=()=>{
       var regEmail=document.getElementById("email");
          var regValue=regEmail.value;

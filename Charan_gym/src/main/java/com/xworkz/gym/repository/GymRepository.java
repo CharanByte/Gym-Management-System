@@ -55,9 +55,19 @@ public interface GymRepository {
 
     RegistrationEntity getAllRegistredUsersDetailsById(int id);
 
-    int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id);
+    int updateUserProfile(RegistrationEntity entity, String filePath,int id);
 
     Long getCountOfEmail(String email);
 
     Long getCountOfRegEmail(String email);
+
+    void saveTrainerDetails(TrainerEntity trainerEntity);
+
+    void saveslots(SlotsEntity entity);
+
+    List<SlotsEntity> getAllSlotsDetails();
+
+    List<TrainerEntity> getAllTrainerDetails();
+
+    int deleteSlotById(int idForDelete);
 }

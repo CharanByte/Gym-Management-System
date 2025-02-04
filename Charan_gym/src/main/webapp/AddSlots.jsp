@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Follow-up</title>
+  <title>Slots</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
   body {
@@ -17,7 +17,6 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #000;
-
      overflow: hidden;
 
   }
@@ -61,12 +60,13 @@
     margin-top: 40px;
     margin-bottom: 50px; /* Add margin to the bottom */
     width: 100%;
-  /* Slightly more opaque background */
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque background */
     padding: 20px;
+
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer shadow for a smoother effect */
     transition: background-color 0.3s ease; /* Smooth transition for background-color */
-    margin-bottom: 10px;
+
   }
 
 
@@ -79,12 +79,14 @@
           text-align: center; /* Ensure text is centered */
       }
 
-      /* Optional: Styling for search-row */
+
       .search-row {
           display: flex;
           justify-content: right;
+          margin-top:50px;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+          margin-right: 80px;
       }
 
       /* Optional: Style the form controls */
@@ -235,16 +237,20 @@
                   border-radius: 50%;
 
                 }
+
+                .deleteMessage{
+                color:red;
+                margin-left:40%;
+                }
+
+                .table-container{
+                padding-bottom:80px;
+
+                }
   </style>
 </head>
 <body>
-  <!-- Centered Message -->
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-    <h5 style="color: red;">${failure}</h5>
-    <p class="update" style="colr:red">${notupdated}</p>
-     <p class="update" style="color:green">${enquiryName}</p>
 
-  </div>
 
 <header class="header">
     <!-- Logo -->
@@ -272,45 +278,31 @@
 
     <!-- Toggle Menu -->
     <nav class="mobile-nav">
-     <a href="index.jsp">Home</a>
-            <a href="enquiry">Enquiry</a>
-            <a href="followup">FollowUp</a>
-            <a href="register">Registration</a>
-            <a href="registrationUpdate">Update</a>
-            <a href="addSlots">Slots</a>
-            <a href="viewtrainer">View Trainer</a>
+      <a href="index.jsp">Home</a>
+      <a href="enquiry">Enquiry</a>
+      <a href="followup">FollowUp</a>
+      <a href="register">Registration</a>
+      <a href="registrationUpdate">Update</a>
+      <a href="addSlots">Slots</a>
+      <a href="viewtrainer">View Trainer</a>
     </nav>
   </header>
 
+<div class="search-row">
+
+            <a href="createSlot" class="btn btn-primary">
+              <button class="btn btn-primary">Create Slot</button>
+            </a>
+        </div>
 
   <div class="container">
-    <!-- Search Row -->
-    <div class="search-row" style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
-           <form action="searchDetails" style="display: flex; gap: 10px; align-items: center;">
-               <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Search name" oninput="onField()" required>
-               <input type="text" class="form-control" id="searchPhoneNo" name="searchPhoneNo" placeholder="Search phone number" oninput="onField()" required>
-               <button type="submit" class="btn btn-primary">Search</button>
-           </form>
 
-           <!-- Div to display validation or result message below the form -->
-           <div id="nameValid" style="margin-top: 0px; color: red; margin-right:170px"></div>
-       </div>
-
-
-
-
-    <!-- This div is for the messages -->
-    <div class="search-message">
-        <h4 style="color: red;">${listEmpty}</h4>
-        <h4 style="color: red;">${notFound}</h4>
-    </div>
-
-
+    <h4 class="deleteMessage">${deleteSlot}</h4>
     <!-- Table Container -->
-    <c:if test="${not empty list}">
+    <c:if test="${not empty slotsEntityList}">
      <div class="table-container">
-       <h4 class="table-name">Registred User Details</h4>
-       <form action="updatebutton" method="post">
+       <h4 class="table-name">Slot Timing Details</h4>
+       <form action="deletebutton" method="post">
          <table class="table table-striped table-bordered table-hover">
            <colgroup>
 
@@ -318,56 +310,36 @@
              <col style="width: 15%;">
              <col style="width: 10%;">
              <col style="width: 10%;">
-             <col style="width: 10%;">
-             <col style="width: 10%;">
-             <col style="width: 10%;">
-             <col style="width: 10%;">
-             <col style="width: 10%;">
-             <col style="width: 10%;">
+
+
            </colgroup>
            <thead>
              <tr>
-               <th>Name</th>
-               <th>Email</th>
-               <th>Phone Number</th>
-               <th>Package</th>
-               <th>Trainer</th>
-               <th>Total Amount</th>
-               <th>Amount Paid</th>
-               <th>Balance Amount</th>
-                <th>update</th>
-                <th>View</th>
+               <th>Start Time</th>
+               <th>End Time</th>
+               <th>Duration</th>
+               <th>Delete</th>
+
              </tr>
            </thead>
            <tbody>
-           <c:forEach items="${list}" var="enquiry">
+           <c:forEach items="${slotsEntityList}" var="slotsEntityList">
              <tr>
-               <form action="updatebutton" method="post" >  <!-- Form for each row -->
+               <form action="deleteSlot" method="post" >  <!-- Form for each row -->
                  <!-- Hidden input to store the enquiry id -->
-                 <input type="hidden" name="id" value="${enquiry.id}" />
-                 <input type="hidden" name="name" value="${enquiry.name}" />
-                   <input type="hidden" name="totalAmount" value="${enquiry.amount}" />
-                  <input type="hidden" name="trainer" value="${enquiry.trainer}" />
-                    <input type="hidden" name="phoneNumber" value="${enquiry.phoneNumber}" />
-                 <input type="hidden" name="gympackage" value="${enquiry.gympackage}" />
-                   <input type="hidden" name="balanceAmount" value="${enquiry.balanceAmount}" />
+
+                 <input type="hidden" name="idForDelete" value="${slotsEntityList.id}" />
 
 
-                 <td>${enquiry.name}</td>
-                 <td>${enquiry.email}</td>
-                 <td>${enquiry.phoneNumber}</td>
-                 <td>${enquiry.gympackage}</td>
-                 <td>${enquiry.trainer}</td>
-                 <td>${enquiry.amount}</td>
-                 <td>${enquiry.amountPaid}</td>
-                  <td>${enquiry.balanceAmount}</td>
+                 <td>${slotsEntityList.startTime}</td>
+                 <td>${slotsEntityList.endTime}</td>
+                 <td>${slotsEntityList.duration}</td>
+
 
                  <td>
-                   <button type="submit" class="btn btn-success">Update</button>  <!-- Update button for each row -->
+                   <button type="submit" class="btn btn-success">Delete</button>  <!-- Update button for each row -->
                  </td>
-                  <td>
-                                <a href="view?id=${enquiry.id}" class="btn btn-success">View</a>
-                                  </td>
+
                </form>
              </tr>
            </c:forEach>

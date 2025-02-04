@@ -52,11 +52,12 @@ public class UpdateRegistredDetails {
 
         model.addAttribute("listimg",entity);
         if(registrationEntityList.isEmpty()){
-            model.addAttribute("list",entity);
+            model.addAttribute("listimg",entity);
+
             model.addAttribute("notFound","No One Registred With This Name And Phone Number. Please Check Name And Phone Number");
             return "RegistredUsersSearch";
         }
-        model.addAttribute("listimg",registrationEntityList);
+        model.addAttribute("list",registrationEntityList);
         return "RegistredUsersSearch";
     }
 

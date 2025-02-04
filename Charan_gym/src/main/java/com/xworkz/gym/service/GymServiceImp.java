@@ -3,6 +3,7 @@ package com.xworkz.gym.service;
 import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.dto.EnquiryDTO;
 import com.xworkz.gym.dto.RegistrationDTO;
+import com.xworkz.gym.dto.TrainerDTO;
 import com.xworkz.gym.entity.*;
 import com.xworkz.gym.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -453,7 +455,16 @@ public class GymServiceImp implements GymService{
 
     @Override
     public int updateUserProfile(RegistrationDTO registrationDTO, String filePath,int id) {
-        return gymRepository.updateUserProfile(registrationDTO,filePath,id);
+        RegistrationEntity entity=new RegistrationEntity();
+        entity.setName(registrationDTO.getName());
+        entity.setEmail(registrationDTO.getEmail());
+        entity.setPhoneNumber(registrationDTO.getPhoneNo());
+        entity.setAge(registrationDTO.getAge());
+        entity.setWeight(registrationDTO.getWeight());
+        entity.setHeight(registrationDTO.getHeight());
+        entity.setChestSize(registrationDTO.getChestSize());
+
+        return gymRepository.updateUserProfile(entity,filePath,id);
     }
 
     @Override
@@ -466,6 +477,44 @@ public class GymServiceImp implements GymService{
     @Override
     public Long getCountOfRegEmail(String email) {
         return gymRepository.getCountOfRegEmail(email);
+    }
+
+    @Override
+    public void saveTrainerDetails(TrainerDTO trainerDTO) {
+
+        TrainerEntity trainerEntity=new TrainerEntity();
+        trainerEntity.setTrainerName(trainerDTO.getTrainer());
+        trainerEntity.setPhoneNo(trainerDTO.getPhoneNo());
+        trainerEntity.setSlotTime(trainerDTO.getTrainerDropdown());
+        System.out.println(trainerEntity);
+
+        gymRepository.saveTrainerDetails(trainerEntity);
+    }
+
+    @Override
+    public void saveslots(String startTime, String endTime, String duration) {
+        SlotsEntity entity =new SlotsEntity();
+        entity.setStartTime(startTime);
+        entity.setEndTime(endTime);
+        entity.setDuration(duration);
+        gymRepository.saveslots(entity);
+    }
+
+    @Override
+    public List<SlotsEntity> getAllSlotsDetails() {
+
+        return gymRepository.getAllSlotsDetails();
+    }
+
+    @Override
+    public List<TrainerEntity> getAllTrainerDetails() {
+
+        return gymRepository.getAllTrainerDetails();
+    }
+
+    @Override
+    public int deleteSlotById(int idForDelete) {
+        return gymRepository.deleteSlotById(idForDelete);
     }
 
 }

@@ -3,6 +3,7 @@ package com.xworkz.gym.service;
 import com.xworkz.gym.dto.AdminLoginDTO;
 import com.xworkz.gym.dto.EnquiryDTO;
 import com.xworkz.gym.dto.RegistrationDTO;
+import com.xworkz.gym.dto.TrainerDTO;
 import com.xworkz.gym.entity.*;
 import org.springframework.stereotype.Service;
 
@@ -56,4 +57,14 @@ public interface GymService {
     Long getCountOfEmail(String email);
 
     Long getCountOfRegEmail(String email);
+
+    void saveTrainerDetails(TrainerDTO trainerDTO);
+
+    void saveslots(String startTime, String endTime, String duration);
+
+    List<SlotsEntity> getAllSlotsDetails();
+
+    List<TrainerEntity> getAllTrainerDetails();
+
+    int deleteSlotById(int idForDelete);
 }

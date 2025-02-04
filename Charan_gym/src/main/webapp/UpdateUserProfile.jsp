@@ -121,19 +121,45 @@
             <input type="text" class="form-control form-control-lg" id="firstName" name="name" placeholder="Enter full name" required value="${entity.name}" onblur="validData(event)">
             <span id="nameValid"></span>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control form-control-lg" id="email" name="email" placeholder="Enter email" required value="${entity.email}" onblur="validData(event)">
-            <span id="emailvalid"></span>
-          </div>
+          <div class="form-row">
+           <div class="form-group col-md-6">
+                                 <label for="email">Email</label>
+                                            <input type="text" class="form-control form-control-lg" id="email" name="email" placeholder="Enter email" required value="${entity.email}" onblur="validData(event)">
+                                            <span id="emailvalid"></span>
+                               </div>
+
+                     <div class="form-group col-md-6">
+                       <label for="phone">Phone Number</label>
+                       <input type="tel" class="form-control form-control-lg" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${entity.phoneNumber}" onblur="validData(event)">
+                        <span id="phonevalid"></span>
+                     </div>
+
+                   </div>
           <div class="form-row">
 
             <div class="form-group col-md-6">
-              <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control form-control-lg" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${entity.phoneNumber}" onblur="validData(event)">
-               <span id="phonevalid"></span>
+              <label for="phone">Age</label>
+              <input type="text" class="form-control form-control-lg" id="age" name="age" placeholder="Enter age" required >
             </div>
+               <div class="form-group col-md-6">
+                          <label for="phone">Weight</label>
+                          <input type="text" class="form-control form-control-lg" id="weight" name="weight" placeholder="Enter weight" required  >
+
+                        </div>
           </div>
+          <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label for="phone">Height</label>
+                        <input type="text" class="form-control form-control-lg" id="height" name="height" placeholder="Enter height" required  >
+                      </div>
+                         <div class="form-group col-md-6">
+                                    <label for="phone">Chest size</label>
+                                    <input type="text" class="form-control form-control-lg" id="size" name="chestSize" placeholder="Enter chest size" required >
+
+                                  </div>
+                    </div>
+
           <div class="form-group">
           <label for="phone">Upload Profile Image</label>
             <input type="file" class="form-control form-control-lg" id="formFile" name="thisfile" accept="image/*" value="${entity.profileImage}">

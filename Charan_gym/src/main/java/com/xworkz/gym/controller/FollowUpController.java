@@ -42,14 +42,18 @@ public class FollowUpController {
     }
 
     @RequestMapping("/followupoperation")
-    public String filterByStatus(String status, Model model) {
+    public String filterByStatus(String status, Model model,HttpSession httpSession) {
         System.out.println(status);
         List<EnquiryEntity> enquiryEntity = gymService.getAllUserDetailsByStatus(status);
         System.out.println(enquiryEntity);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
         if (!enquiryEntity.isEmpty()) {
             model.addAttribute("list", enquiryEntity);
+
+            model.addAttribute("listimg",entity);
             return "FollowUp";
         }
+        model.addAttribute("listimg",entity);
         model.addAttribute("failure", "No enquiry records found on '" + status + "' status");
         return "FollowUp";
     }
@@ -90,9 +94,11 @@ public class FollowUpController {
     //   }
 
     @GetMapping("/onView")
-    public String onView(@RequestParam int id, Model model) {
+    public String onView(@RequestParam int id, Model model,HttpSession httpSession) {
         System.out.println(id);
         List<UpdatedEnquiryDetailsEntity> enquiryDetailsEntities = gymService.getAllViewDetails(id);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg",entity);
 
         model.addAttribute("list", enquiryDetailsEntities);
         return "ViewEnquiryDetails";

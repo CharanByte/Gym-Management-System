@@ -67,4 +67,6 @@ public interface GymService {
     List<TrainerEntity> getAllTrainerDetails();
 
     int deleteSlotById(int idForDelete);
+
+    void assignUsersToTrainer(String trainerName, List<String> userNames,String slot);
 }

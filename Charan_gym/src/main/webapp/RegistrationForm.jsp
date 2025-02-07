@@ -189,6 +189,8 @@
         <a href="registrationUpdate">Update</a>
         <a href="addSlots">Slots</a>
         <a href="viewtrainer">View Trainer</a>
+         <a href="AssignUsers">AssignUsers</a>
+           <a href="index.jsp">Logout</a>
       </nav>
     </header>
 
@@ -218,7 +220,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${phoneNo}" onblur="validData(event)">
+              <input type="tel" class="form-control" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${phoneNo}" oninput="validData(event)">
                <span id="phonevalid"></span>
             </div>
           </div>

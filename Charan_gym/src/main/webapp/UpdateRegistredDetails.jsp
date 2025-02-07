@@ -203,6 +203,8 @@
                <a href="registrationUpdate">Update</a>
                <a href="addSlots">Slots</a>
                <a href="viewtrainer">View Trainer</a>
+                <a href="AssignUsers">AssignUsers</a>
+                  <a href="index.jsp">Logout</a>
       </nav>
     </header>
 

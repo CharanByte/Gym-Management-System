@@ -123,7 +123,7 @@
         </tbody>
     </table>
     <div class="go-back">
-        <a href="RegistrationForm.jsp" class="btn btn-primary">Go Back</a>
+        <a href="register" class="btn btn-primary">Go Back</a>
     </div>
 </div>
 

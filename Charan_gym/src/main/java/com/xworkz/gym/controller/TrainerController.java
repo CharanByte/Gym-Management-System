@@ -3,6 +3,7 @@ package com.xworkz.gym.controller;
 import com.xworkz.gym.constants.GymTrainersEnum;
 import com.xworkz.gym.dto.TrainerDTO;
 import com.xworkz.gym.entity.AdminEntity;
+import com.xworkz.gym.entity.RegistrationEntity;
 import com.xworkz.gym.entity.SlotsEntity;
 import com.xworkz.gym.entity.TrainerEntity;
 import com.xworkz.gym.service.GymService;
@@ -39,8 +40,12 @@ public class TrainerController {
     @GetMapping("/AssignUsers")
     public String assignUser(Model model, HttpSession httpSession){
         AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
-        model.addAttribute("listimg",entity);
-        
+        model.addAttribute("list",entity);
+        List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
+        System.out.println("trainerEntities"+trainerEntities);
+        model.addAttribute("trainers",trainerEntities);
+        List<RegistrationEntity>  registrationEntityList=gymService.getAllRegistredUsersDetails();
+        model.addAttribute("users",registrationEntityList);
         return "AssignUsersToTrainers";
     }
 
@@ -102,6 +107,19 @@ public class TrainerController {
         model.addAttribute("deleteSlot","Slot Not Deleted");
 
         return "AddSlots";
+    }
+    @PostMapping("/assignUsers")
+    public String onAssign(String trainerName,String selectedUserName,Model model){
+        System.out.println(trainerName +"  "+selectedUserName);
+
+        List<String> trainerAndSlot = Arrays.asList(selectedUserName.split(","));
+
+        List<String> userNames = Arrays.asList(selectedUserName.split(","));
+
+        gymService.assignUsersToTrainer(trainerAndSlot.get(0), userNames,trainerAndSlot.get(0));
+        model.addAttribute("trainerName",trainerName);
+        model.addAttribute("assignedUsers",userNames);
+        return "DisplayUsersAssignedToTrainer";
     }
 
 }

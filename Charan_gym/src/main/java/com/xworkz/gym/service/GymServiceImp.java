@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -515,6 +512,14 @@ public class GymServiceImp implements GymService{
     @Override
     public int deleteSlotById(int idForDelete) {
         return gymRepository.deleteSlotById(idForDelete);
+    }
+
+    @Override
+    public void assignUsersToTrainer(String trainerName, List<String> userNames,String slot) {
+        for (String username : userNames) {
+            UsersAssignedToTrainerEntity trainerUser = new UsersAssignedToTrainerEntity(trainerName, username,slot);
+            gymRepository.saveAssignUsersToTrainer(trainerUser);
+        }
     }
 
 }

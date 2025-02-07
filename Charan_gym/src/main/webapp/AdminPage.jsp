@@ -181,8 +181,8 @@
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
-        <a href="AssignUsers">AssignUsers</a>
     </nav>
+
 
     <!-- Profile Image + Toggle Menu (Right Side) -->
     <div style="display: flex; align-items: center;">
@@ -203,6 +203,9 @@
       <a href="registrationUpdate">Update</a>
        <a href="addSlots">Slots</a>
               <a href="viewtrainer">View Trainer</a>
+                <a href="AssignUsers">AssignUsers</a>
+                <a href="index.jsp">Logout</a>
+
     </nav>
   </header>
 

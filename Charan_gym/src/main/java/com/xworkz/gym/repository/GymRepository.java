@@ -70,4 +70,6 @@ public interface GymRepository {
     List<TrainerEntity> getAllTrainerDetails();
 
     int deleteSlotById(int idForDelete);
+
+    void saveAssignUsersToTrainer(UsersAssignedToTrainerEntity trainerUser);
 }

@@ -139,11 +139,11 @@
 
             <div class="form-group col-md-6">
               <label for="phone">Age</label>
-              <input type="text" class="form-control form-control-lg" id="age" name="age" placeholder="Enter age" required >
+              <input type="text" class="form-control form-control-lg" id="age" name="age" placeholder="Enter age" required value="${entity.age}">
             </div>
                <div class="form-group col-md-6">
                           <label for="phone">Weight</label>
-                          <input type="text" class="form-control form-control-lg" id="weight" name="weight" placeholder="Enter weight" required  >
+                          <input type="text" class="form-control form-control-lg" id="weight" name="weight" placeholder="Enter weight" required value="${entity.weight}">
 
                         </div>
           </div>
@@ -151,11 +151,11 @@
 
                       <div class="form-group col-md-6">
                         <label for="phone">Height</label>
-                        <input type="text" class="form-control form-control-lg" id="height" name="height" placeholder="Enter height" required  >
+                        <input type="text" class="form-control form-control-lg" id="height" name="height" placeholder="Enter height" required value="${entity.height}" >
                       </div>
                          <div class="form-group col-md-6">
                                     <label for="phone">Chest size</label>
-                                    <input type="text" class="form-control form-control-lg" id="size" name="chestSize" placeholder="Enter chest size" required >
+                                    <input type="text" class="form-control form-control-lg" id="size" name="chestSize" placeholder="Enter chest size" required value="${entity.chestSize}">
 
                                   </div>
                     </div>

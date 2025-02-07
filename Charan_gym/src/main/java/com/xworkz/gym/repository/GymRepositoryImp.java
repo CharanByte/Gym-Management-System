@@ -636,5 +636,23 @@ public class GymRepositoryImp implements GymRepository{
         return val;
     }
 
+    @Override
+    public void saveAssignUsersToTrainer(UsersAssignedToTrainerEntity trainerUser) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.persist(trainerUser);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+    }
+
 
 }

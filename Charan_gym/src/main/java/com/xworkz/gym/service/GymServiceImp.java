@@ -522,4 +522,9 @@ public class GymServiceImp implements GymService{
         }
     }
 
+    @Override
+    public int deleteTrainerSlot(int trainerId) {
+        return gymRepository.deleteTrainerSlot(trainerId);
+    }
+
 }

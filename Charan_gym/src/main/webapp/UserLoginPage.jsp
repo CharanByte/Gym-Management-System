@@ -91,7 +91,7 @@
       <div class="col-md-7">
       <h6>${locked}</h6>
       <h6>${tryafter2min}</h6>
-        <h2 class="text-center" style="color:white">Login</h2>
+        <h2 class="text-center" style="color:white">User Login</h2>
         <form action="userLogin" method="post">
         <span class="message">${failure}</span>
           <div class="form-group">

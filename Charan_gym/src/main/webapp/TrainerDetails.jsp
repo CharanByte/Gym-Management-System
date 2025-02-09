@@ -262,12 +262,12 @@
           <button class="btn btn-primary">Add trainer</button>
         </a>
     </div>
-
+    <h4 style="color:red; margin-left:40%">${deletedTrainerSlot}</h4>
     <!-- Table Container -->
     <c:if test="${not empty trainerDetails}">
         <div class="table-container">
-            <h4 class="table-name">Enquiry Details</h4>
-            <form action="updateStatus" method="POST">
+            <h4 class="table-name">Trainer Slots</h4>
+            <form action="deleteTrainerSlot" method="POST">
                 <table class="table table-striped table-bordered table-hover">
                     <colgroup>
 
@@ -292,8 +292,9 @@
                     <tbody>
                     <c:forEach items="${trainerDetails}" var="trainerDetails">
                         <tr>
-                            <form action="deletetrainer" method="POST">  <!-- Form for each row -->
+                            <form action="deleteTrainerSlot" method="POST">  <!-- Form for each row -->
 
+                              <input type="hidden" name="trainerId" value="${trainerDetails.id}" />
 
                                 <td>${trainerDetails.trainerName}</td>
                                 <td>${trainerDetails.phoneNo}</td>

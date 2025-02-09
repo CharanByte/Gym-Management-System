@@ -9,6 +9,8 @@ import java.time.LocalTime;
 @Table(name = "trainer_table")
 @Data
 @NamedQuery(name = "getAllTrainerDetails",query = "select a from TrainerEntity a")
+@NamedQuery(name = "deleteTrainerSlotById",query = "DELETE  from TrainerEntity a where a.id=:getId")
+
 public class TrainerEntity {
 
     @Id

@@ -654,5 +654,23 @@ public class GymRepositoryImp implements GymRepository{
         }
     }
 
+    @Override
+    public int deleteTrainerSlot(int trainerId) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        int val=0;
+        try {
+            et.begin();
+            val=em.createNamedQuery("deleteTrainerSlotById").setParameter("getId",trainerId).executeUpdate();
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+        return val;
+    }
+
 
 }

@@ -137,7 +137,7 @@
             <h3>Dashboard</h3>
             <ul>
                 <li><img src="https://i.ibb.co/SXWPRLz/user.png" alt="Dashboard Icon" style="width: 20px; height: 20px;"><a href="#">Personal Profile</a></li>
-
+                 <li><a href="trainerAndSlot">Trainer And Slot</a></li>
             </ul>
         </div>
         <div class="main-content">

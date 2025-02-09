@@ -86,7 +86,7 @@
         <img src="https://media.istockphoto.com/id/542197916/photo/running-on-treadmill.jpg?s=612x612&w=0&k=20&c=CYywmb71uOepSHWa534hG9230AzawSa4i3sA89o4qCQ=" alt="Form Image" class="form-image">
       </div>
       <div class="col-md-7">
-        <h2 class="text-center" style="color:white">Login</h2>
+        <h2 class="text-center" style="color:white">Admin Login</h2>
         <form action="adminLogin" method="post">
         <span class="message">${failure}</span>
           <div class="form-group">

@@ -69,4 +69,6 @@ public interface GymService {
     int deleteSlotById(int idForDelete);
 
     void assignUsersToTrainer(String trainerName, List<String> userNames,String slot);
+
+    int deleteTrainerSlot(int trainerId);
 }

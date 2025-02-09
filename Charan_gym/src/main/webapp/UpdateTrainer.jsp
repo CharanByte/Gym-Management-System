@@ -206,7 +206,7 @@
 
   <div class="container form-container">
     <div class="form-box">
-    <h4 style="color:green">${success}</h4>
+    <h5 style="color:green">${success}</h5>
       <h2 class="text-center" style="color: white;padding-bottom:30px;">Update Trainer Details</h2>
       <form action="updateTrainer" method="post">
         <div class="form-group">

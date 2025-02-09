@@ -85,6 +85,11 @@ public class UserLoginController {
         model.addAttribute("entity",entity);
         return "UpdateUserProfile";
     }
+    @GetMapping("/trainerAndSlot")
+    public String ontrainerAndSlot(HttpSession httpSession,Model model){
+
+        return "DisplayUserTrainerAndSlot";
+    }
 
 
     @PostMapping("/updateUserProfile")

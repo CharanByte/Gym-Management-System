@@ -79,45 +79,79 @@ public class TrainerController {
         return "UpdateTrainer";
     }
     @PostMapping("/updateTrainer")
-    public  String onupdate(TrainerDTO trainerDTO,Model model){
+    public  String onupdate(TrainerDTO trainerDTO,Model model,HttpSession httpSession){
         System.out.println(trainerDTO);
-
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg",entity);
         gymService.saveTrainerDetails(trainerDTO);
         model.addAttribute("success","SuccessFully added Slot to "+trainerDTO.getTrainer());
+
         return "UpdateTrainer";
     }
     @PostMapping("/slot")
-    public  String onaddSlot(String startTime,String endTime,String duration,Model model){
+    public  String onaddSlot(String startTime,String endTime,String duration,Model model,HttpSession httpSession){
 
         System.out.println(startTime+endTime+duration);
         gymService.saveslots(startTime,endTime,duration);
         List<SlotsEntity> slotsEntityList=gymService.getAllSlotsDetails();
         model.addAttribute("slotsEntityList",slotsEntityList);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg",entity);
         return "AddSlots";
     }
 
-    @PostMapping("/deleteSlot")
-    public String onDeleteSlot(int idForDelete,Model model){
+    @PostMapping("/deletebutton")
+    public String onDeleteSlot(int idForDelete,Model model,HttpSession httpSession){
         System.out.println(idForDelete);
         int value=gymService.deleteSlotById(idForDelete);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg",entity);
+        List<SlotsEntity> slotsEntityList=gymService.getAllSlotsDetails();
+        model.addAttribute("slotsEntityList",slotsEntityList);
         if(value>=1){
             model.addAttribute("deleteSlot","SuccessFully Deleted Slot");
+            model.addAttribute("listimg",entity);
+            model.addAttribute("slotsEntityList",slotsEntityList);
+
             return "AddSlots";
         }
+        model.addAttribute("listimg",entity);
         model.addAttribute("deleteSlot","Slot Not Deleted");
 
         return "AddSlots";
+    }
+
+    @PostMapping("/deleteTrainerSlot")
+    public String onDeleteTrainerSlot(int trainerId,Model model,HttpSession httpSession){
+        System.out.println(trainerId);
+        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg",entity);
+        int value=gymService.deleteTrainerSlot(trainerId);
+        if(value>0){
+            model.addAttribute("listimg",entity);
+            List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
+            model.addAttribute("trainerDetails",trainerEntities);
+            model.addAttribute("deletedTrainerSlot","Slot Deleted SuccessFully");
+        return "TrainerDetails";
+        }
+
+        List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
+        model.addAttribute("trainerDetails",trainerEntities);
+        model.addAttribute("deletedTrainerSlot","Slot Not Deleted");
+
+        return "TrainerDetails";
     }
     @PostMapping("/assignUsers")
     public String onAssign(String trainerName,String selectedUserName,Model model){
         System.out.println(trainerName +"  "+selectedUserName);
 
-        List<String> trainerAndSlot = Arrays.asList(selectedUserName.split(","));
+        List<String> trainerAndSlot = Arrays.asList(trainerName.split(","));
 
         List<String> userNames = Arrays.asList(selectedUserName.split(","));
 
-        gymService.assignUsersToTrainer(trainerAndSlot.get(0), userNames,trainerAndSlot.get(0));
-        model.addAttribute("trainerName",trainerName);
+        gymService.assignUsersToTrainer(trainerAndSlot.get(0), userNames,trainerAndSlot.get(1));
+        model.addAttribute("trainerName",trainerAndSlot.get(0));
+        model.addAttribute("slot",trainerAndSlot.get(1));
         model.addAttribute("assignedUsers",userNames);
         return "DisplayUsersAssignedToTrainer";
     }

@@ -325,7 +325,7 @@
            <tbody>
            <c:forEach items="${slotsEntityList}" var="slotsEntityList">
              <tr>
-               <form action="deleteSlot" method="post" >  <!-- Form for each row -->
+               <form action="deleteSlot" method="post">  <!-- Form for each row -->
                  <!-- Hidden input to store the enquiry id -->
 
                  <input type="hidden" name="idForDelete" value="${slotsEntityList.id}" />

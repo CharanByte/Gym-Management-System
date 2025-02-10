@@ -527,4 +527,9 @@ public class GymServiceImp implements GymService{
         return gymRepository.deleteTrainerSlot(trainerId);
     }
 
+    @Override
+    public UsersAssignedToTrainerEntity getTrainerAndSlotByUserName(String name) {
+        return  gymRepository.getTrainerAndSlotByUserName(name);
+    }
+
 }

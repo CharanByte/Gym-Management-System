@@ -672,5 +672,27 @@ public class GymRepositoryImp implements GymRepository{
         return val;
     }
 
+    @Override
+    public UsersAssignedToTrainerEntity getTrainerAndSlotByUserName(String name) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+         UsersAssignedToTrainerEntity entity= null;
+
+        try {
+            et.begin();
+            List<UsersAssignedToTrainerEntity> trainerEntities=em.createNamedQuery("getTrainerAndSlotByUserName",UsersAssignedToTrainerEntity.class).setParameter("getUserName",name).getResultList();
+            if(!trainerEntities.isEmpty()){
+                entity=trainerEntities.get(0);
+            }
+           et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+        return entity;
+    }
+
 
 }

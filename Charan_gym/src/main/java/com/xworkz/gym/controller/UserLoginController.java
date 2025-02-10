@@ -3,6 +3,7 @@ package com.xworkz.gym.controller;
 import com.xworkz.gym.constants.ProfileImagePath;
 import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.RegistrationEntity;
+import com.xworkz.gym.entity.UsersAssignedToTrainerEntity;
 import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class UserLoginController {
     private GymService gymService;
     @GetMapping("/UserLogin")
     public String onLogin(){
+
         return "UserLoginPage";
     }
     @PostMapping("/userLogin")
@@ -87,7 +89,13 @@ public class UserLoginController {
     }
     @GetMapping("/trainerAndSlot")
     public String ontrainerAndSlot(HttpSession httpSession,Model model){
-
+       Object object= httpSession.getAttribute("userRegEntity");
+        RegistrationEntity registrationEntity=(RegistrationEntity) object;
+        System.out.println(registrationEntity);
+        model.addAttribute("registrationEntity",registrationEntity);
+        UsersAssignedToTrainerEntity entity=gymService.getTrainerAndSlotByUserName(registrationEntity.getName());
+        System.out.println(entity);
+        model.addAttribute("entity",entity);
         return "DisplayUserTrainerAndSlot";
     }
 

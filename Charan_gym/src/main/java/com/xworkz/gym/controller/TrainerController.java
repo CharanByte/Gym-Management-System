@@ -2,10 +2,7 @@ package com.xworkz.gym.controller;
 
 import com.xworkz.gym.constants.GymTrainersEnum;
 import com.xworkz.gym.dto.TrainerDTO;
-import com.xworkz.gym.entity.AdminEntity;
-import com.xworkz.gym.entity.RegistrationEntity;
-import com.xworkz.gym.entity.SlotsEntity;
-import com.xworkz.gym.entity.TrainerEntity;
+import com.xworkz.gym.entity.*;
 import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,8 +82,9 @@ public class TrainerController {
         model.addAttribute("listimg",entity);
         gymService.saveTrainerDetails(trainerDTO);
         model.addAttribute("success","SuccessFully added Slot to "+trainerDTO.getTrainer());
-
-        return "UpdateTrainer";
+        List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
+        model.addAttribute("trainerDetails",trainerEntities);
+        return "TrainerDetails";
     }
     @PostMapping("/slot")
     public  String onaddSlot(String startTime,String endTime,String duration,Model model,HttpSession httpSession){
@@ -122,27 +120,82 @@ public class TrainerController {
     }
 
     @PostMapping("/deleteTrainerSlot")
-    public String onDeleteTrainerSlot(int trainerId,Model model,HttpSession httpSession){
+    public String onDeleteTrainerSlot(int trainerId,String trainerName,Model model,HttpSession httpSession) {
         System.out.println(trainerId);
-        AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
-        model.addAttribute("listimg",entity);
-        int value=gymService.deleteTrainerSlot(trainerId);
-        if(value>0){
-            model.addAttribute("listimg",entity);
-            List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
-            model.addAttribute("trainerDetails",trainerEntities);
-            model.addAttribute("deletedTrainerSlot","Slot Deleted SuccessFully");
-        return "TrainerDetails";
+        AdminEntity entity = (AdminEntity) httpSession.getAttribute("adminEntity");
+        model.addAttribute("listimg", entity);
+
+        List<TrainerEntity> trainerEntities = gymService.getAllTrainerDetails();
+
+        model.addAttribute("trainers", trainerEntities);
+
+        List<RegistrationEntity> registrationEntityList = gymService.getAllRegistredUsersDetails();
+        model.addAttribute("users", registrationEntityList);
+        List<UsersAssignedToTrainerEntity> trainerEntitie = gymService.getUsersAssignedToTrainerByTrainerName(trainerName);
+        if (!trainerEntitie.isEmpty()) {
+            List<String> user = new ArrayList<>();
+            for (UsersAssignedToTrainerEntity ref : trainerEntitie) {
+                user.add(ref.getUserName());
+            }
+            System.out.println(user);
+            model.addAttribute("user", user);
+            model.addAttribute("idtrainer",trainerId);
+            int val=gymService.deleteUserAssignedToTrainer(trainerName);
+            System.out.println(val);
+            int value = gymService.deleteTrainerSlot(trainerId);
+            System.out.println(value);
+            if (value > 0) {
+                model.addAttribute("listimg", entity);
+                List<TrainerEntity> trainerEntiti = gymService.getAllTrainerDetails();
+                model.addAttribute("trainerDetails", trainerEntiti);
+                model.addAttribute("deletedTrainerSlot", "Trainer And Slot Deleted SuccessFully");
+                return "AssignUsersToNewTrainer";
+            }
+
+            List<TrainerEntity> trainer = gymService.getAllTrainerDetails();
+            model.addAttribute("trainerDetails", trainer);
+            model.addAttribute("deletedTrainerSlot", "Trainer And Slot Not Deleted");
+
+
+            return "AssignUsersToNewTrainer";
+        } else {
+
+
+            int value = gymService.deleteTrainerSlot(trainerId);
+            if (value > 0) {
+                model.addAttribute("listimg", entity);
+                List<TrainerEntity> trainerEntiti = gymService.getAllTrainerDetails();
+                model.addAttribute("trainerDetails", trainerEntiti);
+                model.addAttribute("deletedTrainerSlot", "Trainer And Slot Deleted SuccessFully");
+                return "TrainerDetails";
+            }
+
+            List<TrainerEntity> trainer = gymService.getAllTrainerDetails();
+            model.addAttribute("trainerDetails", trainer);
+            model.addAttribute("deletedTrainerSlot", "Trainer And Slot Not Deleted");
+
+            return "TrainerDetails";
         }
-
-        List<TrainerEntity> trainerEntities=gymService.getAllTrainerDetails();
-        model.addAttribute("trainerDetails",trainerEntities);
-        model.addAttribute("deletedTrainerSlot","Slot Not Deleted");
-
-        return "TrainerDetails";
     }
     @PostMapping("/assignUsers")
     public String onAssign(String trainerName,String selectedUserName,Model model){
+        System.out.println(trainerName +"  "+selectedUserName);
+
+        List<String> trainerAndSlot = Arrays.asList(trainerName.split(","));
+
+        List<String> userNames = Arrays.asList(selectedUserName.split(","));
+
+        gymService.assignUsersToTrainer(trainerAndSlot.get(0), userNames,trainerAndSlot.get(1));
+        model.addAttribute("trainerName",trainerAndSlot.get(0));
+        model.addAttribute("slot",trainerAndSlot.get(1));
+        model.addAttribute("assignedUsers",userNames);
+        return "DisplayUsersAssignedToTrainer";
+    }
+
+    @PostMapping("/assignUsersToNewTrainer")
+    public String onassignUsersToNewTrainer(int trainerId,String trainerName,String selectedUserName,Model model,HttpSession httpSession){
+        AdminEntity entity = (AdminEntity) httpSession.getAttribute("adminEntity");
+
         System.out.println(trainerName +"  "+selectedUserName);
 
         List<String> trainerAndSlot = Arrays.asList(trainerName.split(","));

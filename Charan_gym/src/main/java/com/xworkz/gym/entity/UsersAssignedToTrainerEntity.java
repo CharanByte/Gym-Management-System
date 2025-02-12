@@ -10,6 +10,9 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @NamedQuery(name = "getTrainerAndSlotByUserName",query = "select a from UsersAssignedToTrainerEntity a where a.userName=:getUserName")
+@NamedQuery(name = "getUsersAssignedToTrainerByTrainerName",query = "select a from UsersAssignedToTrainerEntity a where a.trainerName=:getTrainerName")
+@NamedQuery(name = "deleteUserAssignedToTrainer",query = "DELETE  from UsersAssignedToTrainerEntity a where a.trainerName=:getTrainerName")
+
 public class UsersAssignedToTrainerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

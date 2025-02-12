@@ -262,6 +262,7 @@
           <button class="btn btn-primary">Add trainer</button>
         </a>
     </div>
+    <h5 style="color:green;margin-left:40%">${success}</h5>
     <h4 style="color:red; margin-left:40%">${deletedTrainerSlot}</h4>
     <!-- Table Container -->
     <c:if test="${not empty trainerDetails}">
@@ -275,6 +276,7 @@
 
                         <col style="width: 10%;">
                         <col style="width: 10%;">
+
                         <col style="width: 15%;">
 
                     </colgroup>
@@ -295,7 +297,7 @@
                             <form action="deleteTrainerSlot" method="POST">  <!-- Form for each row -->
 
                               <input type="hidden" name="trainerId" value="${trainerDetails.id}" />
-
+ <input type="hidden" name="trainerName" value="${trainerDetails.trainerName}"/>
                                 <td>${trainerDetails.trainerName}</td>
                                 <td>${trainerDetails.phoneNo}</td>
                                 <td>${trainerDetails.slotTime}</td>

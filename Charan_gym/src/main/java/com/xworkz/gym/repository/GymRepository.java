@@ -76,4 +76,8 @@ public interface GymRepository {
     int deleteTrainerSlot(int trainerId);
 
     UsersAssignedToTrainerEntity getTrainerAndSlotByUserName(String name);
+
+    List<UsersAssignedToTrainerEntity> getUsersAssignedToTrainerByTrainerName(String trainerName);
+
+    int deleteUserAssignedToTrainer(String trainerName);
 }

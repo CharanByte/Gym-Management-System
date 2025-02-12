@@ -14,6 +14,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -530,6 +531,16 @@ public class GymServiceImp implements GymService{
     @Override
     public UsersAssignedToTrainerEntity getTrainerAndSlotByUserName(String name) {
         return  gymRepository.getTrainerAndSlotByUserName(name);
+    }
+
+    @Override
+    public List<UsersAssignedToTrainerEntity> getUsersAssignedToTrainerByTrainerName(String trainerName) {
+        return  gymRepository.getUsersAssignedToTrainerByTrainerName(trainerName);
+    }
+
+    @Override
+    public int deleteUserAssignedToTrainer(String trainerName) {
+        return gymRepository.deleteUserAssignedToTrainer(trainerName);
     }
 
 }

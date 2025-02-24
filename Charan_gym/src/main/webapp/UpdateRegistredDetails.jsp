@@ -127,10 +127,11 @@
       margin-top: 20px;
       padding: 20px;
       padding-bottom: 0px;
-      border: 1px solid #f0ebeb;
+      border: 1px solid rgba(57, 55, 55, 0.3);
       border-radius: 10px;
-      background-color: rgba(57, 55, 55, 0.785);
+      background-color: rgba(57, 55, 55, 0);
       width: 45%;
+          box-shadow: 0px 2px 10px rgba(200, 200, 200, 0.6);
 
     }
     label {
@@ -167,6 +168,40 @@
           border-radius: 50%;
 
         }
+         /* Media query for mobile devices */
+            @media (max-width: 768px) {
+              .form-container {
+                width: 95%; /* Full width on mobile */
+                padding: 15px; /* Reduced padding */
+              }
+              .form-row {
+                flex-direction: column; /* Stack form fields vertically */
+              }
+              .form-group.col-md-6 {
+                width: 100%; /* Full width for stacked fields */
+              }
+              .btn-center {
+                padding: 8px 30px; /* Smaller button for mobile */
+                font-size: 1rem; /* Smaller font size */
+              }
+              .nav {
+                display: none; /* Hide desktop nav on mobile */
+              }
+              .header {
+                padding: 10px 15px; /* Reduced padding */
+              }
+              .logo-img {
+                max-height: 40px; /* Smaller logo */
+              }
+              .profile-img {
+                max-height: 30px; /* Smaller profile image */
+                width: 30px;
+              }
+              .menu-toggle div {
+                width: 25px; /* Smaller toggle bars */
+                height: 2px;
+              }
+            }
   </style>
 </head>
 <body>
@@ -178,7 +213,7 @@
 
       <!-- Navigation centered -->
       <nav class="nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -196,7 +231,7 @@
 
       <!-- Toggle Menu -->
       <nav class="mobile-nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
                <a href="enquiry">Enquiry</a>
                <a href="followup">FollowUp</a>
                <a href="register">Registration</a>
@@ -204,6 +239,7 @@
                <a href="addSlots">Slots</a>
                <a href="viewtrainer">View Trainer</a>
                 <a href="AssignUsers">AssignUsers</a>
+                 <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
                   <a href="index.jsp">Logout</a>
       </nav>
     </header>

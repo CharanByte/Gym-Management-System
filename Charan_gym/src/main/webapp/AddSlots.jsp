@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slots</title>
+  <title>Add Slots</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
   body {
@@ -285,20 +285,23 @@
       <a href="registrationUpdate">Update</a>
       <a href="addSlots">Slots</a>
       <a href="viewtrainer">View Trainer</a>
+        <a href="AssignUsers">AssignUsers</a>
+                      <a href="index.jsp">Logout</a>
     </nav>
   </header>
 
-<div class="search-row">
+<div class="search-row" >
 
             <a href="createSlot" class="btn btn-primary">
               <button class="btn btn-primary">Create Slot</button>
             </a>
         </div>
 
-  <div class="container">
+  <div class="container" style="margin-bottom:10%;">
 
     <h4 class="deleteMessage">${deleteSlot}</h4>
     <!-- Table Container -->
+    <p style="color:red;text-align: center;font-size:20px">${added}</p>
     <c:if test="${not empty slotsEntityList}">
      <div class="table-container">
        <h4 class="table-name">Slot Timing Details</h4>

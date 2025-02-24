@@ -9,7 +9,6 @@ public class RegistrationDTO {
 
     private String name;
     private String email;
-    private String password;
     private long phoneNo;
     private String gympackage;
     private String trainer;

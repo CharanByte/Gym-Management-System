@@ -164,7 +164,7 @@
 
       <!-- Navigation centered -->
       <nav class="nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -182,7 +182,7 @@
 
       <!-- Toggle Menu -->
       <nav class="mobile-nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -190,6 +190,7 @@
         <a href="addSlots">Slots</a>
         <a href="viewtrainer">View Trainer</a>
          <a href="AssignUsers">AssignUsers</a>
+          <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
            <a href="index.jsp">Logout</a>
       </nav>
     </header>
@@ -202,21 +203,20 @@
       <div class="col-md-7">
         <h2 class="text-center" style="color:white">Registration Form</h2>
         <form action="registeration" method="post">
+        <p style="color:red">${notsaved}</p>
           <div class="form-group">
             <label for="firstName">Full Name</label>
             <input type="text" class="form-control" id="firstName" name="name" placeholder="Enter first name" required value="${enquiryName}" onblur="validData(event)">
             <span id="nameValid"></span>
           </div>
           <div class="form-group">
-            <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}" oninput="validData(event)" onblur="onField()">
-            <span style="color:red" id="emailvalid"></span>
+
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="email">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required onblur="validData(event)">
-              <span id="passwordValid"></span>
+               <label for="lastName">Email</label>
+                         <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" required value="${email}" oninput="validData(event)" onblur="onField()">
+                         <span style="color:red" id="emailvalid"></span>
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Phone Number</label>
@@ -315,7 +315,7 @@ const validData=(event)=>{
     }
     else if(name==="name" && (value.length<2 || !regex.test(value) || value==="" )){
     console.log("name not valid");
-    document.getElementById("nameValid").innerHTML="<span style='color:red'}> UserName invalid</span>"
+    document.getElementById("nameValid").innerHTML="<span style='color:red'}> UserName Invalid</span>"
     }
 
     if(name==="email" && (regex1.test(value))){
@@ -324,7 +324,7 @@ const validData=(event)=>{
     }
     else if(name==="email" && !regex1.test(value)){
     console.log("email not valid");
-    document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email invalid</span>"
+    document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email Invalid</span>"
     }
 
 
@@ -334,17 +334,9 @@ const validData=(event)=>{
     }
     else if(name==="phoneNo" && (value.length!=10 || !regex2.test(value))){
     console.log("phoneNo invalid");
-    document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number invalid</span>"
+    document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number Invalid</span>"
     }
 
-    if(name==="password" && passwordRegex.test(value) && value!==""){
-            console.log("valid password");
-          document.getElementById("passwordValid").innerHTML="<span></span>"
-        }
-        else if(name==="password" && (!passwordRegex.test(value) || value==="" )){
-        console.log("password not valid");
-        document.getElementById("passwordValid").innerHTML="<span style='color:red'}>Password Invalid</span>"
-        }
 
 
 }
@@ -358,7 +350,7 @@ const validData=(event)=>{
 
     const trainerPrices = {
       "NOT_REQUIED": 0,
-      "LIKI": 1000,
+      "REQUIED": 1000,
       "NANDAN": 1000,
       "RAJU": 1000
     };

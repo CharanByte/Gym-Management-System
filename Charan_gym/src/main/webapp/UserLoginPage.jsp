@@ -11,7 +11,8 @@
   <style>
     body {
       margin: 0;
-      height: 100vh; /* Full height of the viewport */
+      margin-top:10%;
+      height: auto; /* Full height of the viewport */
       display: flex;
       justify-content: center; /* Horizontally center the content */
       align-items: center; /* Vertically center the content */
@@ -28,7 +29,8 @@
       align-items: center;
       justify-content: center;
       padding: 30px;
-      width: 50%;
+      width: 90%; /* Adjusted for mobile */
+            max-width: 600px;
       border: 1px solid #333;
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0);
@@ -79,6 +81,43 @@
     h6{
     color:red;
     }
+     /* Responsive adjustments */
+        @media (max-width: 768px) {
+        body{
+        margin:0;
+       margin-top:20%;
+        }
+          .form-container {
+            width: 85%; /* Full width on mobile */
+            padding: 15px 0;
+          }
+                .form-image {
+                height:280px;
+                width:270px;
+                margin-bottom:10px;
+                }
+          .row {
+            flex-direction: column; /* Stack columns vertically */
+          }
+
+          .col-md-5, .col-md-7 {
+            width: 100%; /* Full width for columns */
+            margin:0;
+          }
+
+          h2 {
+            font-size: 1.5rem; /* Smaller heading for mobile */
+          }
+
+          .btn-center {
+            padding: 8px 40px; /* Smaller button padding */
+            font-size: 1rem; /* Smaller button text */
+          }
+
+          .password-toggle {
+            top: 38px; /* Adjust icon position */
+          }
+        }
   </style>
 </head>
 <body>

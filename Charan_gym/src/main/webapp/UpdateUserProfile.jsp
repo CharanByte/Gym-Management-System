@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Form</title>
+  <title>Update User Details</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -93,6 +93,43 @@
           border-radius: 50%;
 
         }
+        @media (max-width: 768px) {
+              .header {
+              height:auto;
+                padding: 25px 15px;
+              }
+              .header .logo {
+                font-size: 1.2rem;
+              }
+              .header .nav {
+                gap: 10px;
+              }
+              .header .nav a {
+                font-size: 1.2rem;
+              }
+              .logo-img {
+                max-height: 35px;
+              }
+              .form-container {
+                padding: 15px;
+                margin-top: 50px;
+                padding:10px 30px;
+
+              }
+              .form-image {
+              height:300px;
+             margin-left:22%;
+                margin-bottom: 50px;
+              }
+              .btn-center {
+                padding: 8px 40px;
+                font-size: 0.9rem;
+              }
+              .header .profile-img {
+                max-height: 30px;
+                width: 30px;
+              }
+            }
   </style>
 </head>
 <body>
@@ -114,23 +151,23 @@
         <img src="https://media.istockphoto.com/id/542197916/photo/running-on-treadmill.jpg?s=612x612&w=0&k=20&c=CYywmb71uOepSHWa534hG9230AzawSa4i3sA89o4qCQ=" alt="Form Image" class="form-image">
       </div>
       <div class="col-md-7">
-        <h2 class="text-center" style="color:white">Registration Form</h2>
+        <h2 class="text-center" style="color:white">Update User Details</h2>
         <form action="updateUserProfile" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="firstName">Full Name</label>
-            <input type="text" class="form-control form-control-lg" id="firstName" name="name" placeholder="Enter full name" required value="${entity.name}" onblur="validData(event)">
+            <input type="text" class="form-control form-control-lg" id="firstName" name="name" placeholder="Enter full name" required value="${entity.name}" onblur="validData(event)" readonly>
             <span id="nameValid"></span>
           </div>
           <div class="form-row">
            <div class="form-group col-md-6">
                                  <label for="email">Email</label>
-                                            <input type="text" class="form-control form-control-lg" id="email" name="email" placeholder="Enter email" required value="${entity.email}" onblur="validData(event)">
+                                            <input type="text" class="form-control form-control-lg" id="email" name="email" placeholder="Enter email" required value="${entity.email}" onblur="validData(event)" readonly>
                                             <span id="emailvalid"></span>
                                </div>
 
                      <div class="form-group col-md-6">
                        <label for="phone">Phone Number</label>
-                       <input type="tel" class="form-control form-control-lg" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${entity.phoneNumber}" onblur="validData(event)">
+                       <input type="tel" class="form-control form-control-lg" id="phone" name="phoneNo" placeholder="Enter phone number" required value="${entity.phoneNumber}" onblur="validData(event)" readonly>
                         <span id="phonevalid"></span>
                      </div>
 

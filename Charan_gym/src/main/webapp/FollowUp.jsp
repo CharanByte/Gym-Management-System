@@ -113,8 +113,8 @@
        height: 65px;
        z-index: 999;
        color: white;
-       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-       background-color: #0E0E0E;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  background-color: #1B1E23;
      }
 
      .logo-img {
@@ -203,6 +203,18 @@
        .nav {
          display: none;
        }
+       .table-name {
+                              position: sticky;
+                              top: 0;
+                              background-color: #f8f9fa;
+                              padding: 10px;
+                                               width:250%;
+                              z-index: 7;
+                              text-align: center;
+                              font-size: 1.25rem;
+                              font-weight: bold;
+                              border-bottom: 1px solid #dee2e6;
+                            }
      }
 
     .update{
@@ -218,8 +230,7 @@
   <!-- Centered Message -->
   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
     <h5 style="color: red;">${failure}</h5>
-    <p class="update" style="colr:red">${notupdated}</p>
-     <p class="update" style="color:green">${enquiryName}</p>
+
 
   </div>
 
@@ -231,7 +242,7 @@
 
     <!-- Navigation centered -->
     <nav class="nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -249,7 +260,7 @@
 
     <!-- Toggle Menu -->
     <nav class="mobile-nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
              <a href="enquiry">Enquiry</a>
              <a href="followup">FollowUp</a>
              <a href="register">Registration</a>
@@ -257,14 +268,17 @@
              <a href="addSlots">Slots</a>
              <a href="viewtrainer">View Trainer</a>
               <a href="AssignUsers">AssignUsers</a>
+               <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
                 <a href="index.jsp">Logout</a>
     </nav>
   </header>
 
 
   <div class="container">
+
     <!-- Search Row -->
     <div class="search-row">
+
       <form action="followupoperation" method="POST" style="display: flex; gap: 10px;">
          <select class="form-control" name="status" required >
          <option value="select">filter on status</option>
@@ -275,12 +289,16 @@
                                <option value="Interested">Interested</option>
                            </select>
         <button type="submit" class="btn btn-primary">Filter</button>
+
       </form>
+
     </div>
 
     <!-- Table Container -->
     <c:if test="${not empty list}">
      <div class="table-container">
+      <p class="update" style="colr:red;text-align: center;font-size:20px">${notupdated}</p>
+                <p class="update" style="color:green;text-align: center;font-size:20px">${enquiryName}</p>
        <h4 class="table-name">Enquiry Details</h4>
        <form action="updateStatus" method="POST">
          <table class="table table-striped table-bordered table-hover">

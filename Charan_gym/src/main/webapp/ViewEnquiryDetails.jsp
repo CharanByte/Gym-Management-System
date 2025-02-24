@@ -190,7 +190,7 @@
 
      <!-- Navigation centered -->
      <nav class="nav">
-       <a href="index.jsp">Home</a>
+       <a href="homePage">Home</a>
        <a href="enquiry">Enquiry</a>
        <a href="followup">FollowUp</a>
        <a href="register">Registration</a>
@@ -208,13 +208,16 @@
 
      <!-- Toggle Menu -->
      <nav class="mobile-nav">
-       <a href="index.jsp">Home</a>
+       <a href="homePage">Home</a>
               <a href="enquiry">Enquiry</a>
               <a href="followup">FollowUp</a>
               <a href="register">Registration</a>
               <a href="registrationUpdate">Update</a>
               <a href="addSlots">Slots</a>
-              <a href="viewtrainer">View Trainer</a>
+                          <a href="viewtrainer">View Trainer</a>
+                           <a href="AssignUsers">AssignUsers</a>
+                            <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
+                             <a href="index.jsp">Logout</a>
      </nav>
    </header>
 
@@ -231,9 +234,10 @@
          <th class="hide-column">Follow-up ID</th>
          <th class="hide-column">Enquiry ID</th>
           <th>Updated By</th>
-            <th>Follow-up Date</th>
+
           <th>Status</th>
           <th>Reason</th>
+          <th>Follow-up Date</th>
 
         </tr>
       </thead>
@@ -243,9 +247,10 @@
 
 
             <td>${followup.updatedBy}</td>
-            <td>${followup.updatedDate}</td>
+
             <td>${followup.customer_status}</th>
             <td>${followup.customer_reason}</th>
+            <td>${followup.updatedDate}</td>
 
           </tr>
         </c:forEach>

@@ -6,6 +6,7 @@ import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,6 +24,12 @@ public class AdminLoginController {
         System.out.println("created AdminLoginController");
     }
 
+    @GetMapping("/homePage")
+    public String onHome(HttpSession httpSession,Model model){
+        AdminEntity adminEntity=(AdminEntity)httpSession.getAttribute("adminEntity");
+        model.addAttribute("list",adminEntity);
+        return "AdminPage";
+    }
     @PostMapping("/adminLogin")
     public String onLigin(AdminLoginDTO adminLoginDTO, Model model,HttpSession httpSession){
         System.out.println(adminLoginDTO);

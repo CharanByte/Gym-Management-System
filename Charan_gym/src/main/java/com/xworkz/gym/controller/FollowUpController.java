@@ -62,7 +62,7 @@ public class FollowUpController {
     public String updateStatus(@RequestParam("enquiryId") int enquiryId, @RequestParam("enquiryName") String enquiryName, @RequestParam("status") String status, @RequestParam("reason") String reason, @RequestParam("email") String email, @RequestParam("phoneNo") String phoneNo, Model model, HttpSession session) {
         AdminEntity adminEntity = (AdminEntity) session.getAttribute("adminEntity");
         String adminName = adminEntity.getName();
-        int updatedValue = gymService.updateUserEnquiryDetails(enquiryId, status, reason, adminName);
+        int updatedValue = gymService.updateUserEnquiryDetails(enquiryId, status, reason, adminName,enquiryName);
         if (updatedValue > 0) {
             if (status.equals("Registration")) {
                 model.addAttribute("enquiryName", enquiryName);
@@ -72,15 +72,27 @@ public class FollowUpController {
                 model.addAttribute("gymTrainersEnums", gymTrainersEnums);
                 model.addAttribute("packagesEnumList", packagesEnumList);
 
-
+                model.addAttribute("list", adminEntity);
                 return "RegistrationForm";
             }
-
-            model.addAttribute("enquiryName", "Successfully Updated Details Of " + enquiryName);
-        } else {
-            model.addAttribute("notupdated", "Failed to Update Details of " + enquiryName);
         }
-        return "FollowUp";
+            List<EnquiryEntity> enquiryEntity = gymService.getAllEnquiryUsersDetails();
+
+
+            if (!enquiryEntity.isEmpty()) {
+                model.addAttribute("list", enquiryEntity);
+                model.addAttribute("listimg",adminEntity);
+            model.addAttribute("enquiryName", "Successfully Updated Details Of " + enquiryName);
+            return "FollowUp";
+        } else {
+
+                    model.addAttribute("list", enquiryEntity);
+                    model.addAttribute("listimg",adminEntity);
+
+            model.addAttribute("notupdated", "Failed to Update Details of " + enquiryName);
+            return "FollowUp";
+        }
+
     }
 
 
@@ -97,10 +109,12 @@ public class FollowUpController {
     public String onView(@RequestParam int id, Model model,HttpSession httpSession) {
         System.out.println(id);
         List<UpdatedEnquiryDetailsEntity> enquiryDetailsEntities = gymService.getAllViewDetails(id);
+        System.out.println(enquiryDetailsEntities);
         AdminEntity entity=(AdminEntity) httpSession.getAttribute("adminEntity");
         model.addAttribute("listimg",entity);
+        //model.addAttribute("name",name);
 
-        model.addAttribute("list", enquiryDetailsEntities);
+        model.addAttribute("list",enquiryDetailsEntities);
         return "ViewEnquiryDetails";
 
     }

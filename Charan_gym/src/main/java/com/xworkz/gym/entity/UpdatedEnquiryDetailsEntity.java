@@ -14,7 +14,7 @@ public class UpdatedEnquiryDetailsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id_up;
-
+    private String UserName;
     private String customer_status;
     private  String customer_reason;
     private int id;

@@ -3,6 +3,8 @@ package com.xworkz.gym.controller;
 import com.xworkz.gym.constants.ProfileImagePath;
 import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.RegistrationEntity;
+import com.xworkz.gym.entity.UserExerciseAndDietEntity;
+import com.xworkz.gym.entity.UserUpdatedExerciseAndDietEntity;
 import com.xworkz.gym.entity.UsersAssignedToTrainerEntity;
 import com.xworkz.gym.service.GymService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,25 @@ public class UserLoginController {
 
         return "UserLoginPage";
     }
+
+    @GetMapping("/UserHomePage")
+    public String onHome(Model model,HttpSession httpSession){
+        RegistrationEntity entity=(RegistrationEntity) httpSession.getAttribute("userRegEntity");
+        model.addAttribute("list",entity);
+        return "UserHomePage";
+    }
+    @GetMapping("/exerciseDiet")
+    public String onExceriseAndDiet(Model model,HttpSession httpSession){
+        RegistrationEntity entity=(RegistrationEntity) httpSession.getAttribute("userRegEntity");
+        model.addAttribute("list",entity);
+        List<UserUpdatedExerciseAndDietEntity> userExerciseAndDietEntities =gymService.getAlluserExerciseAndDietEntitiesById(entity.getId());
+        System.out.println(userExerciseAndDietEntities);
+        List<UserExerciseAndDietEntity> userMonthlyImages =gymService.getuserMonthlyImages(entity.getId());
+        model.addAttribute("viewUserExercise",userExerciseAndDietEntities);
+        model.addAttribute("monthlyImages",userMonthlyImages);
+
+        return "ViewUserExerciseAndDiet";
+    }
     @PostMapping("/userLogin")
     public String onUserLogin(String useremail, String password, Model model, HttpSession httpSession){
         RegistrationEntity registrationEntity=gymService.getAllRegistredUsersDetailsByEmail(useremail);
@@ -45,7 +66,7 @@ public class UserLoginController {
            System.out.println("login Successfull");
 
            model.addAttribute("list",registrationEntity);
-           return "UserPage";
+           return "UserHomePage";
        }
        if(valid==3){
            System.out.println("wrong password");
@@ -107,7 +128,7 @@ public class UserLoginController {
         String filePath;
 
         if (multipartFile.isEmpty()) {
-            return "UpdateUserDetails.jsp";
+            return "UpdateUserDetails";
         } else {
             System.out.println(multipartFile);
             System.out.println(multipartFile.getOriginalFilename());
@@ -125,7 +146,10 @@ public class UserLoginController {
         return "UserPage";
     }
 
-
-
-
+    @GetMapping("/UserProfile")
+    public String onUserProfile(HttpSession httpSession,Model model) {
+        RegistrationEntity registrationEntity = (RegistrationEntity) httpSession.getAttribute("userRegEntity");
+        model.addAttribute("list",registrationEntity);
+        return "UserPage";
+    }
 }

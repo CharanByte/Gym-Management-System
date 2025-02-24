@@ -177,7 +177,7 @@
 
     <!-- Navigation centered -->
     <nav class="nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -196,7 +196,7 @@
 
     <!-- Toggle Menu -->
     <nav class="mobile-nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -204,6 +204,7 @@
        <a href="addSlots">Slots</a>
               <a href="viewtrainer">View Trainer</a>
                 <a href="AssignUsers">AssignUsers</a>
+                <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
                 <a href="index.jsp">Logout</a>
 
     </nav>

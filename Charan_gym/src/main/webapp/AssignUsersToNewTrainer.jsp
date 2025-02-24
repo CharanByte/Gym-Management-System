@@ -29,7 +29,7 @@
              position: sticky;
              top: 0;
             width:95.3%;
-             height: 60px;
+             height: 55px;
              z-index: 999;
              color: white;
              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -246,8 +246,44 @@
 </head>
 <body>
 <header class="headers">
-    <!-- Your existing header content -->
-</header>
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=277,h=270,fit=crop/AwvJoE0xx0IZMJ8K/ft_power_gym_logo_file_png-01-Yg2apa87NxI6eQXX.png" alt="Logo" class="logo-img">
+    </div>
+
+    <!-- Navigation centered -->
+    <nav class="nav">
+      <a href="homePage">Home</a>
+      <a href="enquiry">Enquiry</a>
+      <a href="followup">FollowUp</a>
+      <a href="register">Registration</a>
+
+    </nav>
+
+    <!-- Profile Image + Toggle Menu (Right Side) -->
+    <div style="display: flex; align-items: center;">
+      <img src="photo/${listimg.image}" alt="Profile Picture" class="profile-img">
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- Toggle Menu -->
+    <nav class="mobile-nav">
+      <a href="homePage">Home</a>
+      <a href="enquiry">Enquiry</a>
+      <a href="followup">FollowUp</a>
+      <a href="register">Registration</a>
+      <a href="registrationUpdate">Update</a>
+       <a href="addSlots">Slots</a>
+              <a href="viewtrainer">View Trainer</a>
+                <a href="AssignUsers">AssignUsers</a>
+                 <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
+                  <a href="index.jsp">Logout</a>
+    </nav>
+  </header>
 <div class="container">
 
     <div class="header">Assign Users to Trainer</div>

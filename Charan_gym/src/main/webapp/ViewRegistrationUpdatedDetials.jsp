@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Follow-up Details</title>
+  <title>Payment Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
     body {
@@ -185,6 +185,44 @@
             border-radius: 50%;
 
           }
+          /* Media query for mobile devices */
+              @media (max-width: 768px) {
+                .container {
+                  padding: 10px;
+                  margin: 10px;
+
+                }
+                table {
+                  font-size: 14px;
+                }
+                th, td {
+                  padding: 8px;
+                }
+                h3 {
+                  font-size: 1.5rem;
+                }
+              }
+                /* Adjust layout for small screens */
+                  @media (max-width: 768px) {
+                    .nav {
+                      display: none;
+                    }
+                    .header {
+                      padding: 10px 15px;
+
+                    }
+                    .logo-img {
+                      max-height: 40px;
+                    }
+                    .profile-img {
+                      max-height: 30px;
+                      width: 30px;
+                    }
+                    .menu-toggle div {
+                      width: 25px;
+                      height: 2px;
+                    }
+                  }
   </style>
 </head>
 <body>
@@ -197,7 +235,7 @@
 
      <!-- Navigation centered -->
      <nav class="nav">
-       <a href="index.jsp">Home</a>
+       <a href="homePage">Home</a>
        <a href="enquiry">Enquiry</a>
        <a href="followup">FollowUp</a>
        <a href="register">Registration</a>
@@ -215,13 +253,17 @@
 
      <!-- Toggle Menu -->
      <nav class="mobile-nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
                <a href="enquiry">Enquiry</a>
                <a href="followup">FollowUp</a>
                <a href="register">Registration</a>
                <a href="registrationUpdate">Update</a>
                <a href="addSlots">Slots</a>
-               <a href="viewtrainer">View Trainer</a>
+                           <a href="viewtrainer">View Trainer</a>
+                            <a href="AssignUsers">AssignUsers</a>
+                             <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
+
+                              <a href="index.jsp">Logout</a>
      </nav>
    </header>
 
@@ -236,12 +278,13 @@
         <tr>
 
           <th>Updated By</th>
-            <th>Paid Date</th>
+
             <th>Package</th>
-             <th>Trainer Name</th>
+             <th>Trainer</th>
 
           <th>Paid Amount</th>
           <th>Balance Amount</th>
+           <th>Paid Date</th>
 
         </tr>
       </thead>
@@ -251,13 +294,13 @@
 
 
             <td>${followup.updated_by}</td>
-            <td>${followup.updated_date}</td>
+
             <td>${followup.updated_packagel}</th>
             <td>${followup.updated_trainer}</th>
 
                         <td>${followup.amount_paid}</th>
                         <td>${followup.amount_balance}</th>
-
+                          <td>${followup.updated_date}</td>
           </tr>
         </c:forEach>
       </tbody>

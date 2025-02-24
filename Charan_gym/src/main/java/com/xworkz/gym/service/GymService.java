@@ -1,9 +1,6 @@
 package com.xworkz.gym.service;
 
-import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.dto.EnquiryDTO;
-import com.xworkz.gym.dto.RegistrationDTO;
-import com.xworkz.gym.dto.TrainerDTO;
+import com.xworkz.gym.dto.*;
 import com.xworkz.gym.entity.*;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,7 @@ public interface GymService {
 
     Long getCountOfAdminUserName(String email);
 
-    int updateUserEnquiryDetails(int enquiryId, String status, String reason,String adminName);
+    int updateUserEnquiryDetails(int enquiryId, String status, String reason, String adminName, String enquiryName);
 
     List<EnquiryEntity> getAllUserDetailsByStatus(String status);
 
@@ -56,9 +53,9 @@ public interface GymService {
 
     Long getCountOfEmail(String email);
 
-    Long getCountOfRegEmail(String email);
+    long getCountOfRegEmail(String email);
 
-    void saveTrainerDetails(TrainerDTO trainerDTO);
+    int saveTrainerDetails(TrainerDTO trainerDTO);
 
     void saveslots(String startTime, String endTime, String duration);
 
@@ -77,4 +74,10 @@ public interface GymService {
     List<UsersAssignedToTrainerEntity> getUsersAssignedToTrainerByTrainerName(String trainerName);
 
     int deleteUserAssignedToTrainer(String trainerName);
+
+    void saveUserDietAndExercise(int id, String filePath, UserExerciseAndDietDTO userExerciseAndDietDTO);
+
+    List<UserUpdatedExerciseAndDietEntity> getAlluserExerciseAndDietEntitiesById(int id);
+
+    List<UserExerciseAndDietEntity> getuserMonthlyImages(int id);
 }

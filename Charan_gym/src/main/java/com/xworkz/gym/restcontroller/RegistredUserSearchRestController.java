@@ -21,7 +21,7 @@ public class RegistredUserSearchRestController {
 
         if(registrationEntityList.isEmpty()){
 
-            return "Please enter valid Name and Phone Number";
+            return "No User Registred With this Name and Phone Number";
     }
         return "";
     }
@@ -30,11 +30,11 @@ public class RegistredUserSearchRestController {
     public String getName(@PathVariable String email) {
         System.out.println(email);
 
-        Long count = gymService.getCountOfRegEmail(email);
-
+        long count = gymService.getCountOfRegEmail(email);
+        System.out.println(count);
         if (count > 0) {
             System.out.println("enquiry Email exists");
-            return "email already exists";
+            return "Email already exists";
         } else {
             System.out.println("enquiry Email doesn't exists");
             return "";

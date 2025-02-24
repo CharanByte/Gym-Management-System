@@ -35,6 +35,7 @@
             background: #fff;
             padding: 25px;
             border-radius: 8px;
+            margin-bottom:20px;
         }
 
         .container header {
@@ -297,6 +298,10 @@
                 row-gap: 15px;
             }
         }
+
+        .invalidDetails{
+        color:red
+        }
     </style>
 </head>
 <body>
@@ -307,7 +312,7 @@
     </div>
 
     <nav class="nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -323,7 +328,7 @@
     </div>
 
     <nav class="mobile-nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -331,6 +336,7 @@
         <a href="addSlots">Slots</a>
         <a href="viewtrainer">View Trainer</a>
         <a href="AssignUsers">AssignUsers</a>
+         <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
           <a href="index.jsp">Logout</a>
     </nav>
 </header>
@@ -338,6 +344,7 @@
 <section class="container">
     <header>Enquiry Form</header>
     <form action="enquiry" class="form" method="post">
+    <p class="invalidDetails">${invalidDetails}</p>
         <div class="input-box">
             <label>Full Name</label>
             <input type="text" placeholder="Enter full name" name="name" required onblur="validData(event)" />
@@ -385,7 +392,9 @@
             <input type="text" placeholder="Enter street address" name="address" required />
             <div class="column">
                 <div class="input-box">
-                  <input type="text" id="status" name="status" value="Enquiry" disabled style="background-color:white"/>
+                  <select required>
+                  <option>Select status</option>
+                  <option>Enquiry</option>
 
                     </select>
                 </div>
@@ -431,28 +440,28 @@
             document.getElementById("nameValid").innerHTML="<span></span>";
         }
         else if(name==="name" && (value.length<2 || !regex.test(value) || value==="" )){
-            document.getElementById("nameValid").innerHTML="<span style='color:red'}> name invalid</span>";
+            document.getElementById("nameValid").innerHTML="<span style='color:red'}> Name Invalid</span>";
         }
 
         if(name==="email" && (regex1.test(value))){
             document.getElementById("emailvalid").innerHTML="<span></span>";
         }
         else if(name==="email" && !regex1.test(value)){
-            document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email invalid</span>";
+            document.getElementById("emailvalid").innerHTML="<span style='color:red'}> Email Invalid</span>";
         }
 
         if(name==="phoneNumber" && value.length==10 && regex2.test(value)){
             document.getElementById("phonevalid").innerHTML="<span></span>";
         }
         else if(name==="phoneNumber" && (value.length!=10 || !regex2.test(value))){
-            document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number invalid</span>";
+            document.getElementById("phonevalid").innerHTML="<span style='color:red'}> Phone Number Invalid</span>";
         }
 
         if(name==="age" && value>12 && value<50){
             document.getElementById("agevalid").innerHTML="<span></span>";
         }
         else if(name==="age" && (value<12 || value>50)){
-            document.getElementById("agevalid").innerHTML="<span style='color:red'}>age must be Inbetween 12 to 50</span>";
+            document.getElementById("agevalid").innerHTML="<span style='color:red'}>Age must be Inbetween 12 to 60</span>";
         }
     }
     </script>

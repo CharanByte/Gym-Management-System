@@ -52,8 +52,8 @@ public class RegistrationController {
             return "DisplayRegistredDetails";
         }
         else {
-            model.addAttribute("notsaved","Please Fill Valid Details");
-            return "DisplayRegistredDetails";
+            model.addAttribute("notsaved","Not Submitted Please Fill Valid Details");
+            return "RegistrationForm";
         }
 
     }

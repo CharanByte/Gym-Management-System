@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Form</title>
+  <title>Update Trainer Details</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -25,12 +25,14 @@
               padding: 15px 30px;
               position: sticky;
               top: 0;
+
               width: 100%;
               height: 65px;
               z-index: 999;
               color: white;
            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
                  background-color: #1B1E23;
+                 margin-bottom:40px;
             }
 
             .logo-img {
@@ -114,18 +116,12 @@
               display: flex;
             }
 
-            /* Adjust layout for small screens */
-            @media (max-width: 768px) {
-              .nav {
-                display: none;
-              }
-            }
 
     .form-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: auto;
     }
     .form-box {
       background-color: rgba(57, 55, 55, 0.9);
@@ -163,6 +159,30 @@
     .btn-submit:hover {
       background-color: #0056b3;
     }
+    @media (max-width: 768px) {
+          .nav {
+            display: none;
+          }
+          .form-box {
+            width: 90%;
+          }
+        }
+        @media (max-width: 480px) {
+          .header {
+            padding: 10px 20px;
+            margin-bottom:20%;
+          }
+          .menu-toggle div {
+            width: 25px;
+            height: 2.5px;
+          }
+           .form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: auto;
+              }
+        }
   </style>
 </head>
 <body>
@@ -174,7 +194,7 @@
 
       <!-- Navigation centered -->
       <nav class="nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -192,7 +212,7 @@
 
       <!-- Toggle Menu -->
       <nav class="mobile-nav">
-        <a href="index.jsp">Home</a>
+        <a href="homePage">Home</a>
         <a href="enquiry">Enquiry</a>
         <a href="followup">FollowUp</a>
         <a href="register">Registration</a>
@@ -200,6 +220,7 @@
         <a href="addSlots">Slots</a>
         <a href="viewtrainer">View Trainer</a>
          <a href="AssignUsers">AssignUsers</a>
+          <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
            <a href="index.jsp">Logout</a>
       </nav>
     </header>
@@ -207,16 +228,13 @@
   <div class="container form-container">
     <div class="form-box">
 
-      <h2 class="text-center" style="color: white;padding-bottom:30px;">Update Trainer Details</h2>
+      <h2 class="text-center" style="color: white;padding-bottom:30px;">Add Trainer</h2>
       <form action="updateTrainer" method="post">
+      <p style="color:red; text-align:center">${error}</p>
         <div class="form-group">
-          <label for="trainer">Select Trainer</label>
-          <select class="form-control" name="trainer" required>
-          <option value="">Select Trainer</option>
-            <option value="RAJU">RAJU</option>
-            <option value="NANDAN">NANDAN</option>
-            <option value="LIKI">LIKI</option>
-          </select>
+          <label for="trainer">Trainer Name</label>
+          <input type="text" class="form-control" name="trainer" placeholder="Enter trainer Name"required onblur="validData(event)" >
+            <span id="nameValid"></span>
         </div>
         <div class="form-group">
           <label for="phone">Phone Number</label>
@@ -247,7 +265,17 @@ function toggleMenu() {
 
      const validData=(event)=>{
       const {name,value}=event.target;
+       const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
       var regex2 = /^[0-9]+$/;
+
+      if(name==="trainer" && value.length>=2 && regex.test(value) && value!==""){
+              console.log("valid name");
+            document.getElementById("nameValid").innerHTML="<span></span>"
+          }
+          else if(name==="trainer" && (value.length<2 || !regex.test(value) || value==="" )){
+          console.log("name not valid");
+          document.getElementById("nameValid").innerHTML="<span style='color:red'}> Trainer Name Invalid</span>"
+          }
        if(name==="phoneNo" && value.length==10 && regex2.test(value)){
                   document.getElementById("phonevalid").innerHTML="<span></span>";
               }

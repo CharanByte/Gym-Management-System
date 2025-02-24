@@ -1,7 +1,6 @@
 package com.xworkz.gym.repository;
 
 import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.dto.RegistrationDTO;
 import com.xworkz.gym.entity.*;
 import org.springframework.stereotype.Repository;
 
@@ -59,7 +58,7 @@ public interface GymRepository {
 
     Long getCountOfEmail(String email);
 
-    Long getCountOfRegEmail(String email);
+    long getCountOfRegEmail(String email);
 
     void saveTrainerDetails(TrainerEntity trainerEntity);
 
@@ -80,4 +79,12 @@ public interface GymRepository {
     List<UsersAssignedToTrainerEntity> getUsersAssignedToTrainerByTrainerName(String trainerName);
 
     int deleteUserAssignedToTrainer(String trainerName);
+
+    void saveUserDietAndExercise(UserExerciseAndDietEntity entity);
+
+    List<UserUpdatedExerciseAndDietEntity> getAlluserExerciseAndDietEntitiesById(int id);
+
+    void saveUserUpdatedDietAndExercise(UserUpdatedExerciseAndDietEntity entity);
+
+    List<UserExerciseAndDietEntity> getuserMonthlyImages(int id);
 }

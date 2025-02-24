@@ -29,7 +29,7 @@
              position: sticky;
              top: 0;
             width:95.3%;
-             height: 60px;
+             height: 50px;
              z-index: 999;
              color: white;
              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -213,6 +213,111 @@
             width: 100%; /* Ensure it takes full width */
         }
 
+         .btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
+         .btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+
+/* Mobile-first approach */
+@media (max-width: 768px) {
+
+    body{
+    height:80%;
+    }
+
+    .headers {
+        padding: 10px 15px;
+        width: 93%;
+    }
+
+    .logo-img {
+        max-height: 40px;
+    }
+
+    .nav {
+        display: none; /* Hide desktop nav on mobile */
+    }
+
+    .mobile-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(14, 14, 14, 0.9);
+        width: 100%;
+        padding: 15px 0;
+        align-items: center;
+    }
+
+    .mobile-nav.show {
+        display: flex;
+    }
+
+    .container {
+        width: 85%;
+        padding: 15px;
+        margin: 30% 20px; /* Adjust for navbar */
+    }
+
+    .header {
+        font-size: 18px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    select, input[type="text"], button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .user-list div {
+        font-size: 14px;
+    }
+
+    #autocomplete-list {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    #autocomplete-list div {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .btn-grad {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 769px) {
+    .container {
+        width: 400px;
+    }
+}
     </style>
 </head>
 <body>
@@ -224,7 +329,7 @@
 
     <!-- Navigation centered -->
     <nav class="nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -243,7 +348,7 @@
 
     <!-- Toggle Menu -->
     <nav class="mobile-nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -251,6 +356,7 @@
        <a href="addSlots">Slots</a>
               <a href="viewtrainer">View Trainer</a>
                 <a href="AssignUsers">AssignUsers</a>
+                 <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
                   <a href="index.jsp">Logout</a>
     </nav>
   </header>
@@ -276,7 +382,7 @@
             <!-- Hidden input to store selected user IDs -->
             <input type="hidden" id="selectedUserIds" name="selectedUserName">
 
-            <button type="submit">Assign Users</button>
+            <button class="btn-grad"type="submit">Assign Users</button>
         </form>
         <div class="result" id="result"></div>
     </div>

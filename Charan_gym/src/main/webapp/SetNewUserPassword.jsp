@@ -97,19 +97,21 @@
         <form action="setuserPassword" method="post">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="${userEmail}">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="${userEmail}" readonly>
             <span id="nameValid"></span>
           </div>
           <div class="form-group">
             <label for="password">Enter New Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+            <input type="password" class="form-control" id="newpassword" name="password" placeholder="Enter password" required oninput="getName(event)">
             <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePassword()"></i> <!-- Font Awesome icon -->
+          <span style="color:red" id="passwordValid"></span>
           </div>
 
           <div class="form-group">
             <label for="password">Re-enter New Password</label>
-            <input type="password" class="form-control" id="password" name="confirmpassword" placeholder="Enter password" required>
-            <i class="fas fa-eye password-toggle" id="toggleconPassword" onclick="togglePassword()"></i> <!-- Font Awesome icon -->
+            <input type="password" class="form-control" id="password" name="confirmpassword" placeholder="Enter confirm password" required  oninput="getName(event)">
+            <i class="fas fa-eye password-toggle" id="toggleconPassword" onclick="toggleConPassword1()"></i> <!-- Font Awesome icon -->
+          <span style="color:red" id="conpasswordValid"></span>
           </div>
           <button type="submit" class="btn btn-primary btn-center">Reset</button>
         </form>
@@ -124,7 +126,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     function togglePassword() {
-      const passwordField = document.getElementById('password');
+      const passwordField = document.getElementById('newpassword');
       const toggleIcon = document.getElementById('togglePassword');
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
@@ -137,9 +139,9 @@
       }
 
     }
-     function toggleConPassword() {
+     function toggleConPassword1() {
           const passwordField = document.getElementById('password');
-          const toggleIcon = document.getElementById('togglePassword');
+          const toggleIcon = document.getElementById('toggleconPassword');
           if (passwordField.type === 'password') {
             passwordField.type = 'text';
             toggleIcon.classList.remove('fa-eye');
@@ -165,6 +167,34 @@
                   document.getElementById("nameValid").innerHTML = this.responseText;
               }
               }
+
+      }
+      var getName=(event)=>{
+      var {name,value}=event.target;
+           const passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+
+      console.log(name);
+      console.log(value);
+
+        if(name==="password" && passwordRegex.test(value) && value!==""){
+                  console.log("valid password");
+                document.getElementById("passwordValid").innerHTML="<span></span>"
+              }
+              else if(name==="password" && (!passwordRegex.test(value) || value==="" )){
+              console.log("password not valid");
+              document.getElementById("passwordValid").innerHTML="<span style='color:red'}>Password must contain [A-Z,a-z,0-9,special char]</span>"
+              }
+
+      if(name==="confirmpassword" && value===document.getElementById("newpassword").value){
+      console.log("new password and confirm password matching");
+      document.getElementById("conpasswordValid").innerHTML="<span style='color:red'></span>"
+
+      }
+      else if(name==="confirmpassword" && value!==document.getElementById("newpassword").value){
+      document.getElementById("conpasswordValid").innerHTML="<span style='color:red'>Password and Confirm password must be same</span>"
+      console.log("new password and confirm password notMatching");
+
+      }
 
       }
   </script>

@@ -1,9 +1,6 @@
 package com.xworkz.gym.service;
 
-import com.xworkz.gym.dto.AdminLoginDTO;
-import com.xworkz.gym.dto.EnquiryDTO;
-import com.xworkz.gym.dto.RegistrationDTO;
-import com.xworkz.gym.dto.TrainerDTO;
+import com.xworkz.gym.dto.*;
 import com.xworkz.gym.entity.*;
 import com.xworkz.gym.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,9 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 @Service
 public class GymServiceImp implements GymService{
@@ -90,7 +87,7 @@ public class GymServiceImp implements GymService{
             System.out.println("phoneNo Invalid");
         }
         int age=enquiryDTO.getAge();
-        if(age>=12){
+        if(age>=12 && age<=60){
             System.out.println("age valid");
         }
         else {
@@ -183,7 +180,7 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public int updateUserEnquiryDetails(int enquiryId, String status, String reason,String adminName) {
+    public int updateUserEnquiryDetails(int enquiryId, String status, String reason, String adminName, String enquiryName) {
 
         LocalDateTime  localDateTime=LocalDateTime.now();
         int updatedValue=gymRepository.updateUserEnquiryDetails(enquiryId,status,reason,adminName,localDateTime);
@@ -193,6 +190,7 @@ public class GymServiceImp implements GymService{
         updatedEnquiryDetails.setCustomer_reason(reason);
         updatedEnquiryDetails.setUpdatedBy(adminName);
         updatedEnquiryDetails.setUpdatedDate(localDateTime);
+        updatedEnquiryDetails.setUserName(enquiryName);
         gymRepository.saveUserUpdatedEnquiryDetails(updatedEnquiryDetails);
         return updatedValue;
     }
@@ -203,6 +201,25 @@ public class GymServiceImp implements GymService{
         return gymRepository.getAllUserDetailsByStatus(status);
     }
 
+    public String passwordGenerate() {
+        String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String Small_chars = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+
+
+        String values = Capital_chars + Small_chars + numbers;
+
+        Random rndm = new Random();
+
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < 6; i++) {
+
+            password.append(values.charAt(rndm.nextInt(values.length())));
+
+        }
+        return password.toString();
+    }
     @Override
     public boolean validateAndSaveRegistredDetails(RegistrationDTO registrationDTO,String adminName) {
         boolean valid=true;
@@ -230,22 +247,17 @@ public class GymServiceImp implements GymService{
             valid=false;
             System.out.println("phoneNo Invalid");
         }
-        String password = registrationDTO.getPassword();
-        if (password != null && password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")) {
-            System.out.println("Password is valid");
-        } else {
-            valid = false;
-            System.out.println("Password is invalid");
-        }
+
 
 
 
         if(valid) {
 
+            String generatedPassword=passwordGenerate();
             RegistrationEntity registrationEntity = new RegistrationEntity();
             registrationEntity.setName(registrationDTO.getName());
             registrationEntity.setEmail(registrationDTO.getEmail());
-            registrationEntity.setPassword(registrationDTO.getPassword());
+            registrationEntity.setPassword(generatedPassword);
             registrationEntity.setPhoneNumber(registrationDTO.getPhoneNo());
             registrationEntity.setGympackage(registrationDTO.getGympackage());
             registrationEntity.setTrainer(registrationDTO.getTrainer());
@@ -473,20 +485,40 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public Long getCountOfRegEmail(String email) {
+    public long getCountOfRegEmail(String email) {
         return gymRepository.getCountOfRegEmail(email);
     }
 
     @Override
-    public void saveTrainerDetails(TrainerDTO trainerDTO) {
+    public int saveTrainerDetails(TrainerDTO trainerDTO) {
+        boolean valid=true;
+        String name=trainerDTO.getTrainer();
+        if(name!=null && name.length()>1 && name.length()<30){
+            System.out.println("name is valid");
+        }
+        else {
+            valid=false;
+            System.out.println("name is in valid");
+        }
+        String phoneNo=String.valueOf(trainerDTO.getPhoneNo());
+        if(phoneNo!=null && phoneNo.length()==10){
+            System.out.println("phoneNo valid");
+        }
+        else {
+            valid=false;
+            System.out.println("phoneNo Invalid");
+        }
+        if(valid) {
+            TrainerEntity trainerEntity = new TrainerEntity();
+            trainerEntity.setTrainerName(trainerDTO.getTrainer());
+            trainerEntity.setPhoneNo(trainerDTO.getPhoneNo());
+            trainerEntity.setSlotTime(trainerDTO.getTrainerDropdown());
+            System.out.println(trainerEntity);
 
-        TrainerEntity trainerEntity=new TrainerEntity();
-        trainerEntity.setTrainerName(trainerDTO.getTrainer());
-        trainerEntity.setPhoneNo(trainerDTO.getPhoneNo());
-        trainerEntity.setSlotTime(trainerDTO.getTrainerDropdown());
-        System.out.println(trainerEntity);
-
-        gymRepository.saveTrainerDetails(trainerEntity);
+            gymRepository.saveTrainerDetails(trainerEntity);
+            return 1;
+        }
+        return 0;
     }
 
     @Override
@@ -541,6 +573,46 @@ public class GymServiceImp implements GymService{
     @Override
     public int deleteUserAssignedToTrainer(String trainerName) {
         return gymRepository.deleteUserAssignedToTrainer(trainerName);
+    }
+
+    @Override
+    public void saveUserDietAndExercise(int id, String filePath, UserExerciseAndDietDTO userExerciseAndDietDTO) {
+        UserExerciseAndDietEntity entity=new UserExerciseAndDietEntity();
+        entity.setId(id);
+        entity.setMonday(userExerciseAndDietDTO.getMonday());
+        entity.setTuesday(userExerciseAndDietDTO.getTuesday());
+        entity.setWednesday(userExerciseAndDietDTO.getWednesday());
+        entity.setThursday(userExerciseAndDietDTO.getThursday());
+        entity.setFriday(userExerciseAndDietDTO.getFriday());
+        entity.setSaturday(userExerciseAndDietDTO.getSaturday());
+        entity.setSunday(userExerciseAndDietDTO.getSunday());
+        entity.setMonth(userExerciseAndDietDTO.getMonth());
+        entity.setDietPlan(userExerciseAndDietDTO.getDietPlan());
+        entity.setUsermonthlyImage(filePath);
+        gymRepository.saveUserDietAndExercise(entity);
+        UserUpdatedExerciseAndDietEntity userUpdatedExerciseAndDietEntity=new UserUpdatedExerciseAndDietEntity();
+        userUpdatedExerciseAndDietEntity.setId(id);
+                userUpdatedExerciseAndDietEntity.setMonday(userExerciseAndDietDTO.getMonday());
+        userUpdatedExerciseAndDietEntity.setTuesday(userExerciseAndDietDTO.getTuesday());
+                userUpdatedExerciseAndDietEntity.setWednesday(userExerciseAndDietDTO.getWednesday());
+        userUpdatedExerciseAndDietEntity.setThursday(userExerciseAndDietDTO.getThursday());
+                userUpdatedExerciseAndDietEntity.setFriday(userExerciseAndDietDTO.getFriday());
+        userUpdatedExerciseAndDietEntity.setSaturday(userExerciseAndDietDTO.getSaturday());
+                userUpdatedExerciseAndDietEntity.setSunday(userExerciseAndDietDTO.getSunday());
+        userUpdatedExerciseAndDietEntity.setMonth(userExerciseAndDietDTO.getMonth());
+        userUpdatedExerciseAndDietEntity.setDietPlan(userExerciseAndDietDTO.getDietPlan());
+                userUpdatedExerciseAndDietEntity.setUsermonthlyImage(filePath);
+        gymRepository.saveUserUpdatedDietAndExercise(userUpdatedExerciseAndDietEntity);
+    }
+
+    @Override
+    public List<UserUpdatedExerciseAndDietEntity> getAlluserExerciseAndDietEntitiesById(int id) {
+        return gymRepository.getAlluserExerciseAndDietEntitiesById(id);
+    }
+
+    @Override
+    public List<UserExerciseAndDietEntity> getuserMonthlyImages(int id) {
+        return gymRepository.getuserMonthlyImages(id);
     }
 
 }

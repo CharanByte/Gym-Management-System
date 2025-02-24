@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Follow-up</title>
+  <title>Registred Users</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <style>
   body {
@@ -130,7 +130,7 @@
         z-index: 999;
         color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        background-color: #0E0E0E;
+                    background-color: #1B1E23;
       }
 
       .logo-img {
@@ -254,7 +254,7 @@
 
     <!-- Navigation centered -->
     <nav class="nav">
-      <a href="index.jsp">Home</a>
+      <a href="homePage">Home</a>
       <a href="enquiry">Enquiry</a>
       <a href="followup">FollowUp</a>
       <a href="register">Registration</a>
@@ -272,7 +272,7 @@
 
     <!-- Toggle Menu -->
     <nav class="mobile-nav">
-     <a href="index.jsp">Home</a>
+     <a href="homePage">Home</a>
             <a href="enquiry">Enquiry</a>
             <a href="followup">FollowUp</a>
             <a href="register">Registration</a>
@@ -280,6 +280,7 @@
             <a href="addSlots">Slots</a>
             <a href="viewtrainer">View Trainer</a>
              <a href="AssignUsers">AssignUsers</a>
+              <a href="UpdateExerciseAndDiet">UpdateUserExerciseAndDiet</a>
                <a href="index.jsp">Logout</a>
     </nav>
   </header>
@@ -311,7 +312,7 @@
     <!-- Table Container -->
     <c:if test="${not empty list}">
      <div class="table-container">
-       <h4 class="table-name">Registred User Details</h4>
+       <h4 class="table-name">User Details</h4>
        <form action="updatebutton" method="post">
          <table class="table table-striped table-bordered table-hover">
            <colgroup>
@@ -401,22 +402,37 @@
      const onField = () => {
          var searchName = document.getElementById("searchName").value;
          var searchPhoneNo = document.getElementById("searchPhoneNo").value;
+         var nameValidDiv = document.getElementById("nameValid");
 
+         // Regular expressions for validation
+         var namePattern = /^[A-Za-z\s]+$/; // Allows only alphabets and spaces
+         var phonePattern = /^[0-9]*$/; // Allows only digits
+
+         // Name validation (only alphabets and spaces)
+         if (searchName !== "" && !namePattern.test(searchName)) {
+             nameValidDiv.innerHTML = "Please enter only alphabets for the name.";
+             return; // Stop execution if invalid input is detected
+         }
+
+         // Phone number validation (only digits)
+         if (searchPhoneNo !== "" && !phonePattern.test(searchPhoneNo)) {
+             nameValidDiv.innerHTML = "Please enter only numbers for the phone number.";
+             return; // Stop execution if invalid input is detected
+         }
+
+         // Clear error message if inputs are valid
+         nameValidDiv.innerHTML = "";
+
+         // Proceed with AJAX call if both fields are valid
          if (searchName !== "" && searchPhoneNo !== "") {
              var xhttp = new XMLHttpRequest();
-
-             // Send both values as query parameters in the URL
              var url = "http://localhost:8080/Charan_gym/search?searchName=" + encodeURIComponent(searchName) + "&searchPhoneNo=" + encodeURIComponent(searchPhoneNo);
-
              xhttp.open("GET", url, true);
              xhttp.send();
 
-             xhttp.onload = function() {
-                 // Update the DOM with the server's response
-                 document.getElementById("nameValid").innerHTML = this.responseText;
+             xhttp.onload = function () {
+                 nameValidDiv.innerHTML = this.responseText;
              };
-         } else {
-
          }
      };
 

@@ -38,6 +38,8 @@ public class EnquiryController {
            model.addAttribute("enquiryDTO",enquiryDTO);
            return "DisplayEnquiryDetails";
         }
+        model.addAttribute("invalidDetails","Not Submitted Please Enter Valid Details");
+       model.addAttribute("list",adminEntity);
         return "Enquiry";
     }
 

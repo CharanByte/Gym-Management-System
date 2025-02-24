@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NamedQuery;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 @Repository
 public class GymRepositoryImp implements GymRepository{
@@ -517,11 +515,11 @@ public class GymRepositoryImp implements GymRepository{
     }
 
     @Override
-    public Long getCountOfRegEmail(String email) {
+    public long getCountOfRegEmail(String email) {
 
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        Object object=em.createNamedQuery("getCountOfRegEmail").setParameter("getEmail",email).getSingleResult();
+        Object object=em.createNamedQuery("getCountOfRegistredUserEmail").setParameter("getEmail",email).getSingleResult();
         Long aLong=(Long) object;
         try {
             et.begin();
@@ -733,5 +731,84 @@ public class GymRepositoryImp implements GymRepository{
         return val;
     }
 
+    @Override
+    public void saveUserDietAndExercise(UserExerciseAndDietEntity entity) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.persist(entity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+    }
+
+
+
+    @Override
+    public void saveUserUpdatedDietAndExercise(UserUpdatedExerciseAndDietEntity entity) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+
+        try {
+            et.begin();
+            em.merge(entity);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+    }
+
+
+    @Override
+    public List<UserUpdatedExerciseAndDietEntity> getAlluserExerciseAndDietEntitiesById(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+       List<UserUpdatedExerciseAndDietEntity> list= em.createNamedQuery("getAlluserExerciseAndDietEntitiesById",UserUpdatedExerciseAndDietEntity.class).setParameter("getId",id).getResultList();
+
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+
+        System.out.println(list);
+        return list;
+    }
+
+
+    @Override
+    public List<UserExerciseAndDietEntity> getuserMonthlyImages(int id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        List<UserExerciseAndDietEntity> list= em.createNamedQuery("getuserMonthlyImages",UserExerciseAndDietEntity.class).setParameter("getId",id).getResultList();
+
+        try {
+            et.begin();
+
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }        } finally {
+            em.close();
+        }
+
+        System.out.println(list);
+        return list;
+    }
 
 }

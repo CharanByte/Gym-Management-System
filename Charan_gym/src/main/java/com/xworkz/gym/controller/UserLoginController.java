@@ -57,7 +57,7 @@ public class UserLoginController {
     public String onUserLogin(String useremail, String password, Model model, HttpSession httpSession){
         RegistrationEntity registrationEntity=gymService.getAllRegistredUsersDetailsByEmail(useremail);
             httpSession.setAttribute("userRegEntity",registrationEntity);
-       int valid=gymService.validteUserPasswordNyEmail(useremail,password);
+       int valid=gymService.validteUserPasswordByEmail(useremail,password);
        if(valid==1){
            model.addAttribute("userEmail",useremail);
           return "SetNewUserPassword";

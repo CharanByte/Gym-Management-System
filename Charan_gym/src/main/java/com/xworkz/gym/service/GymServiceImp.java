@@ -395,7 +395,7 @@ public class GymServiceImp implements GymService{
     }
 
     @Override
-    public int validteUserPasswordNyEmail(String email, String password) {
+    public int validteUserPasswordByEmail(String email, String password) {
 
         RegistrationEntity list=gymRepository.getAllByEmail(email);
 

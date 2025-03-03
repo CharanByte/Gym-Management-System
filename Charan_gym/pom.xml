@@ -76,6 +76,25 @@
       <version>1.3.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>5.3.30</version>
+    </dependency>
+
+    <!-- AspectJ Weaver (for runtime weaving) -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.7</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>Charan_gym</finalName>

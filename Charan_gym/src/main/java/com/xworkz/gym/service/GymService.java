@@ -41,7 +41,7 @@ public interface GymService {
 
     Long getCountOfRegisteredUserEmail(String email);
 
-    int validteUserPasswordNyEmail(String email, String password);
+    int validteUserPasswordByEmail(String email, String password);
 
     int validateAndupdateNewPassword( int id,String password, String confirmpassword);
 
